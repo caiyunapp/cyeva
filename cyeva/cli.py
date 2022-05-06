@@ -133,7 +133,4 @@ def cli():
 
 
 if __name__ == "__main__":
-    generate(
-        "/Users/wentao.li/moji/lab/冬奥会/predict_bj_wog_merge_xiongjie_complete_2021-09-06-modify-precip/sample",
-        "./result7.csv",
-    )
+    pass
