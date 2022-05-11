@@ -1,4 +1,5 @@
-from typing import Tuple, Union
+from typing import List, Union
+from numbers import Number
 from collections import Counter
 
 import numpy as np
@@ -15,7 +16,6 @@ from cyeva.utils import (
 from cyeva.config.directions.wind import DIRECTION8_CENTER_ANGLE, DIRECTION8_ABBR
 from cyeva.config.levels.wind import (
     GENERAL_WIND_SPEED_LEVELS,
-    # OBS_WIND_SPEED_MAPPING_LEVELS_FOR_ACCURACY,
 )
 from .statistic import (
     calc_differ_accuracy_rate,
@@ -31,16 +31,16 @@ from cyeva.core import Comparison
 
 # @np.vectorize
 def get_least_angle_deflection(
-    angle1: Union[int, float], angle2: Union[int, float]
-) -> float:
+    angle1: Union[Number, np.ndarray], angle2: Union[Number, np.ndarray]
+) -> Union[Number, np.ndarray]:
     """Calculate the least angle deflection between two angles.
 
     Args:
-        angle1 (Union[int, float]): One angle(degree).
-        angle2 (Union[int, float]): Another angle(degree).
+        angle1 (Union[Number, np.ndarray]): One angle(degree).
+        angle2 (Union[Number, np.ndarray]): Another angle(degree).
 
     Returns:
-        float: The least deflection between two angles.
+        Union[Number, np.ndarray]: The least deflection between two angles.
     """
 
     angle1 %= 360
@@ -49,161 +49,117 @@ def get_least_angle_deflection(
     deflection1 = abs(angle1 - angle2)
     deflection2 = 360 - abs(angle1 - angle2)
 
-    return deflection1 if deflection1 < deflection2 else deflection2
+    if isinstance(angle1, Number) and isinstance(angle2, Number):
+        return deflection1 if deflection1 < deflection2 else deflection2
+    elif isinstance(angle1, np.ndarray) and isinstance(angle2, Number):
+        index1 = np.where(deflection1 < deflection2)
+        index2 = np.where(deflection2 < deflection1)
+
+        deflection = np.full_like(deflection1, 0)
+
+        deflection[index1] = deflection1[index1]
+        deflection[index2] = deflection2[index2]
+
+        return deflection
 
 
-def get_least_angle_deflection_array(
-    angles1: Union[list, np.ndarray], angles2: Union[list, np.ndarray]
-) -> np.ndarray:
-    """Calculate least angle deflection between two angle arrays.
-
-    Args:
-        angles1 (Union[list, np.ndarray]): One angle array(degree).
-        angles2 (Union[list, np.ndarray]): Another angle array(degree).
-
-    Returns:
-        np.ndarray: The least deflection array between two angle arrays.
-    """
-    angles1 %= 360
-    angles2 %= 360
-
-    deflection1 = np.abs(angles1 - angles2)
-    deflection2 = 360 - np.abs(angles1 - angles2)
-
-    index1 = np.where(deflection1 < deflection2)
-    index2 = np.where(deflection2 < deflection1)
-
-    deflection = np.full_like(deflection1, 0)
-
-    deflection[index1] = deflection1[index1]
-    deflection[index2] = deflection2[index2]
-
-    return deflection
-
-
-def identify_direction8(angle: Union[float, int]) -> Tuple[int, str]:
+def identify_direction8(angle: Union[Number, np.ndarray]) -> Union[int, np.ndarray]:
     """Identify 8 cardinal directions by angle.
 
     Args:
-        angle (Union[float, int]): The wind direction in degree.
+        angle (Number): The wind direction in degree.
 
     Returns:
-        Tuple[int, str]: Direction ID and the abbreviation of the cardinal direction.
+        Union[int, np.ndarray]: Direction ID of the cardinal direction.
     """
+    if isinstance(angle, List):
+        angle = np.array(angle)
+
     angle %= 360
-    for dir_id, center_angle in DIRECTION8_CENTER_ANGLE.items():
-        if get_least_angle_deflection(angle, center_angle) <= 22.5:
-            break
 
-    return dir_id, DIRECTION8_ABBR[dir_id]
+    if isinstance(angle, Number):
+        for dir_id, center_angle in DIRECTION8_CENTER_ANGLE.items():
+            if get_least_angle_deflection(angle, center_angle) <= 22.5:
+                break
 
+        return dir_id
 
-def identify_direction8_array(angles: np.ndarray):
-    """Identify 8 cardinal directions by angle array.
+    elif isinstance(angle, np.ndarray):
+        dir_ids = np.full_like(angle, -1)
+        for dir_id, center_angle in DIRECTION8_CENTER_ANGLE.items():
+            least_angle_defl = get_least_angle_deflection(angle, center_angle)
+            dir_ids[least_angle_defl <= 22.5] = dir_id
 
-    Args:
-        angle (np.ndarray): The wind direction array in degree.
-
-    Returns:
-        np.array: Direction ID array.
-    """
-    if not isinstance(angles, np.ndarray):
-        angles = np.array(angles)
-
-    angles %= 360
-
-    dir_ids = np.full_like(angles, -1)
-    for dir_id, center_angle in DIRECTION8_CENTER_ANGLE.items():
-        least_angle_defl = get_least_angle_deflection_array(angles, center_angle)
-        dir_ids[least_angle_defl <= 22.5] = dir_id
-
-    return dir_ids
+        return dir_ids
 
 
-def identify_speed_level_single(speed: Union[int, float]) -> int:
+def identify_speed_level(speed: Union[Number, np.ndarray]) -> Union[int, np.ndarray]:
     """Identify wind level by speed.
 
     Args:
-        speed (Union[int, float]): Wind speed in m/s.
+        speed (Union[Number, np.ndarray]): Wind speed in m/s.
 
     Returns:
-        int: Wind level.
+        Union[int, np.ndarray]: Wind level.
     """
+    if isinstance(speed, np.ndarray):
+        spd_levs = np.full_like(speed, np.nan)
     for lev, attr in GENERAL_WIND_SPEED_LEVELS.items():
         minimum = attr["min"]
         maximum = attr["max"]
-        # if minimum <= round(speed, 1) <= maximum:
-        if minimum <= speed <= maximum:
-            return lev
+        if isinstance(speed, Number):
+            if lev == 0:
+                if minimum <= speed <= maximum:
+                    return lev
+            else:
+                if minimum < speed <= maximum:
+                    return lev
+        elif isinstance(speed, np.ndarray):
+            if lev == 0:
+                spd_levs[(speed >= minimum) & (speed <= maximum)] = lev
+            else:
+                spd_levs[(speed > minimum) & (speed <= maximum)] = lev
+
+    return spd_levs
 
 
-def identify_speed_level_array(speed, kind="1to1"):
-    """根据风速值识别出风速等级
-
-    Args:
-        speed (ndarray): 待识别的风速数组(m/s)
-        kind (str, optional): 等级定义类型(general/mapping). Defaults to 'general'.
-
-    Returns:
-        set: 风速等级id，返回值为集合
-             若kind=='general'，则返回的集合只包含一个元素，例如{2}
-             若kind=='mapping'，则返回的集合可能包含多个元素，例如{1,2,3}
-    """
-
-    if kind == "1to1":
-        LEVELS = GENERAL_WIND_SPEED_LEVELS
-        spd_levs = np.full_like(speed, np.nan)
-        for lev, attr in LEVELS.items():
-            minimum = attr["min"]
-            maximum = attr["max"]
-            spd_levs[(speed >= minimum) & (speed <= maximum)] = lev
-
-        return spd_levs
-    elif kind == "1toM":
-        LEVELS = OBS_WIND_SPEED_MAPPING_LEVELS_FOR_ACCURACY
-
-
-def get_least_lev_deflection(lev1, lev2, circle_num=8):
-    """计算等级最小偏差偏离
+def get_least_lev_diff(
+    lev1: Union[int, np.ndarray],
+    lev2: Union[int, np.ndarray],
+) -> int:
+    """Calculate least level difference.
 
     Args:
-        lev1 (int): 第1个等级值
-        lev2 (int): 第2个等级值
-        circle_num (int | NoneType): 循环点，也是总等级（或方位）数
-                                     若为None，则无循环（风速等级）
-                                     若为整数，则为循环（风向方位），且数值应为总方位数
+        lev1 (int): One level value.
+        lev2 (int): Another level value.
 
     Returns:
-        int: 最小偏离等级数
+        int: Least level difference.
     """
-    if circle_num:
-        deflection1 = abs(lev1 - lev2)
-        deflection2 = circle_num - abs(lev1 - lev2)
-
-        return deflection1 if deflection1 < deflection2 else deflection2
-    else:
-        return abs(lev1 - lev2)
+    return np.abs(lev1 - lev2)
 
 
-def get_least_lev_deflection_array(levs1, levs2, circle_num=8):
-    """计算等级最小偏差偏离
+def get_least_dir_deflection(
+    dir1: Union[int, np.ndarray], dir2: Union[int, np.ndarray], circle_num: int = 8
+) -> Union[int, np.ndarray]:
+    """Get least deflection from two directions.
 
     Args:
-        lev1 (int): 第1个等级值
-        lev2 (int): 第2个等级值
-        circle_num (int | NoneType): 循环点，也是总等级（或方位）数
-                                     若为None，则无循环（风速等级）
-                                     若为整数，则为循环（风向方位），且数值应为总方位数
+        dir1 (Union[int, np.ndarray]): One direction number(0-7 if circle_num is 8)
+        dir2 (Union[int, np.ndarray]): Another direction number(0-7 if circle_num is 8)
+        circle_num (int, optional): Circulation knot num. Defaults to 8.
 
     Returns:
-        int: 最小偏离等级数
+        Union[int, np.ndarray]: The least deflection of directions.
     """
-    if circle_num:
-        deflection1 = np.abs(levs1 - levs2)
-        deflection2 = circle_num - np.abs(levs1 - levs2)
+    if isinstance(dir1, Number) and isinstance(dir2, Number):
+        deflection1 = abs(dir1 - dir2)
+        deflection2 = circle_num - abs(dir1 - dir2)
 
-        # deflection1 = np.abs(angles1 - angles2)
-        # deflection2 = 360 - np.abs(angles1 - angles2)
+        return int(deflection1) if deflection1 < deflection2 else int(deflection2)
+    elif isinstance(dir1, np.ndarray) and isinstance(dir2, np.ndarray):
+        deflection1 = np.abs(dir1 - dir2)
+        deflection2 = circle_num - np.abs(dir1 - dir2)
 
         index1 = np.where(deflection1 < deflection2)
         index2 = np.where(deflection2 < deflection1)
@@ -213,33 +169,29 @@ def get_least_lev_deflection_array(levs1, levs2, circle_num=8):
         deflection[index1] = deflection1[index1]
         deflection[index2] = deflection2[index2]
 
-        # return deflection1 if deflection1 < deflection2 else deflection2
         return deflection
-    else:
-        return np.abs(levs1 - levs2)
 
 
 @assert_length
 @result_round_digit(4)
 @fix_zero_division
-def calc_wind_dir_score(observation, forecast):
-    """计算风向评分
+def calc_wind_dir_score(
+    observation: Union[np.ndarray, list], forecast: Union[np.ndarray, list]
+) -> float:
+    """Calculate wind direction forecast score.
 
     Args:
-        observation (list | ndarray): 观测风向角度
-        forecast (list | ndarray): 预报风向角度
+        observation (Union[np.ndarray, list]): Observation wind direction in degree.
+        forecast (Union[np.ndarray, list]): Forecast wind direction in degree.
 
     Returns:
-        float: 风向预报评分
+        float: Wind direction forecast score.
     """
-    obs_d8 = [identify_direction8(obs)[0] for obs in observation]
-    fct_d8 = [identify_direction8(fct)[0] for fct in forecast]
 
-    couples = zip(obs_d8, fct_d8)
+    obs_d8 = identify_direction8(observation)
+    fct_d8 = identify_direction8(forecast)
 
-    dir_deflection = np.array(
-        [get_least_lev_deflection(obs, fct) for obs, fct in couples]
-    )
+    dir_deflection = get_least_lev_diff(obs_d8, fct_d8)
 
     score_series = np.full_like(dir_deflection, 0).astype(np.float)
     score_series[np.isclose(dir_deflection, 1)] = 0.6
@@ -261,12 +213,12 @@ def calc_wind_dir_score_array(observation, forecast):
     Returns:
         float: 风向预报评分
     """
-    obs_d8 = identify_direction8_array(observation)
-    fct_d8 = identify_direction8_array(forecast)
+    obs_d8 = identify_direction8(observation)
+    fct_d8 = identify_direction8(forecast)
 
     couples = zip(obs_d8, fct_d8)
 
-    dir_deflection = get_least_lev_deflection_array(obs_d8, fct_d8)
+    dir_deflection = get_least_lev_diff(obs_d8, fct_d8)
 
     score_series = np.full_like(dir_deflection, 0).astype(np.float)
     score_series[np.isclose(dir_deflection, 1)] = 0.6
@@ -305,8 +257,8 @@ def calc_wind_dir_accuracy_rate(observation, forecast, mode="degree", threshold=
         return np.sum(count_series) / len(count_series) * 100
 
     elif mode == "drange8":
-        obs_d8 = identify_direction8_array(observation)
-        fct_d8 = identify_direction8_array(forecast)
+        obs_d8 = identify_direction8(observation)
+        fct_d8 = identify_direction8(forecast)
 
         cross = obs_d8 == fct_d8
         total = len(cross)
@@ -341,11 +293,11 @@ def calc_wind_level_accuracy_rate(observation, forecast, mode="strict"):
     for obs, fct in couples:
         total += 1
         if mode == "loose":
-            obs_lev = identify_speed_level_single(obs, kind="mapping")
+            obs_lev = identify_speed_level(obs, kind="mapping")
         elif mode == "strict":
-            obs_lev = identify_speed_level_single(obs, kind="general")
+            obs_lev = identify_speed_level(obs, kind="general")
 
-        fct_lev = identify_speed_level_single(fct, kind="general")
+        fct_lev = identify_speed_level(fct, kind="general")
 
         if obs_lev & fct_lev:
             hits += 1
@@ -395,7 +347,7 @@ def calc_wind_speed_score(observation, forecast):
         obs_lev = identify_speed_level_single(obs, kind="general").pop()
         fct_lev = identify_speed_level_single(fct, kind="general").pop()
 
-        lev_defls.append(get_least_lev_deflection(obs_lev, fct_lev, circle_num=None))
+        lev_defls.append(get_least_lev_diff(obs_lev, fct_lev, circle_num=None))
 
     score_series = np.full_like(lev_defls, 0).astype(np.float)
     score_series[np.isclose(lev_defls, 0)] = 1
