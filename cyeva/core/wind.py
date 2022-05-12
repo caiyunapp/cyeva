@@ -13,15 +13,18 @@ from cyeva.utils import (
     assert_length,
     drop_nan,
 )
-from cyeva.config.directions.wind import DIRECTION8_CENTER_ANGLE, DIRECTION8_ABBR
+from cyeva.config.directions.wind import (
+    DIRECTION8_CENTER_ANGLE,
+    DIRECTION16_CENTER_ANGLE,
+)
 from cyeva.config.levels.wind import (
     GENERAL_WIND_SPEED_LEVELS,
 )
 from .statistic import (
-    calc_differ_accuracy_rate,
+    # calc_differ_accuracy_rate,
     calc_mae,
     calc_rmse,
-    calc_mean_rss,
+    calc_rss,
     calc_chi_square,
     calc_linregress,
 )
@@ -51,9 +54,9 @@ def get_least_angle_deflection(
 
     if isinstance(angle1, Number) and isinstance(angle2, Number):
         return deflection1 if deflection1 < deflection2 else deflection2
-    elif isinstance(angle1, np.ndarray) and isinstance(angle2, Number):
-        index1 = np.where(deflection1 < deflection2)
-        index2 = np.where(deflection2 < deflection1)
+    else:
+        index1 = np.where(deflection1 <= deflection2)
+        index2 = np.where(deflection2 <= deflection1)
 
         deflection = np.full_like(deflection1, 0)
 
@@ -63,11 +66,14 @@ def get_least_angle_deflection(
         return deflection
 
 
-def identify_direction8(angle: Union[Number, np.ndarray]) -> Union[int, np.ndarray]:
+def identify_direction(
+    angle: Union[Number, np.ndarray], dnum: int = 8
+) -> Union[int, np.ndarray]:
     """Identify 8 cardinal directions by angle.
 
     Args:
         angle (Number): The wind direction in degree.
+        dnum (int): The wind directions number.
 
     Returns:
         Union[int, np.ndarray]: Direction ID of the cardinal direction.
@@ -75,20 +81,27 @@ def identify_direction8(angle: Union[Number, np.ndarray]) -> Union[int, np.ndarr
     if isinstance(angle, List):
         angle = np.array(angle)
 
+    if dnum == 8:
+        DIRECTION_CENTER_ANGLE = DIRECTION8_CENTER_ANGLE
+        threshold = 22.5
+    elif dnum == 16:
+        DIRECTION_CENTER_ANGLE = DIRECTION16_CENTER_ANGLE
+        threshold = 11.25
+
     angle %= 360
 
     if isinstance(angle, Number):
-        for dir_id, center_angle in DIRECTION8_CENTER_ANGLE.items():
-            if get_least_angle_deflection(angle, center_angle) <= 22.5:
+        for dir_id, center_angle in DIRECTION_CENTER_ANGLE.items():
+            if get_least_angle_deflection(angle, center_angle) <= threshold:
                 break
 
         return dir_id
 
     elif isinstance(angle, np.ndarray):
         dir_ids = np.full_like(angle, -1)
-        for dir_id, center_angle in DIRECTION8_CENTER_ANGLE.items():
+        for dir_id, center_angle in DIRECTION_CENTER_ANGLE.items():
             least_angle_defl = get_least_angle_deflection(angle, center_angle)
-            dir_ids[least_angle_defl <= 22.5] = dir_id
+            dir_ids[least_angle_defl <= threshold] = dir_id
 
         return dir_ids
 
@@ -157,12 +170,12 @@ def get_least_dir_deflection(
         deflection2 = circle_num - abs(dir1 - dir2)
 
         return int(deflection1) if deflection1 < deflection2 else int(deflection2)
-    elif isinstance(dir1, np.ndarray) and isinstance(dir2, np.ndarray):
+    else:
         deflection1 = np.abs(dir1 - dir2)
         deflection2 = circle_num - np.abs(dir1 - dir2)
 
-        index1 = np.where(deflection1 < deflection2)
-        index2 = np.where(deflection2 < deflection1)
+        index1 = np.where(deflection1 <= deflection2)
+        index2 = np.where(deflection2 <= deflection1)
 
         deflection = np.full_like(deflection1, 0)
 
@@ -176,92 +189,112 @@ def get_least_dir_deflection(
 @result_round_digit(4)
 @fix_zero_division
 def calc_wind_dir_score(
-    observation: Union[np.ndarray, list], forecast: Union[np.ndarray, list]
+    observation: Union[Number, np.ndarray],
+    forecast: Union[Number, np.ndarray],
+    dnum: int = 8,
 ) -> float:
-    """Calculate wind direction forecast score.
+    """Calculate wind direction score.
 
     Args:
-        observation (Union[np.ndarray, list]): Observation wind direction in degree.
-        forecast (Union[np.ndarray, list]): Forecast wind direction in degree.
+        observation (Union[Number, np.ndarray]): Observation wind direction value or ndarray in degree.
+        forecast (Union[Number, np.ndarray]): Forecast wind direction value or ndarray in degree.
+        dnum (int, optional): The wind directions number. Defaults to 8.
 
     Returns:
-        float: Wind direction forecast score.
+        float: The wind direction score
     """
+    if dnum == 8:
+        obs_d8 = identify_direction(observation)
+        fct_d8 = identify_direction(forecast)
 
-    obs_d8 = identify_direction8(observation)
-    fct_d8 = identify_direction8(forecast)
+        dir_deflection = get_least_lev_diff(obs_d8, fct_d8)
 
-    dir_deflection = get_least_lev_diff(obs_d8, fct_d8)
+        score_series = np.full_like(dir_deflection, 0).astype(float)
+        score_series[np.isclose(dir_deflection, 1)] = 0.6
+        score_series[dir_deflection < 1] = 1
 
-    score_series = np.full_like(dir_deflection, 0).astype(np.float)
-    score_series[np.isclose(dir_deflection, 1)] = 0.6
-    score_series[dir_deflection < 1] = 1
+    elif dnum == 16:
+        obs_d16 = identify_direction(observation, dnum=16)
+        fct_d16 = identify_direction(forecast, dnum=16)
 
-    return np.sum(score_series) / len(score_series)
+        dir_deflection = get_least_lev_diff(obs_d16, fct_d16)
 
+        score_series = np.full_like(dir_deflection, 0).astype(float)
+        score_series[np.isclose(dir_deflection, 2)] = 0.6
+        score_series[np.isclose(dir_deflection, 1)] = 0.8
+        score_series[dir_deflection < 1] = 1
 
-@assert_length
-@result_round_digit(4)
-@fix_zero_division
-def calc_wind_dir_score_array(observation, forecast):
-    """计算风向评分
-
-    Args:
-        observation (list | ndarray): 观测风向角度
-        forecast (list | ndarray): 预报风向角度
-
-    Returns:
-        float: 风向预报评分
-    """
-    obs_d8 = identify_direction8(observation)
-    fct_d8 = identify_direction8(forecast)
-
-    couples = zip(obs_d8, fct_d8)
-
-    dir_deflection = get_least_lev_diff(obs_d8, fct_d8)
-
-    score_series = np.full_like(dir_deflection, 0).astype(np.float)
-    score_series[np.isclose(dir_deflection, 1)] = 0.6
-    score_series[dir_deflection < 1] = 1
-
-    return np.sum(score_series) / len(score_series)
+    try:
+        return np.sum(score_series) / len(score_series)
+    except TypeError:
+        return np.sum(score_series)
 
 
 @result_round_digit(4)
 @assert_length
 @fix_zero_division
-def calc_wind_dir_accuracy_rate(observation, forecast, mode="degree", threshold=22.5):
-    """计算风向准确率
+def calc_wind_dir_accuracy_ratio(
+    observation: Union[Number, np.ndarray],
+    forecast: Union[Number, np.ndarray],
+    mode="degree",
+    threshold=22.5,
+) -> float:
+    """Calculate wind direction accuracy ratio.
 
     Args:
-        observation (list | ndarray): 观测风向角度
-        forecast (list | ndarray): 预报风向角度
-        mode (str): 计算模式，可选选项有'degree', 'drange8'
-                    * degree 表示以角度偏转为指标进行计算
-                    * drange8 表示以8方位角为指标进行计算
-        threshold (Number): 仅 mode == degree 模式时有效，即判断预报准确的角度阈值
+        observation (Union[Number, np.ndarray]): Observation wind direction value or ndarray in degree.
+        forecast (Union[Number, np.ndarray]): Forecast wind direction value or ndarray in degree.
+        mode (str, optional): Wind direction mode. Options as follow:
+                              * degree: Calculate wind direction accuracy ratio from degree way.
+                              * drange8: Calculate wind direction accuracy ratio from 8 cardinal directions way.
+                              * drange16 Calculate wind direction accuracy ratio from 16 cardinal directions way.
+                              Defaults to "degree".
+        threshold (float, optional): The degree threshold to check if wind is accurate, only useful when mode=='degree'.
+                                     Defaults to 22.5.
 
     Returns:
-        float: 风向准确率(%)
+        float: The accuracy ratio (%).
     """
-    couples = zip(observation, forecast)
+    try:
+        couples = zip(observation, forecast)
+    except TypeError:
+        couples = zip([observation], [forecast])
 
     if mode == "degree":
         angle_deflection = np.array(
             [get_least_angle_deflection(obs, fct) for obs, fct in couples]
         )
 
-        count_series = np.full_like(angle_deflection, 0).astype(np.float)
+        count_series = np.full_like(angle_deflection, 0).astype(float)
         count_series[angle_deflection <= threshold] = 1
 
         return np.sum(count_series) / len(count_series) * 100
 
     elif mode == "drange8":
-        obs_d8 = identify_direction8(observation)
-        fct_d8 = identify_direction8(forecast)
+        obs_d8 = identify_direction(observation)
+        fct_d8 = identify_direction(forecast)
 
         cross = obs_d8 == fct_d8
-        total = len(cross)
+        try:
+            total = len(cross)
+        except TypeError:
+            cross = [cross]
+            total = 1
+        counter = Counter(cross)
+        correct = counter[True]
+
+        return correct / total * 100
+
+    elif mode == "drange16":
+        obs_d16 = identify_direction(observation, dnum=16)
+        fct_d16 = identify_direction(forecast, dnum=16)
+
+        cross = obs_d16 == fct_d16
+        try:
+            total = len(cross)
+        except TypeError:
+            cross = [cross]
+            total = 1
         counter = Counter(cross)
         correct = counter[True]
 
