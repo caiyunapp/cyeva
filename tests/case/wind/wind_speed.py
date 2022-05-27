@@ -1,9 +1,9 @@
 import numpy as np
 
 IDENTIFY_SPEED_LEVEL_GENERAL_CASE = [
-    {"wspd": 0.1, "result": {0}},
-    {"wspd": 8.1, "result": {5}},
-    {"wspd": 38, "result": {13}},
+    {"wspd": 0.1, "result": 0},
+    {"wspd": 8.1, "result": 5},
+    {"wspd": 38, "result": 13},
 ]
 
 IDENTIFY_SPEED_LEVEL_MAPPING_CASE = [
@@ -14,11 +14,11 @@ IDENTIFY_SPEED_LEVEL_MAPPING_CASE = [
 
 LEAST_LEV_DEFLECTION_CASE = [
     {"lev1": 0, "lev2": 1, "result": 1},
-    {"lev1": 0, "lev2": 13, "result": 1},
-    {"lev1": 1, "lev2": 13, "result": 2},
-    {"lev1": 2, "lev2": 13, "result": 3},
-    {"lev1": 2, "lev2": 12, "result": 4},
-    {"lev1": 3, "lev2": 12, "result": 5},
+    {"lev1": 0, "lev2": 13, "result": 13},
+    {"lev1": 1, "lev2": 13, "result": 12},
+    {"lev1": 2, "lev2": 13, "result": 11},
+    {"lev1": 2, "lev2": 12, "result": 10},
+    {"lev1": 3, "lev2": 12, "result": 9},
 ]
 
 WIND_SPEED_SCORE_CASE = [
@@ -29,9 +29,9 @@ WIND_SPEED_SCORE_CASE = [
 ]
 
 WIND_LEVEL_ACCURACY_RATE_CASE = [
-    {"obs": [0.9, 9.4, 35, 38], "fct": [0.1, 8.1, 38, 0], "result": 75},
-    {"obs": [0.9, 9.4, 35, 38], "fct": [0.1, 8.1, 0, 0], "result": 50},
-    {"obs": [0.9, 9.4, 35, 38], "fct": [0.1, 0, 0, 0], "result": 25},
+    {"obs": [0.9, 9.4, 35, 38], "fct": [0.1, 8.1, 38, 0], "result": 25},
+    {"obs": [0.9, 9.4, 35, 38], "fct": [0.1, 8.1, 0, 0], "result": 25},
+    {"obs": [0.9, 9.4, 35, 38], "fct": [0.1, 0, 0, 0], "result": 0},
 ]
 
 WIND_SPEED_ACCURACY_RATE_CASE = [

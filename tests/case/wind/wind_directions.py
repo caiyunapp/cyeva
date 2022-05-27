@@ -7,10 +7,10 @@ LEAST_ANGLE_DEFLECTION_CASE = [
 ]
 
 IDENTIFY_DIRECTION8_CASE = [
-    {"angle": 22, "result": (0, "N")},
-    {"angle": 23, "result": (1, "NE")},
-    {"angle": 91, "result": (2, "E")},
-    {"angle": 350, "result": (0, "N")},
+    {"angle": 22, "result": 0},
+    {"angle": 23, "result": 1},
+    {"angle": 91, "result": 2},
+    {"angle": 350, "result": 0},
 ]
 
 LEAST_DIR_DEFLECTION_CASE = [
@@ -31,6 +31,6 @@ WIND_DIR_SCORE_CASE = [
 
 WIND_DIR_ACCURACY_RATE = [
     {"obs": [0, 45, 90, 180], "fct": [0, 45, 90, 180], "result": 100},
-    {"obs": [0, 45, 45, 180], "fct": [25, 45, 90, 180], "result": 100},
+    {"obs": [0, 45, 45, 180], "fct": [25, 45, 90, 180], "result": 50},
     {"obs": [22, 45, 90, 0], "fct": [25, 45, 90, 180], "result": 75},
 ]

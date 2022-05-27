@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from pint import UnitRegistry, UnitStrippedWarning
 
-from cyeva.core import Comparison
+from ..core import Comparison
 
 UNITS = UnitRegistry()
 
