@@ -4,7 +4,7 @@ from numbers import Number
 import numpy as np
 import pandas as pd
 
-from cyeva.utils import result_round_digit, source_round_digit
+from ..utils import result_round_digit, source_round_digit
 from .binarize import threshold_binarize
 from .statistic import (
     calc_differ_accuracy_ratio,
@@ -45,11 +45,11 @@ class Comparison:
         forecast: Union[np.ndarray, list] = None,
         *args,
         **kwargs
-    ):
+    ) -> float:
         "Root Mean Square Error"
-        if not observation:
+        if observation is None:
             observation = self.observation
-        if not forecast:
+        if forecast is None:
             forecast = self.forecast
 
         return calc_rmse(observation, forecast)
@@ -62,11 +62,11 @@ class Comparison:
         forecast: Union[np.ndarray, list] = None,
         *args,
         **kwargs
-    ):
+    ) -> float:
         """Mean Absolute Error"""
-        if not observation:
+        if observation is None:
             observation = self.observation
-        if not forecast:
+        if forecast is None:
             forecast = self.forecast
 
         return calc_mae(observation, forecast)
@@ -79,11 +79,11 @@ class Comparison:
         forecast: Union[np.ndarray, list] = None,
         *args,
         **kwargs
-    ):
+    ) -> float:
         """χ2"""
-        if not observation:
+        if observation is None:
             observation = self.observation
-        if not forecast:
+        if forecast is None:
             forecast = self.forecast
 
         return calc_chi_square(observation, forecast)
@@ -96,11 +96,11 @@ class Comparison:
         forecast: Union[np.ndarray, list] = None,
         *args,
         **kwargs
-    ):
+    ) -> float:
         """Residual Sum of Square"""
-        if not observation:
+        if observation is None:
             observation = self.observation
-        if not forecast:
+        if forecast is None:
             forecast = self.forecast
 
         return calc_rss(observation, forecast)
@@ -113,9 +113,9 @@ class Comparison:
         **kwargs
     ):
         """linregress args"""
-        if not observation:
+        if observation is None:
             observation = self.observation
-        if not forecast:
+        if forecast is None:
             forecast = self.forecast
 
         return calc_linregress(observation, forecast)
@@ -129,12 +129,16 @@ class Comparison:
         threshold: Number = 0,
         *args,
         **kwargs
-    ):
+    ) -> float:
         """BIAS score"""
-        if not observation:
+        if observation is None:
             _observation = self.observation
-        if not forecast:
+        else:
+            _observation = observation
+        if forecast is None:
             _forecast = self.forecast
+        else:
+            _forecast = forecast
 
         observation, forecast = threshold_binarize(
             _observation, _forecast, threshold=threshold, compare=">"
@@ -160,9 +164,9 @@ class Comparison:
         Returns:
             float: The accuracy ratio.
         """
-        if not observation:
+        if observation is None:
             observation = self.observation
-        if not forecast:
+        if forecast is None:
             forecast = self.forecast
 
         binary_observation, binary_forecast = threshold_binarize(
@@ -191,9 +195,9 @@ class Comparison:
         Returns:
             float: The accuracy ratio.
         """
-        if not observation:
+        if observation is None:
             observation = self.observation
-        if not forecast:
+        if forecast is None:
             forecast = self.forecast
 
         return calc_differ_accuracy_ratio(observation, forecast, limit=limit)

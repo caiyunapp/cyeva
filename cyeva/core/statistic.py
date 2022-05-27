@@ -5,7 +5,7 @@ from collections import Counter
 import numpy as np
 from scipy import stats
 
-from cyeva.utils import (
+from ..utils import (
     convert_to_ndarray,
     fix_zero_division,
     assert_length,

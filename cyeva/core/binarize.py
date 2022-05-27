@@ -3,7 +3,7 @@ from numbers import Number
 
 import numpy as np
 
-from cyeva.utils.decorators import (
+from ..utils.decorators import (
     convert_to_ndarray,
     assert_length,
     drop_nan,
