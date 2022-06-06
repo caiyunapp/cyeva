@@ -221,18 +221,23 @@ def filter_wind_speed_levels(
     *args,
     **kwargs,
 ):
-    """根据风速等级过滤风速数组
+    """Filter wind by wind speed levels.
 
     Args:
-        observation (list | ndarray): 观测风速数组
-        forecast (list | ndarray): 预报风速数组
-        lev_min (float | int, optional): 过滤最小风级，若为None则取预定义风级中的最小值. Defaults to None.
-        lev_max (float | int, optional): 过滤最大风级，若为None则取预定义风级中的最大值. Defaults to None.
-        mode (str, optional): 过滤逻辑(and/or). Defaults to 'and'.
-        return_index (boolean, optional): 是否返回索引，若为False则返回观测和预报数组，否则返回原数组的过滤索引. Defaults to False.
+        observation (list | ndarray): Observation wind speed array.
+        forecast (list | ndarray): Forecast wind speed array.
+        lev_min (float | int, optional): The minimum wind speed level to filter,
+            if set to None it will be the minimum level in default levels.
+            Defaults to None.
+        lev_max (float | int, optional): The maximum wind speed level to filter,
+            if set to None it will be the maximum level in default levels.
+            Defaults to None.
+        mode (str, optional): Filter logic(and/or). Defaults to 'and'.
+        return_index (boolean, optional): Whether return index, if it is False
+            return values, ohterwise return array's index. Defaults to False.
 
     Returns:
-        tuple: (观测风速数组, 预报风速数组)
+        tuple: (Observation wind speed array, Forecast wind speed array)
     """
 
     if not lev_min:
