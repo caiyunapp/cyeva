@@ -116,7 +116,7 @@ def identify_direction(
         return dir_ids
 
 
-def identify_speed_level(speed: Union[Number, np.ndarray]) -> Union[int, np.ndarray]:
+def identify_wind_scale(speed: Union[Number, np.ndarray]) -> Union[int, np.ndarray]:
     """Identify wind scale by speed.
 
     Args:
@@ -245,8 +245,8 @@ def filter_wind_speed_levels(
     if not lev_max:
         lev_max = float(sorted(GENERAL_WIND_SCALES.keys())[-1])
 
-    obs_lev = identify_speed_level(observation)
-    fct_lev = identify_speed_level(forecast)
+    obs_lev = identify_wind_scale(observation)
+    fct_lev = identify_wind_scale(forecast)
     assert (obs_lev == obs_lev).all() and (fct_lev == fct_lev).all()
 
     if mode == "and":
@@ -673,8 +673,8 @@ class WindComparison(Comparison):
         if forecast is None:
             forecast = self.fct_spd
 
-        obs_lev = identify_speed_level(self.obs_spd)
-        fct_lev = identify_speed_level(self.fct_spd)
+        obs_lev = identify_wind_scale(self.obs_spd)
+        fct_lev = identify_wind_scale(self.fct_spd)
 
         hits = np.count_nonzero(obs_lev == fct_lev)
         try:
@@ -724,8 +724,8 @@ class WindComparison(Comparison):
         if forecast is None:
             forecast = self.fct_spd
 
-        obs_lev = identify_speed_level(observation)
-        fct_lev = identify_speed_level(forecast)
+        obs_lev = identify_wind_scale(observation)
+        fct_lev = identify_wind_scale(forecast)
 
         lev_defls = fct_lev - obs_lev
 
@@ -756,8 +756,8 @@ class WindComparison(Comparison):
         if forecast is None:
             forecast = self.fct_spd
 
-        obs_lev = identify_speed_level(observation)
-        fct_lev = identify_speed_level(forecast)
+        obs_lev = identify_wind_scale(observation)
+        fct_lev = identify_wind_scale(forecast)
 
         lev_defls = fct_lev - obs_lev
 
@@ -788,8 +788,8 @@ class WindComparison(Comparison):
         if forecast is None:
             forecast = self.fct_spd
 
-        obs_lev = identify_speed_level(observation)
-        fct_lev = identify_speed_level(forecast)
+        obs_lev = identify_wind_scale(observation)
+        fct_lev = identify_wind_scale(forecast)
 
         lev_defls = get_least_lev_diff(obs_lev, fct_lev)
         score_series = np.full_like(lev_defls, 0).astype(float)
