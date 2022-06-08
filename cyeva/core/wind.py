@@ -123,7 +123,7 @@ def identify_wind_scale(speed: Union[Number, np.ndarray]) -> Union[int, np.ndarr
         speed (Union[Number, np.ndarray]): Wind speed in m/s.
 
     Returns:
-        Union[int, np.ndarray]: Wind level.
+        Union[int, np.ndarray]: Wind scale.
     """
     if isinstance(speed, list):
         speed = np.array(speed)
@@ -211,26 +211,26 @@ def get_least_dir_deflection(
 @source_round_digit(series_num=2)
 @convert_to_ndarray
 @drop_nan
-def filter_wind_speed_levels(
+def filter_wind_wind_scales(
     observation,
     forecast,
-    lev_min=None,
-    lev_max=None,
+    scale_min=None,
+    scale_max=None,
     mode="and",
     return_index=False,
     *args,
     **kwargs,
 ):
-    """Filter wind by wind speed levels.
+    """Filter wind by wind scales.
 
     Args:
         observation (list | ndarray): Observation wind speed array.
         forecast (list | ndarray): Forecast wind speed array.
-        lev_min (float | int, optional): The minimum wind speed level to filter,
-            if set to None it will be the minimum level in default levels.
+        scale_min (float | int, optional): The minimum wind scale to filter,
+            if set to None it will be the minimum scale in default scales.
             Defaults to None.
-        lev_max (float | int, optional): The maximum wind speed level to filter,
-            if set to None it will be the maximum level in default levels.
+        scale_max (float | int, optional): The maximum wind scale to filter,
+            if set to None it will be the maximum scale in default scales.
             Defaults to None.
         mode (str, optional): Filter logic(and/or). Defaults to 'and'.
         return_index (boolean, optional): Whether return index, if it is False
@@ -240,22 +240,22 @@ def filter_wind_speed_levels(
         tuple: (Observation wind speed array, Forecast wind speed array)
     """
 
-    if not lev_min:
-        lev_min = float(sorted(GENERAL_WIND_SCALES.keys())[0])
-    if not lev_max:
-        lev_max = float(sorted(GENERAL_WIND_SCALES.keys())[-1])
+    if not scale_min:
+        scale_min = float(sorted(GENERAL_WIND_SCALES.keys())[0])
+    if not scale_max:
+        scale_max = float(sorted(GENERAL_WIND_SCALES.keys())[-1])
 
     obs_lev = identify_wind_scale(observation)
     fct_lev = identify_wind_scale(forecast)
     assert (obs_lev == obs_lev).all() and (fct_lev == fct_lev).all()
 
     if mode == "and":
-        index = ((obs_lev >= lev_min) & (obs_lev <= lev_max)) & (
-            (fct_lev >= lev_min) & (fct_lev <= lev_max)
+        index = ((obs_lev >= scale_min) & (obs_lev <= scale_max)) & (
+            (fct_lev >= scale_min) & (fct_lev <= scale_max)
         )
     elif mode == "or":
-        index = ((obs_lev >= lev_min) & (obs_lev <= lev_max)) | (
-            (fct_lev >= lev_min) & (fct_lev <= lev_max)
+        index = ((obs_lev >= scale_min) & (obs_lev <= scale_max)) | (
+            (fct_lev >= scale_min) & (fct_lev <= scale_max)
         )
 
     filtered_obs = observation[index]
@@ -651,7 +651,7 @@ class WindComparison(Comparison):
     @result_round_digit(4)
     @source_round_digit()
     @fix_zero_division
-    def calc_level_accuracy_ratio(
+    def calc_wind_scale_accuracy_ratio(
         self,
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
@@ -666,7 +666,7 @@ class WindComparison(Comparison):
             forecast (Union[Number, np.ndarray]): Forecast wind speed value or ndarray in m/s.
 
         Returns:
-            float: Wind level accuracy ratio (%)
+            float: Wind scale accuracy ratio (%)
         """
         if observation is None:
             observation = self.obs_spd
@@ -705,19 +705,19 @@ class WindComparison(Comparison):
     @result_round_digit(4)
     @source_round_digit()
     @fix_zero_division
-    def calc_speed_level_stronger_ratio(
+    def calc_wind_scale_stronger_ratio(
         self,
         observation: Union[Number, np.ndarray] = None,
         forecast: Union[Number, np.ndarray] = None,
     ):
-        """Calculate wind speed level stronger ratio.
+        """Calculate wind scale stronger ratio.
 
         Args:
             observation (Union[Number, np.ndarray]): Observation wind speed value or ndarray in m/s.
             forecast (Union[Number, np.ndarray]): Forecast wind speed value or ndarray in m/s.
 
         Returns:
-            float: Wind level stronger ratio(%).
+            float: Wind scale stronger ratio(%).
         """
         if observation is None:
             observation = self.obs_spd
@@ -737,19 +737,19 @@ class WindComparison(Comparison):
     @result_round_digit(4)
     @source_round_digit()
     @fix_zero_division
-    def calc_speed_level_weaker_ratio(
+    def calc_wind_scale_weaker_ratio(
         self,
         observation: Union[Number, np.ndarray] = None,
         forecast: Union[Number, np.ndarray] = None,
     ):
-        """Calculate wind speed level weaker ratio.
+        """Calculate wind scale weaker ratio.
 
         Args:
             observation (Union[Number, np.ndarray]): Observation wind speed value or ndarray in m/s.
             forecast (Union[Number, np.ndarray]): Forecast wind speed value or ndarray in m/s.
 
         Returns:
-            float: Wind level weaker ratio(%).
+            float: Wind scale weaker ratio(%).
         """
         if observation is None:
             observation = self.obs_spd
@@ -815,8 +815,8 @@ class WindComparison(Comparison):
                 "%",
                 "≤2m/s",
             ),
-            "speed_level_stronger_ratio": (self.calc_speed_level_stronger_ratio, "%", None),
-            "speed_level_weaker_ratio": (self.calc_speed_level_weaker_ratio, "%", None),
+            "wind_scale_stronger_ratio": (self.calc_wind_scale_stronger_ratio, "%", None),
+            "wind_scale_weaker_ratio": (self.calc_wind_scale_weaker_ratio, "%", None),
             "speed_mae": (self.calc_mae, "m/s", None),
             "speed_score": (self.calc_speed_score, None, None),
             "rmse": (self.calc_rmse, "m/s", "RMSE"),
