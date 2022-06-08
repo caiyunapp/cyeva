@@ -20,7 +20,7 @@ from ..config.directions.wind import (
     DIRECTION16_CENTER_ANGLE,
 )
 from ..config.levels.wind import (
-    GENERAL_WIND_SPEED_LEVELS,
+    GENERAL_WIND_SCALES,
 )
 
 from ..core import Comparison
@@ -117,7 +117,7 @@ def identify_direction(
 
 
 def identify_speed_level(speed: Union[Number, np.ndarray]) -> Union[int, np.ndarray]:
-    """Identify wind level by speed.
+    """Identify wind scale by speed.
 
     Args:
         speed (Union[Number, np.ndarray]): Wind speed in m/s.
@@ -135,7 +135,7 @@ def identify_speed_level(speed: Union[Number, np.ndarray]) -> Union[int, np.ndar
     except AttributeError:
         speed_magnitude = speed
 
-    for lev, attr in GENERAL_WIND_SPEED_LEVELS.items():
+    for lev, attr in GENERAL_WIND_SCALES.items():
         minimum = attr["min"]
         maximum = attr["max"]
         if isinstance(speed, Number):
@@ -241,9 +241,9 @@ def filter_wind_speed_levels(
     """
 
     if not lev_min:
-        lev_min = float(sorted(GENERAL_WIND_SPEED_LEVELS.keys())[0])
+        lev_min = float(sorted(GENERAL_WIND_SCALES.keys())[0])
     if not lev_max:
-        lev_max = float(sorted(GENERAL_WIND_SPEED_LEVELS.keys())[-1])
+        lev_max = float(sorted(GENERAL_WIND_SCALES.keys())[-1])
 
     obs_lev = identify_speed_level(observation)
     fct_lev = identify_speed_level(forecast)
@@ -659,7 +659,7 @@ class WindComparison(Comparison):
         lev_min=None,
         lev_max=None,
     ):
-        """Calculate wind level accuracy ratio
+        """Calculate wind scale accuracy ratio
 
         Args:
             observation (Union[Number, np.ndarray]): Observation wind speed value or ndarray in m/s.
@@ -675,9 +675,6 @@ class WindComparison(Comparison):
 
         obs_lev = identify_speed_level(self.obs_spd)
         fct_lev = identify_speed_level(self.fct_spd)
-
-        print(obs_lev)
-        print(fct_lev)
 
         hits = np.count_nonzero(obs_lev == fct_lev)
         try:
@@ -708,7 +705,7 @@ class WindComparison(Comparison):
     @result_round_digit(4)
     @source_round_digit()
     @fix_zero_division
-    def calc_speed_stronger_ratio(
+    def calc_speed_level_stronger_ratio(
         self,
         observation: Union[Number, np.ndarray] = None,
         forecast: Union[Number, np.ndarray] = None,
@@ -740,7 +737,7 @@ class WindComparison(Comparison):
     @result_round_digit(4)
     @source_round_digit()
     @fix_zero_division
-    def calc_speed_weaker_ratio(
+    def calc_speed_level_weaker_ratio(
         self,
         observation: Union[Number, np.ndarray] = None,
         forecast: Union[Number, np.ndarray] = None,
@@ -795,7 +792,7 @@ class WindComparison(Comparison):
         fct_lev = identify_speed_level(forecast)
 
         lev_defls = get_least_lev_diff(obs_lev, fct_lev)
-        score_series = np.full_like(lev_defls, 0).astype(np.float)
+        score_series = np.full_like(lev_defls, 0).astype(float)
 
         score_series[np.isclose(lev_defls, 0)] = 1
         score_series[np.isclose(lev_defls, 1)] = 0.6
@@ -818,8 +815,8 @@ class WindComparison(Comparison):
                 "%",
                 "≤2m/s",
             ),
-            "speed_stronger_ratio": (self.calc_speed_stronger_ratio, "%", None),
-            "speed_weaker_ratio": (self.calc_speed_weaker_ratio, "%", None),
+            "speed_level_stronger_ratio": (self.calc_speed_level_stronger_ratio, "%", None),
+            "speed_level_weaker_ratio": (self.calc_speed_level_weaker_ratio, "%", None),
             "speed_mae": (self.calc_mae, "m/s", None),
             "speed_score": (self.calc_speed_score, None, None),
             "rmse": (self.calc_rmse, "m/s", "RMSE"),
