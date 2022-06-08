@@ -1,7 +1,7 @@
 from cyeva.core.wind import (
     get_least_angle_deflection,
     identify_direction,
-    identify_speed_level,
+    identify_wind_scale,
     get_least_lev_diff,
     get_least_dir_deflection,
     filter_wind_speed_levels,
@@ -51,11 +51,11 @@ def test_identify_direction8():
         assert identify_direction(angle, dnum=8) == result
 
 
-def test_identify_speed_level():
+def test_identify_wind_scale():
     for case in IDENTIFY_SPEED_LEVEL_GENERAL_CASE:
         wspd = case["wspd"]
         result = case["result"]
-        assert identify_speed_level(wspd) == result
+        assert identify_wind_scale(wspd) == result
 
 
 def test_calc_wind_dir_score():
