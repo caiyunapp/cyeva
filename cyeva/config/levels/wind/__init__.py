@@ -1,12 +1,12 @@
 """
 This is the module to store wind speed level constants.
 
-* GENERAL_WIND_SPEED_LEVELS: Wind speed levels thresholds.
+* GENERAL_WIND_SCALES: Wind speed levels thresholds.
 """
 
 import numpy as np
 
-GENERAL_WIND_SPEED_LEVELS = {
+GENERAL_WIND_SCALES = {
     0: {"min": 0, "max": 0.2},
     1: {"min": 0.2, "max": 1.5},
     2: {"min": 1.5, "max": 3.3},
