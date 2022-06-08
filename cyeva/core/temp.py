@@ -1,16 +1,12 @@
 from typing import Union
-import warnings
 
 import numpy as np
 import pandas as pd
-from pint import UnitRegistry, UnitStrippedWarning
+from pint import UnitRegistry
 
 from ..core import Comparison
 
 UNITS = UnitRegistry()
-
-warnings.filterwarnings("ignore", category=UnitStrippedWarning)
-
 
 class TemperatureComparison(Comparison):
     def __init__(
