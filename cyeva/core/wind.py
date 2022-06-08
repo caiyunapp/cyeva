@@ -815,7 +815,11 @@ class WindComparison(Comparison):
                 "%",
                 "≤2m/s",
             ),
-            "wind_scale_stronger_ratio": (self.calc_wind_scale_stronger_ratio, "%", None),
+            "wind_scale_stronger_ratio": (
+                self.calc_wind_scale_stronger_ratio,
+                "%",
+                None,
+            ),
             "wind_scale_weaker_ratio": (self.calc_wind_scale_weaker_ratio, "%", None),
             "speed_mae": (self.calc_mae, "m/s", None),
             "speed_score": (self.calc_speed_score, None, None),
