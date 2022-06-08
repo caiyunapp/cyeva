@@ -1,11 +1,10 @@
 from typing import Union
 from numbers import Number
 from functools import partial
-import warnings
 
 import numpy as np
 import pandas as pd
-from pint import UnitRegistry, UnitStrippedWarning
+from pint import UnitRegistry
 
 from ..config.levels.precip import PRECIP_LEVELS, ACC_PRECIP_LEVELS
 from ..core.binarize import (
@@ -22,8 +21,6 @@ from .statistic import (
     calc_bias_score,
 )
 from ..core import Comparison
-
-warnings.filterwarnings("ignore", category=UnitStrippedWarning)
 
 UNITS = UnitRegistry()
 
