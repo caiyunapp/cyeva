@@ -4,7 +4,7 @@ from cyeva.core.wind import (
     identify_wind_scale,
     get_least_lev_diff,
     get_least_dir_deflection,
-    filter_wind_speed_levels,
+    filter_wind_wind_scales,
     WindComparison,
 )
 
@@ -96,7 +96,7 @@ def test_calc_wind_scale_accuracy_ratio():
 
         wind_comparison = WindComparison(obs_spd=obs, fct_spd=fct)
 
-        assert wind_comparison.calc_level_accuracy_ratio() == result
+        assert wind_comparison.calc_wind_scale_accuracy_ratio() == result
 
 
 def test_calc_wind_speed_accuracy_ratio():
@@ -121,7 +121,7 @@ def test_calc_wind_speed_score():
         assert wind_comparison.calc_speed_score() == result
 
 
-def test_calc_wind_speed_level_stronger_ratio():
+def test_calc_wind_scale_stronger_ratio():
     for case in WIND_SPEED_STRONGER_RATE_CASE:
         obs = case["obs"]
         fct = case["fct"]
@@ -129,10 +129,10 @@ def test_calc_wind_speed_level_stronger_ratio():
 
         wind_comparison = WindComparison(obs_spd=obs, fct_spd=fct)
 
-        assert wind_comparison.calc_speed_level_stronger_ratio() == result
+        assert wind_comparison.calc_wind_scale_stronger_ratio() == result
 
 
-def test_calc_wind_speed_level_weaker_ratio():
+def test_calc_wind_scale_weaker_ratio():
     for case in WIND_SPEED_WEAKER_RATE_CASE:
         obs = case["obs"]
         fct = case["fct"]
@@ -140,7 +140,7 @@ def test_calc_wind_speed_level_weaker_ratio():
 
         wind_comparison = WindComparison(obs_spd=obs, fct_spd=fct)
 
-        assert wind_comparison.calc_speed_level_weaker_ratio() == result
+        assert wind_comparison.calc_wind_scale_weaker_ratio() == result
 
 
 def test_calc_wind_speed_chi_square():
