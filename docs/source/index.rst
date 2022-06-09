@@ -3,18 +3,23 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to cyeva's documentation!
-=================================
+.. image:: _static/logo.png
+
+cyeva 是一个由彩云科技天气团队开发的用于对气象要素确定性预报准确率进行快速评测的 Python 开源工具库。
+
+cyeva 将致力于让气象要素确定性预报准确率的自动化评估变得简单直接，将集成常用的确定性预报准确率评估指标，且内部算法广泛使用了numpy的向量运算实现，对于大数据量的计算也具有很高的计算效率。
+
+使用指南
+---------------
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 3
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   content/installation
+   content/usage
+   content/indicator
+   content/api-ref
+   content/contributor-guide
+   content/license
+   content/citation
+   content/changelog
