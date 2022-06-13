@@ -1,6 +1,6 @@
 import setuptools
 import os
-from .cyeva import __version__
+from cyeva import __version__
 
 FILE_PATH = os.path.dirname(os.path.realpath(__file__))
 
