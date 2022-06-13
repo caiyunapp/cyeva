@@ -1,6 +1,5 @@
 import setuptools
 import os
-from cyeva.__version__ import __version__
 
 FILE_PATH = os.path.dirname(os.path.realpath(__file__))
 
@@ -13,7 +12,7 @@ with open(requirements_path) as f:
 
 setuptools.setup(
     name="cyeva",
-    version=__version__,
+    version="0.1.0",
     author="caiyunapp",
     author_email="oss@caiyunapp.com",
     description="A package to evaluate of forecast",
