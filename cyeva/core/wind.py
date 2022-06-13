@@ -655,15 +655,20 @@ class WindComparison(Comparison):
         self,
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
-        kind=None,
-        lev_min=None,
-        lev_max=None,
+        scale_min=None,
+        scale_max=None,
+        mode="strict",
     ):
         """Calculate wind scale accuracy ratio
 
         Args:
             observation (Union[Number, np.ndarray]): Observation wind speed value or ndarray in m/s.
             forecast (Union[Number, np.ndarray]): Forecast wind speed value or ndarray in m/s.
+            scale_min (Number): The min wind scale to remain after filter.
+            scale_max (Number): The max wind scale to remain after filter.
+            mode (str): The mode to filter, Options are 'strict' and 'loose'.
+                        If 'strict' it will use 'and' logic when filter observation and forecast.
+                        If 'loose' it will use 'or' logic.
 
         Returns:
             float: Wind scale accuracy ratio (%)
@@ -673,12 +678,25 @@ class WindComparison(Comparison):
         if forecast is None:
             forecast = self.fct_spd
 
-        obs_lev = identify_wind_scale(self.obs_spd)
-        fct_lev = identify_wind_scale(self.fct_spd)
+        if mode == "strict":
+            observation, forecast = filter_wind_wind_scales(
+                observation, forecast, scale_min=scale_min, scale_max=scale_max
+            )
+        elif mode == "loose":
+            observation, forecast = filter_wind_wind_scales(
+                observation,
+                forecast,
+                scale_min=scale_min,
+                scale_max=scale_max,
+                mode="or",
+            )
+
+        obs_lev = identify_wind_scale(observation)
+        fct_lev = identify_wind_scale(forecast)
 
         hits = np.count_nonzero(obs_lev == fct_lev)
         try:
-            total = len(self.obs_spd)
+            total = len(observation)
         except TypeError:
             total = 1
 
@@ -804,7 +822,7 @@ class WindComparison(Comparison):
         funcs = {
             # tuple: (function object, unit, comment)
             "direction_accuracy_ratio": (self.calc_dir_accuracy_ratio, "%", None),
-            "direction_accuracy_ration_8": (
+            "direction_accuracy_ratio_8": (
                 partial(self.calc_dir_accuracy_ratio, mode="drange8"),
                 "%",
                 None,
