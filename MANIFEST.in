@@ -3,6 +3,7 @@ include *.ini
 include *.rst
 include *.txt
 include LICENSE
+recursive-include requirements
 
 global-exclude __pycache__ *.py[cod] *.ipynb
 global-exclude *.so *.dylib
