@@ -13,11 +13,6 @@ Python用于进行预报准确性检验的工具包
 import numpy as np
 from cyeva import PrecipitationComparison
 
-# 因为pint包有点问题，每次调用都会抛出警告，先用手动的方法过滤掉，后续再想办法解决。
-import warnings
-from pint import UnitStrippedWarning
-warnings.filterwarnings("ignore", category=UnitStrippedWarning)
-
 obs = np.array([1, 2, 3, 4])
 fcst = np.array([0, 0, 0, 0])
 
@@ -45,11 +40,6 @@ print(precip.calc_miss_ratio())             # 漏报率
 import numpy as np
 from cyeva import TemperatureComparison
 
-# 因为pint包有点问题，每次调用都会抛出警告，先用手动的方法过滤掉，后续再想办法解决。
-import warnings
-from pint import UnitStrippedWarning
-warnings.filterwarnings("ignore", category=UnitStrippedWarning)
-
 obs = np.array([1, 2, 3, 4])
 fcst = np.array([0, 0, 0, 0])
 
@@ -61,4 +51,27 @@ print(temp.calc_rss())                              # 剩余平方和
 print(temp.calc_rmse())                             # 均方根误差
 print(temp.calc_mae())                              # 平均绝对误差
 print(temp.calc_chi_square())                       # 卡方(χ2)
+```
+
+### 风
+
+```python
+import numpy as np
+from cyeva import WindComparison
+
+np.random.seed(0)
+
+obs_spd = np.random.random(100) * 10
+obs_dir = np.random.random(100) * 360
+fct_spd = np.random.random(100) * 10
+fct_dir = np.random.random(100) * 360
+
+wind = WindComparison(obs_spd, fct_spd, obs_dir, fct_dir)
+
+print(wind.calc_diff_accuracy_ratio(limit=1))       # 1度准确率（偏差在1°C以内）
+print(wind.calc_diff_accuracy_ratio(limit=2))       # 2度准确率（偏差在2°C以内）
+print(wind.calc_rss())                              # 剩余平方和
+print(wind.calc_rmse())                             # 均方根误差
+print(wind.calc_mae())                              # 平均绝对误差
+print(wind.calc_chi_square())                       # 卡方(χ2)
 ```
