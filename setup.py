@@ -1,5 +1,6 @@
 import setuptools
 import os
+from .cyeva import __version__
 
 FILE_PATH = os.path.dirname(os.path.realpath(__file__))
 
@@ -12,9 +13,9 @@ with open(requirements_path) as f:
 
 setuptools.setup(
     name="cyeva",
-    version="1.0.0",
-    author="wentao.li",
-    author_email="liwentao@caiyunapp.com",
+    version=__version__,
+    author="caiyunapp",
+    author_email="oss@caiyunapp.com",
     description="A package to evaluate of forecast",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -26,6 +27,5 @@ setuptools.setup(
     classifiers=[
         "Programming Language :: Python :: 3",
     ],
-    python_requires=">=3.7",
-    entry_points={"console_scripts": ["cyeva = cyeva.cli:cli"]},
+    python_requires=">=3.7"
 )
