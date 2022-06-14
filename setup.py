@@ -12,7 +12,7 @@ with open(requirements_path) as f:
 
 setuptools.setup(
     name="cyeva",
-    version="0.1.0",
+    version="0.1.0-beta",
     author="caiyunapp",
     author_email="oss@caiyunapp.com",
     description="A package to evaluate of forecast",
