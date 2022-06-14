@@ -18,7 +18,7 @@ setuptools.setup(
     description="A package to evaluate of forecast",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="",
+    url="https://github.com/caiyunapp/cyeva",
     include_package_data=True,
     package_data={"": ["*.csv", "*.config", "*.nl", "*.json"]},
     packages=setuptools.find_packages(),
