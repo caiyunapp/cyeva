@@ -1,20 +1,17 @@
 from typing import Union
 from numbers import Number
 from functools import partial
-import warnings
 
 import numpy as np
 import pandas as pd
-from pint import UnitRegistry, UnitStrippedWarning
+from pint import UnitRegistry
 
-from cyeva.config.levels.precip.acc_precip_level import ACC_PRECIP_LEVELS
-from cyeva.config.levels.precip.precip_level import PRECIP_LEVELS
-
-from cyeva.core.binarize import (
+from ..config.levels.precip import PRECIP_LEVELS, ACC_PRECIP_LEVELS
+from ..core.binarize import (
     threshold_binarize,
     level_binarize,
 )
-from cyeva.utils import result_round_digit, source_round_digit
+from ..utils import result_round_digit, source_round_digit
 from .statistic import (
     calc_binary_accuracy_ratio,
     calc_miss_ratio,
@@ -23,9 +20,7 @@ from .statistic import (
     calc_ets,
     calc_bias_score,
 )
-from cyeva.core import Comparison
-
-warnings.filterwarnings("ignore", category=UnitStrippedWarning)
+from ..core import Comparison
 
 UNITS = UnitRegistry()
 

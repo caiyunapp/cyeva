@@ -12,20 +12,30 @@ with open(requirements_path) as f:
 
 setuptools.setup(
     name="cyeva",
-    version="1.0.0",
-    author="wentao.li",
-    author_email="liwentao@caiyunapp.com",
+    version="0.1.0-beta",
+    author="caiyunapp",
+    author_email="oss@caiyunapp.com",
     description="A package to evaluate of forecast",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="",
+    url="https://github.com/caiyunapp/cyeva",
     include_package_data=True,
     package_data={"": ["*.csv", "*.config", "*.nl", "*.json"]},
     packages=setuptools.find_packages(),
     install_requires=required,
     classifiers=[
-        "Programming Language :: Python :: 3",
+        "Development Status :: 4 - Beta",
+        "Topic :: Scientific/Engineering :: Atmospheric Science",
+        "Topic :: Scientific/Engineering :: Mathematics",
+        "License :: OSI Approved :: BSD License",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Operating System :: POSIX :: Linux",
+        "Operating System :: Microsoft :: Windows",
+        "Operating System :: MacOS",
+        "Framework :: Sphinx"
     ],
-    python_requires=">=3.6",
-    entry_points={"console_scripts": ["cyeva = cyeva.cli:cli"]},
+    python_requires=">=3.7"
 )

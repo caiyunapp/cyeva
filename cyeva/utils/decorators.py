@@ -1,4 +1,5 @@
 from functools import wraps
+from numbers import Number
 
 import numpy as np
 
@@ -8,6 +9,8 @@ def assert_length(func):
 
     @wraps(func)
     def wrapper(observation, forecast, *args, **kwargs):
+        if isinstance(observation, Number) and isinstance(forecast, Number):
+            return func(observation, forecast, *args, **kwargs)
         if (
             hasattr(observation, "__len__")
             and hasattr(forecast, "__len__")
@@ -26,10 +29,13 @@ def convert_to_ndarray(func):
 
     @wraps(func)
     def wrapper(observation, forecast, *args, **kwargs):
-        if not isinstance(observation, np.ndarray):
+
+        if not isinstance(observation, np.ndarray) and not isinstance(
+            observation, Number
+        ):
             observation = np.array(observation)
 
-        if not isinstance(forecast, np.ndarray):
+        if not isinstance(forecast, np.ndarray) and not isinstance(forecast, Number):
             forecast = np.array(forecast)
 
         return func(observation, forecast, *args, **kwargs)
