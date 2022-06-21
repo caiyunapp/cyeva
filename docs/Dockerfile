@@ -6,10 +6,8 @@ RUN sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.li
     sed -i 's/security.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list && \
     apt-get update && apt-get install -y make
 
-COPY ../requirements/requirements-dev.txt .
-
 RUN pip install -i "https://pypi.doubanio.com/simple/" pip -U pip setuptools wheel && \
-    pip install -i "https://pypi.doubanio.com/simple/" -r requirements.txt --trusted-host "https://pypi.doubanio.com"
+    pip install -i "https://pypi.doubanio.com/simple/" Sphinx>=5.0.1 sphinx-rtd-theme>=1.0.0 --trusted-host "https://pypi.doubanio.com"
 
 COPY . .
 
