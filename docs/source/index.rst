@@ -23,3 +23,4 @@ cyeva 将致力于让气象要素确定性预报准确率的自动化评估变�
    content/license
    content/citation
    content/changelog
+   content/appendix
