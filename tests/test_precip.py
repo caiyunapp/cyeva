@@ -13,6 +13,7 @@ from .case.precip.single import (
     ETS_SCORE_CASE,
     TS_SCORE_CASE,
     FALSE_ALARM_RATE_CASE,
+    FALSE_ALARM_RATIO_CASE,
     MISS_RATE_CASE,
 )
 from .case.precip.interval import (
@@ -67,11 +68,23 @@ def test_calc_miss_ratio():
 
 
 def test_calc_false_alarm_ratio():
-    for case in FALSE_ALARM_RATE_CASE:
+    for case in FALSE_ALARM_RATIO_CASE:
         obs = case["obs"]
         fct = case["fct"]
         result = case["result"]
         _result = calc_precip_occur_indicators(obs, fct, indicator="false_alarm_ratio")
+        if not np.isnan(result):
+            assert _result == result
+        else:
+            assert np.isnan(_result)
+
+
+def test_calc_false_alarm_rate():
+    for case in FALSE_ALARM_RATE_CASE:
+        obs = case["obs"]
+        fct = case["fct"]
+        result = case["result"]
+        _result = calc_precip_occur_indicators(obs, fct, indicator="false_alarm_rate")
         if not np.isnan(result):
             assert _result == result
         else:
