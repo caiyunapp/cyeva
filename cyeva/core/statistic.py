@@ -70,6 +70,7 @@ def calc_binary_accuracy_ratio(
 
     return ((hits + correct_rejects) / total) * 100
 
+#TODO: 增加命中率
 
 @assert_length
 @fix_zero_division
@@ -116,6 +117,7 @@ def calc_false_alarm_ratio(
         observation, forecast
     )
 
+    # FIXME: (false_alarms / (hits + false_alarms)) * 100
     return (false_alarms / (hits + false_alarms + correct_rejects)) * 100
 
 
