@@ -70,7 +70,30 @@ def calc_binary_accuracy_ratio(
 
     return ((hits + correct_rejects) / total) * 100
 
-#TODO: 增加命中率
+
+@assert_length
+@fix_zero_division
+@drop_nan
+def calc_hit_ratio(
+    observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
+) -> float:
+    """Calculate hit ratio.
+
+    Args:
+        observation (Union[list, np.ndarray]): Binarized observation data array
+                                               that consist of True and False.
+        forecast (Union[list, np.ndarray]): Binarized forecast data array that
+                                            consist of True and False.
+
+    Returns:
+        float: Missing ratio(%)
+    """
+    hits, misses, _, correct_rejects, _ = calc_binary_quadrant_values(
+        observation, forecast
+    )
+
+    return (hits / (hits + misses)) * 100
+
 
 @assert_length
 @fix_zero_division
@@ -93,7 +116,7 @@ def calc_miss_ratio(
         observation, forecast
     )
 
-    return (misses / (hits + misses + correct_rejects)) * 100
+    return (misses / (hits + misses)) * 100
 
 
 @assert_length
