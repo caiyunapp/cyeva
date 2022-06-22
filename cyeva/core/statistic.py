@@ -125,9 +125,9 @@ def calc_miss_ratio(
 def calc_false_alarm_ratio(
     observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
 ) -> float:
-    """Calculate false alarm ratio.
+    """Calculate false alarm ratio, commonly known as FAR.
 
-    Note that false alarm rate is different from false alarm ratio.
+    Note that false alarm rate(POFD) is different from false alarm ratio(FAR).
     You can get more information about this from https://doi.org/10.1175/2009WAF2222300.1
 
     Args:
@@ -139,11 +139,10 @@ def calc_false_alarm_ratio(
     Returns:
         float: False alarm ratio(%)
     """
-    hits, _, false_alarms, correct_rejects, _ = calc_binary_quadrant_values(
-        observation, forecast
-    )
+    hits, _, false_alarms, _, _ = calc_binary_quadrant_values(observation, forecast)
 
     return (false_alarms / (hits + false_alarms)) * 100
+
 
 @assert_length
 @fix_zero_division
@@ -151,9 +150,9 @@ def calc_false_alarm_ratio(
 def calc_false_alarm_rate(
     observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
 ) -> float:
-    """Calculate false alarm rate. 
+    """Calculate false alarm rate, commonly known as POFD.
 
-    Note that false alarm rate is different from false alarm ratio.
+    Note that false alarm rate(POFD) is different from false alarm ratio(FAR).
     You can get more information about this from https://doi.org/10.1175/2009WAF2222300.1
 
     Args:
@@ -165,7 +164,7 @@ def calc_false_alarm_rate(
     Returns:
         float: False alarm rate(%)
     """
-    hits, _, false_alarms, correct_rejects, _ = calc_binary_quadrant_values(
+    _, _, false_alarms, correct_rejects, _ = calc_binary_quadrant_values(
         observation, forecast
     )
 
