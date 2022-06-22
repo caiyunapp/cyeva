@@ -21,6 +21,7 @@ from .case.precip.interval import (
     LEV_TS_SCORE_CASE,
     LEV_ETS_SCORE_CASE,
     LEV_MISS_RATE_CASE,
+    LEV_FALSE_ALARM_RATIO_CASE,
     LEV_FALSE_ALARM_RATE_CASE,
     LEV_BIAS_SCORE_CASE,
 )
@@ -28,7 +29,7 @@ from .case.precip.accumulate import (
     ACC_ACCURACY_RATE_CASE,
     ACC_TS_SCORE_CASE,
     ACC_ETS_SCORE_CASE,
-    ACC_MISS_RATE_CASE,
+    ACC_MISS_RATIO_CASE,
     ACC_FALSE_ALARM_RATE_CASE,
     ACC_BIAS_SCORE_CASE,
 )
@@ -160,7 +161,7 @@ def test_calc_precip_interval_miss_ratio():
 
 
 def test_calc_precip_interval_false_alarm_ratio():
-    for kind, levs in LEV_FALSE_ALARM_RATE_CASE.items():
+    for kind, levs in LEV_FALSE_ALARM_RATIO_CASE.items():
         for lev, cases in levs.items():
             for case in cases:
                 obs = case["obs"]
@@ -240,7 +241,7 @@ def test_calc_precip_accumulate_accuracy_ratio():
 
 
 def test_calc_precip_accumulate_miss_ratio():
-    for kind, levs in ACC_MISS_RATE_CASE.items():
+    for kind, levs in ACC_MISS_RATIO_CASE.items():
         for lev, cases in levs.items():
             for case in cases:
                 obs = case["obs"]
@@ -447,7 +448,7 @@ def test_precipitation_object_each():
         else:
             assert np.isnan(_result)
 
-    for case in FALSE_ALARM_RATE_CASE:
+    for case in FALSE_ALARM_RATIO_CASE:
         obs = case["obs"]
         fcst = case["fct"]
         result = case["result"]
@@ -533,7 +534,7 @@ def test_precipitation_object_each():
                 else:
                     assert np.isnan(_result)
 
-    for kind, levs in LEV_FALSE_ALARM_RATE_CASE.items():
+    for kind, levs in LEV_FALSE_ALARM_RATIO_CASE.items():
         for lev, cases in levs.items():
             for case in cases:
                 obs = case["obs"]
@@ -607,7 +608,7 @@ def test_precipitation_object_each():
                 else:
                     assert np.isnan(_result)
 
-    for kind, levs in ACC_MISS_RATE_CASE.items():
+    for kind, levs in ACC_MISS_RATIO_CASE.items():
         for lev, cases in levs.items():
             for case in cases:
                 obs = case["obs"]

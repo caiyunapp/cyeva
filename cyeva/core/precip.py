@@ -123,6 +123,7 @@ def calc_precip_interval_indicators(
         "accuracy_ratio": calc_binary_accuracy_ratio,
         "miss_ratio": calc_miss_ratio,
         "false_alarm_ratio": calc_false_alarm_ratio,
+        "false_alarm_rate": calc_false_alarm_rate,
         "ts": calc_ts,
         "ets": calc_ets,
         "bias_score": calc_bias_score,
@@ -180,6 +181,7 @@ def calc_precip_accumulate_indicators(
         "accuracy_ratio": calc_binary_accuracy_ratio,
         "miss_ratio": calc_miss_ratio,
         "false_alarm_ratio": calc_false_alarm_ratio,
+        "false_alarm_rate": calc_false_alarm_rate,
         "ts": calc_ts,
         "ets": calc_ets,
         "bias_score": calc_bias_score,
@@ -203,8 +205,8 @@ class PrecipitationComparison(Comparison):
         self.kind = kind
         self.unit = unit
         self.lev = lev
-        self.observation = (self.observation * UNITS[unit]).to("mm")
-        self.forecast = (self.forecast * UNITS[unit]).to("mm")
+        self.observation = (self.observation * UNITS.parse_expression(unit)).to("mm")
+        self.forecast = (self.forecast * UNITS.parse_expression(unit)).to("mm")
         self.df = pd.DataFrame(
             {
                 "observation": self.observation,
@@ -278,7 +280,7 @@ class PrecipitationComparison(Comparison):
         if int(lev) > 0:
             if not kind:
                 kind = self.kind
-            assert kind and (kind.lower() in ["1h", "3h", "24h"])
+            assert kind and (kind.lower() in ["1h", "3h", "12h", "24h"])
             if not lev:
                 lev = self.lev
             assert lev and (lev in self.lev_index)
@@ -323,7 +325,7 @@ class PrecipitationComparison(Comparison):
         if int(lev) > 0:
             if not kind:
                 kind = self.kind
-            assert kind and (kind.lower() in ["1h", "3h", "24h"])
+            assert kind and (kind.lower() in ["1h", "3h", "12h", "24h"])
             if not lev:
                 lev = self.lev
             assert lev and (lev in self.lev_index)
@@ -368,7 +370,7 @@ class PrecipitationComparison(Comparison):
         if int(lev) > 0:
             if not kind:
                 kind = self.kind
-            assert kind and (kind.lower() in ["1h", "3h", "24h"])
+            assert kind and (kind.lower() in ["1h", "3h", "12h", "24h"])
             if not lev:
                 lev = self.lev
             assert lev and (lev in self.lev_index)
@@ -413,7 +415,7 @@ class PrecipitationComparison(Comparison):
         if int(lev) > 0:
             if not kind:
                 kind = self.kind
-            assert kind and (kind.lower() in ["1h", "3h", "24h"])
+            assert kind and (kind.lower() in ["1h", "3h", "12h", "24h"])
             if not lev:
                 lev = self.lev
             assert lev and (lev in self.lev_index)
@@ -458,7 +460,7 @@ class PrecipitationComparison(Comparison):
         if int(lev) > 0:
             if not kind:
                 kind = self.kind
-            assert kind and (kind.lower() in ["1h", "3h", "24h"])
+            assert kind and (kind.lower() in ["1h", "3h", "12h", "24h"])
             if not lev:
                 lev = self.lev
             assert lev and (lev in self.lev_index)
@@ -503,7 +505,7 @@ class PrecipitationComparison(Comparison):
         if int(lev) > 0:
             if not kind:
                 kind = self.kind
-            assert kind and (kind.lower() in ["1h", "3h", "24h"])
+            assert kind and (kind.lower() in ["1h", "3h", "12h", "24h"])
             if not lev:
                 lev = self.lev
             assert lev and (lev in self.lev_index)
@@ -532,7 +534,7 @@ class PrecipitationComparison(Comparison):
         """
         if not kind:
             kind = self.kind
-        assert kind and (kind.lower() in ["1h", "3h", "24h"])
+        assert kind and (kind.lower() in ["1h", "3h", "12h", "24h"])
 
         LEVS = {
             "0": ("rain_or_shine", None),
