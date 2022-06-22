@@ -127,6 +127,9 @@ def calc_false_alarm_ratio(
 ) -> float:
     """Calculate false alarm ratio.
 
+    Note that false alarm rate is different from false alarm ratio.
+    You can get more information about this from https://doi.org/10.1175/2009WAF2222300.1
+
     Args:
         observation (Union[list, np.ndarray]): Binarized observation data array
                                                that consist of True and False.
@@ -140,8 +143,33 @@ def calc_false_alarm_ratio(
         observation, forecast
     )
 
-    # FIXME: (false_alarms / (hits + false_alarms)) * 100
-    return (false_alarms / (hits + false_alarms + correct_rejects)) * 100
+    return (false_alarms / (hits + false_alarms)) * 100
+
+@assert_length
+@fix_zero_division
+@drop_nan
+def calc_false_alarm_rate(
+    observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
+) -> float:
+    """Calculate false alarm rate. 
+
+    Note that false alarm rate is different from false alarm ratio.
+    You can get more information about this from https://doi.org/10.1175/2009WAF2222300.1
+
+    Args:
+        observation (Union[list, np.ndarray]): Binarized observation data array
+                                               that consist of True and False.
+        forecast (Union[list, np.ndarray]): Binarized forecast data array that
+                                            consist of True and False.
+
+    Returns:
+        float: False alarm rate(%)
+    """
+    hits, _, false_alarms, correct_rejects, _ = calc_binary_quadrant_values(
+        observation, forecast
+    )
+
+    return (false_alarms / (correct_rejects + false_alarms)) * 100
 
 
 @assert_length
