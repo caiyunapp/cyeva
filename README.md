@@ -1,7 +1,7 @@
 # cyeva
 
-[![Python package](https://github.com/caiyunapp/cyeva/actions/workflows/python-package.yml/badge.svg)](https://github.com/caiyunapp/cyeva/actions/workflows/python-package.yml)
-[![Upload Python Package](https://github.com/caiyunapp/cyeva/actions/workflows/python-publish.yml/badge.svg)](https://github.com/caiyunapp/cyeva/actions/workflows/python-publish.yml)
+[![Pytest](https://github.com/caiyunapp/cyeva/actions/workflows/pytest.yml/badge.svg)](https://github.com/caiyunapp/cyeva/actions/workflows/pytest.yml)
+[![Pypi publish](https://github.com/caiyunapp/cyeva/actions/workflows/pypi-publish.yml/badge.svg)](https://github.com/caiyunapp/cyeva/actions/workflows/pypi-publish.yml)
 [![Pypi](https://badge.fury.io/py/cyeva.svg)](https://badge.fury.io/py/cyeva)
 [![Documentation Status](https://readthedocs.org/projects/cyeva/badge/?version=latest)](https://cyeva.readthedocs.io/zh_CN/latest/?badge=latest)
 
