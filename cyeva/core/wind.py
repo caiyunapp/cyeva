@@ -278,13 +278,13 @@ class WindComparison(Comparison):
         unit_dir: str = "degree",
     ):
         if obs_spd is not None:
-            self.obs_spd = (obs_spd * UNITS[unit_spd]).to("m/s")
+            self.obs_spd = (obs_spd * UNITS.parse_expression(unit_spd)).to("m/s")
         if obs_dir is not None:
-            self.obs_dir = (obs_dir * UNITS[unit_dir]).to("degree")
+            self.obs_dir = (obs_dir * UNITS.parse_expression(unit_dir)).to("degree")
         if fct_spd is not None:
-            self.fct_spd = (fct_spd * UNITS[unit_spd]).to("m/s")
+            self.fct_spd = (fct_spd * UNITS.parse_expression(unit_spd)).to("m/s")
         if fct_dir is not None:
-            self.fct_dir = (fct_dir * UNITS[unit_dir]).to("degree")
+            self.fct_dir = (fct_dir * UNITS.parse_expression(unit_dir)).to("degree")
 
         self.df = pd.DataFrame(
             {

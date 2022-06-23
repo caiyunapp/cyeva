@@ -20,8 +20,8 @@ class TemperatureComparison(Comparison):
         super().__init__(observation, forecast)
         self.kind = kind
         self.lev = lev
-        self.observation = (self.observation * UNITS[unit]).to("degC")
-        self.forecast = (self.forecast * UNITS[unit]).to("degC")
+        self.observation = (self.observation * UNITS.parse_expression(unit)).to("degC")
+        self.forecast = (self.forecast * UNITS.parse_expression(unit)).to("degC")
         self.df = pd.DataFrame(
             {
                 "observation": self.observation,
