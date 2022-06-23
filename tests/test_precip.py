@@ -31,6 +31,7 @@ from .case.precip.accumulate import (
     ACC_ETS_SCORE_CASE,
     ACC_MISS_RATIO_CASE,
     ACC_FALSE_ALARM_RATE_CASE,
+    ACC_FALSE_ALARM_RATIO_CASE,
     ACC_BIAS_SCORE_CASE,
 )
 from .case import (
@@ -257,6 +258,22 @@ def test_calc_precip_accumulate_miss_ratio():
 
 
 def test_calc_precip_accumulate_false_alarm_ratio():
+    for kind, levs in ACC_FALSE_ALARM_RATIO_CASE.items():
+        for lev, cases in levs.items():
+            for case in cases:
+                obs = case["obs"]
+                fct = case["fct"]
+                result = case["result"]
+                _result = calc_precip_accumulate_indicators(
+                    obs, fct, kind, lev, indicator="false_alarm_ratio"
+                )
+                if not np.isnan(result):
+                    assert _result == result
+                else:
+                    assert np.isnan(_result)
+
+
+def test_calc_precip_accumulate_false_alarm_rate():
     for kind, levs in ACC_FALSE_ALARM_RATE_CASE.items():
         for lev, cases in levs.items():
             for case in cases:
