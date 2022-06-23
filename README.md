@@ -1,5 +1,14 @@
 # cyeva
 
+[![Python package](https://github.com/caiyunapp/cyeva/actions/workflows/python-package.yml/badge.svg)](https://github.com/caiyunapp/cyeva/actions/workflows/python-package.yml)
+[![Upload Python Package](https://github.com/caiyunapp/cyeva/actions/workflows/python-publish.yml/badge.svg)](https://github.com/caiyunapp/cyeva/actions/workflows/python-publish.yml)
+[![Pypi](https://badge.fury.io/py/cyeva.svg)](https://badge.fury.io/py/cyeva)
+[![Documentation Status](https://readthedocs.org/projects/cyeva/badge/?version=latest)](https://cyeva.readthedocs.io/zh_CN/latest/?badge=latest)
+
+[![Line statistic](https://tokei.rs/b1/github/caiyunapp/cyeva?category=lines)](https://github.com/caiyunapp/cyeva)
+
+[![Download statistic](https://pepy.tech/project/cyeva)](https://pepy.tech/project/cyeva)
+
 cyeva 是一个由彩云科技天气团队开发的用于对气象要素确定性预报准确率进行快速评测的 Python 开源工具库。
 
 cyeva 将致力于让气象要素确定性预报准确率的自动化评估变得简单直接，将集成常用的确定性预报准确率评估指标，且内部算法广泛使用了 numpy 的向量运算实现，对于大数据量的计算也具有较高的计算效率。
