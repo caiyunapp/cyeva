@@ -641,7 +641,7 @@ def test_precipitation_object_each():
                 else:
                     assert np.isnan(_result)
 
-    for kind, levs in ACC_FALSE_ALARM_RATE_CASE.items():
+    for kind, levs in ACC_FALSE_ALARM_RATIO_CASE.items():
         for lev, cases in levs.items():
             for case in cases:
                 obs = case["obs"]
@@ -650,6 +650,21 @@ def test_precipitation_object_each():
                 precip = PrecipitationComparison(obs, fcst)
 
                 _result = precip.calc_false_alarm_ratio(lev="+" + str(lev), kind=kind)
+
+                if not np.isnan(result):
+                    assert _result == result
+                else:
+                    assert np.isnan(_result)
+
+    for kind, levs in ACC_FALSE_ALARM_RATE_CASE.items():
+        for lev, cases in levs.items():
+            for case in cases:
+                obs = case["obs"]
+                fcst = case["fct"]
+                result = case["result"]
+                precip = PrecipitationComparison(obs, fcst)
+
+                _result = precip.calc_false_alarm_rate(lev="+" + str(lev), kind=kind)
 
                 if not np.isnan(result):
                     assert _result == result

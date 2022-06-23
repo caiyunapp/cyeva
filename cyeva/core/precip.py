@@ -95,7 +95,7 @@ def calc_precip_interval_indicators(
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
 
-        kind (str): Statistic kind. Options are '1h', '3h' and '24h'.
+        kind (str): Statistic kind. Options are '1h', '3h', '12h' and '24h'.
 
         lev (int): Level ID, Options:
                    * 1: Light rain
@@ -152,7 +152,7 @@ def calc_precip_accumulate_indicators(
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
 
-        kind (str): Statistic kind. Options are '1h', '3h' and '24h'.
+        kind (str): Statistic kind. Options are '1h', '3h', '12h' and '24h'.
 
         lev (int): Level ID, Options:
                    * 1: Light rain
@@ -257,7 +257,7 @@ class PrecipitationComparison(Comparison):
         """Calculste precipitation accuracy ratio.
 
         Args:
-            kind (str): Statistic kind. Options are '1h', '3h' and '24h'.
+            kind (str): Statistic kind. Options are '1h', '3h', '12h' and '24h'.
             lev (str): Level ID, Options:
                        * "0": Rain or shine.
                        * "1": Light rain.
@@ -302,7 +302,7 @@ class PrecipitationComparison(Comparison):
         """Calculste precipitation missing ratio.
 
         Args:
-            kind (str): Statistic kind. Options are '1h', '3h' and '24h'.
+            kind (str): Statistic kind. Options are '1h', '3h', '12h' and '24h'.
             lev (str): Level ID, Options:
                        * "0": Rain or shine.
                        * "1": Light rain
@@ -347,7 +347,7 @@ class PrecipitationComparison(Comparison):
         """Calculste precipitation false alarm ratio.
 
         Args:
-            kind (str): Statistic kind. Options are '1h', '3h' and '24h'.
+            kind (str): Statistic kind. Options are '1h', '3h', '12h' and '24h'.
             lev (str): Level ID, Options:
                        * "0": Rain or shine.
                        * "1": Light rain.
@@ -388,11 +388,56 @@ class PrecipitationComparison(Comparison):
             self.observation, self.forecast, kind=kind, lev=int(lev)
         )
 
+    def calc_false_alarm_rate(self, kind: str = None, lev: str = "0"):
+        """Calculste precipitation false alarm rate.
+
+        Args:
+            kind (str): Statistic kind. Options are '1h', '3h', '12h' and '24h'.
+            lev (str): Level ID, Options:
+                       * "0": Rain or shine.
+                       * "1": Light rain.
+                       * "2": Moderate rain.
+                       * "3": Heavy rain.
+                       * "4": Violent rain.
+                       * "5": Severe violent rain.
+                       * "6": Super severe violent rain(1h don't have this).
+                       * "+1": Accumulated to Light rain.
+                       * "+2": Accumulated to Moderate rain.
+                       * "+3": Accumulated to Heavy rain.
+                       * "+4": Accumulated to Violent rain.
+                       * "+5": Accumulated to Severe violent rain.
+                       * "+6": Accumulated to Super severe violent rain(1h don't have this).
+                       Defaults to "0".
+
+        Returns:
+            float: False alarm ratio of specific kind and level(%)
+        """
+        if int(lev) > 0:
+            if not kind:
+                kind = self.kind
+            assert kind and (kind.lower() in ["1h", "3h", "12h", "24h"])
+            if not lev:
+                lev = self.lev
+            assert lev and (lev in self.lev_index)
+
+            if kind == "1h" and lev in ["6", "+6"]:
+                lev = lev.replace("6", "5")
+
+            kind = kind.lower()
+        else:
+            kind = None
+
+        func_choice = self.__make_func_choice(indicator="false_alarm_rate")
+
+        return func_choice[lev](
+            self.observation, self.forecast, kind=kind, lev=int(lev)
+        )
+
     def calc_ts(self, kind: str = "1h", lev: str = "0"):
         """Calculste precipitation threat score(TS).
 
         Args:
-            kind (str): Statistic kind. Options are '1h', '3h' and '24h'.
+            kind (str): Statistic kind. Options are '1h', '3h', '12h' and '24h'.
             lev (str): Level ID, Options:
                        * "0": Rain or shine.
                        * "1": Light rain.
@@ -437,7 +482,7 @@ class PrecipitationComparison(Comparison):
         """Calculste precipitation equitable threat score(ETS).
 
         Args:
-            kind (str): Statistic kind. Options are '1h', '3h' and '24h'.
+            kind (str): Statistic kind. Options are '1h', '3h', '12h' and '24h'.
             lev (str): Level ID, Options:
                        * "0": Rain or shine.
                        * "1": Light rain.
@@ -482,7 +527,7 @@ class PrecipitationComparison(Comparison):
         """Calculste precipitation equitable threat score(ETS).
 
         Args:
-            kind (str): Statistic kind. Options are '1h', '3h' and '24h'.
+            kind (str): Statistic kind. Options are '1h', '3h', '12h' and '24h'.
             lev (str): Level ID, Options:
                        * "0": Rain or shine.
                        * "1": Light rain.
@@ -527,7 +572,7 @@ class PrecipitationComparison(Comparison):
         """Calculate all indicators.
 
         Args:
-            kind (str): Statistic kind. Options are '1h', '3h' and '24h'.
+            kind (str): Statistic kind. Options are '1h', '3h', '12h' and '24h'.
 
         Returns:
             pandas.core.frame.DataFrame: All indicators.
