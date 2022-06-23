@@ -281,7 +281,7 @@ def test_calc_precip_accumulate_false_alarm_rate():
                 fct = case["fct"]
                 result = case["result"]
                 _result = calc_precip_accumulate_indicators(
-                    obs, fct, kind, lev, indicator="false_alarm_ratio"
+                    obs, fct, kind, lev, indicator="false_alarm_rate"
                 )
                 if not np.isnan(result):
                     assert _result == result
