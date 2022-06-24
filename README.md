@@ -19,6 +19,8 @@ cyeva 将致力于让气象要素确定性预报准确率的自动化评估变�
 $ pip install cyeva
 ```
 
+**注意：由于本项目目前处于beta阶段，并非稳定版本，有可能在后续的发布版中出现不兼容性修改，因此在安装时建议指定版本号，例如 `pip install cyeva==0.1.0b0`**
+
 ### 通过源码安装
 
 首先在[版本页面](https://github.com/caiyunapp/cyeva/releases)选择想要安装的版本，解压，进入项目目录然后执行：
