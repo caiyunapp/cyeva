@@ -43,46 +43,38 @@ fcst = np.random.random(int(1E4)) * 50
 
 precip = PrecipitationComparison(obs, fcst)
 
-print(precip.calc_ts())                     # TS评分
-for inv in ['1h', '3h', '24h']:
+print(precip.calc_rss())                    # 剩余平方和
+print(precip.calc_rmse())                   # 均方根误差
+print(precip.calc_mae())                    # 平均绝对误差
+print(precip.calc_chi_square())             # 卡方(χ2)
+print(precip.calc_accuracy_ratio())         # 准确率(0级)
+print(precip.calc_binary_accuracy_ratio())  # 准确率(二分/晴雨)
+print(precip.calc_false_alarm_ratio())      # 空报率
+print(precip.calc_miss_ratio())             # 漏报率
+
+print(precip.calc_ts())                     # TS评分（默认为1h晴雨TS）
+for inv in ['1h', '3h', '12h', '24h']:      # 不同间隔下的分级TS评分
     for lev in range(7):
         print(f'ts-{inv}-{lev}:', precip.calc_ts(kind=inv, lev=str(lev)))
     
-print(precip.calc_ets())                    # ETS评分
-for inv in ['1h', '3h', '24h']:
+print(precip.calc_ets())                    # ETS评分（默认为1h晴雨ETS）
+for inv in ['1h', '3h', '12h', '24h']:      # 不同间隔下的分级ETS评分
     for lev in range(7):
         print(f'ets-{inv}-{lev}:', precip.calc_ets(kind=inv, lev=str(lev)))
 
-print(precip.calc_bias_score())             # bias评分
-for inv in ['1h', '3h', '24h']:
+print(precip.calc_bias_score())             # bias评分（默认为1h晴雨bias）
+for inv in ['1h', '3h', '12h', '24h']:      # 不同间隔下的分级bias评分
     for lev in range(7):
         print(f'bias-{inv}-{lev}:', precip.calc_bias(kind=inv, lev=str(lev)))
 
 print(precip.calc_accuracy_ratio(kind='3h', lev='3'))         # 准确率(3小时间隔3级/大雨)
-for inv in ['1h', '3h', '24h']:
+for inv in ['1h', '3h', '12h', '24h']:                        # 不同间隔下的分级准确率
     for lev in range(7):
         lev_str = str(lev)
         levp_str = f'+{lev_str}'
         print(f'ts-{inv}- {lev_str}:', precip.calc_ts(kind=inv, lev=lev_str))
         if lev > 0:
             print(f'ts-{inv}- {levp_str}:', precip.calc_ts(kind=inv, lev=levp_str))
-
-print(precip.calc_rss())                    # 剩余平方和
-print(precip.calc_rmse())                   # 均方根误差
-
-print(precip.calc_mae())                    # 平均绝对误差
-print(precip.calc_chi_square())             # 卡方(χ2)
-print(precip.calc_accuracy_ratio())         # 准确率(0级)
-print(precip.calc_accuracy_ratio(kind='1h', lev='1'))         # 准确率(1小时间隔1级/小雨)
-print(precip.calc_accuracy_ratio(kind='3h', lev='1'))         # 准确率(3小时间隔1级/小雨)
-print(precip.calc_accuracy_ratio(kind='3h', lev='3'))         # 准确率(3小时间隔3级/大雨)
-for inv in ['1h', '3h', '24h']:
-    for lev in range(7):
-        print(f'{inv}-{lev}:', precip.calc_ts(kind=inv, lev=str(lev)))
-print(precip.calc_accuracy_ratio(kind='3h', lev='+3'))        # 准确率(3小时间隔累计3级/大雨)
-print(precip.calc_binary_accuracy_ratio())  # 准确率(二分/晴雨)
-print(precip.calc_false_alarm_ratio())      # 空报率
-print(precip.calc_miss_ratio())             # 漏报率
 ```
 
 ### 气温
@@ -103,7 +95,6 @@ print(temp.calc_rss())                              # 剩余平方和
 print(temp.calc_rmse())                             # 均方根误差
 print(temp.calc_mae())                              # 平均绝对误差
 print(temp.calc_chi_square())                       # 卡方(χ2)
-print(temp.gather_all_factors())                    # 全部要素
 ```
 
 ### 风
