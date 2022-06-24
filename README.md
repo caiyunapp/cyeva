@@ -137,19 +137,19 @@ wind = WindComparison(obs_spd, fct_spd, obs_dir, fct_dir)
 
 print('difference accuracy ratio within 1 m/s:', wind.calc_diff_accuracy_ratio(limit=1))       # 1m/s准确率（风速偏差在1m/s以内）
 print('difference accuracy ratio within 2 m/s:', wind.calc_diff_accuracy_ratio(limit=2))       # 2m/s准确率（风速偏差在2m/s以内）
-print('wind speed rss:', wind.calc_rss())                              # 剩余平方和（默认风速）
-print('wind direction rss:', wind.calc_rss(kind='direction'))              # 剩余平方和（指定风向）
-print('wind speed rmse:', wind.calc_rmse())                             # 均方根误差（默认风速）
-print('wind direction rmse:', wind.calc_rmse(kind='direction'))             # 均方根误差（指定风向）
-print('wind speed mae: ', wind.calc_mae())                              # 平均绝对误差（默认风速）
-print('wind direction mae:', wind.calc_mae(kind='direction'))              # 平均绝对误差（指定风向）
-print('wind speed chi square:', wind.calc_chi_square())                       # 卡方(χ2)
-print('wind direction chi square:', wind.calc_chi_square(kind='direction'))       # 卡方(χ2)（指定风向）
-print('wind direction score:', wind.calc_dir_score())                        # 风向评分
-print('wind speed score:', wind.calc_speed_score())                      # 风速评分
-print('wind scale accuracy ratio:', wind.calc_wind_scale_accuracy_ratio())        # 风级准确率
-print('wind speed accuracy ratio within 2m/s:', wind.calc_speed_accuracy_ratio())             # 风速准确率(默认2m/s偏差以内)
-print('wind speed accuracy radio within 3m/s:', wind.calc_speed_accuracy_ratio(limit=3))      # 风速准确率(指定3m/s偏差以内)
-print('wind scale stronger ratio:', wind.calc_wind_scale_stronger_ratio())        # 风级偏强率
-print('wind scale weaker ratio:', wind.calc_wind_scale_weaker_ratio())          # 风级偏弱率
+print('wind speed rss:', wind.calc_rss())                                                      # 剩余平方和（默认风速）
+print('wind direction rss:', wind.calc_rss(kind='direction'))                                  # 剩余平方和（指定风向）
+print('wind speed rmse:', wind.calc_rmse())                                                    # 均方根误差（默认风速）
+print('wind direction rmse:', wind.calc_rmse(kind='direction'))                                # 均方根误差（指定风向）
+print('wind speed mae:', wind.calc_mae())                                                      # 平均绝对误差（默认风速）
+print('wind direction mae:', wind.calc_mae(kind='direction'))                                  # 平均绝对误差（指定风向）
+print('wind speed chi square:', wind.calc_chi_square())                                        # 卡方(χ2)
+print('wind direction chi square:', wind.calc_chi_square(kind='direction'))                    # 卡方(χ2)（指定风向）
+print('wind direction score:', wind.calc_dir_score())                                          # 风向评分
+print('wind speed score:', wind.calc_speed_score())                                            # 风速评分
+print('wind scale accuracy ratio:', wind.calc_wind_scale_accuracy_ratio())                     # 风级准确率
+print('wind speed accuracy ratio within 2m/s:', wind.calc_speed_accuracy_ratio())              # 风速准确率(默认2m/s偏差以内)
+print('wind speed accuracy radio within 3m/s:', wind.calc_speed_accuracy_ratio(limit=3))       # 风速准确率(指定3m/s偏差以内)
+print('wind scale stronger ratio:', wind.calc_wind_scale_stronger_ratio())                     # 风级偏强率
+print('wind scale weaker ratio:', wind.calc_wind_scale_weaker_ratio())                         # 风级偏弱率
 ```
