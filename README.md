@@ -5,7 +5,7 @@
 [![Pypi](https://badge.fury.io/py/cyeva.svg)](https://badge.fury.io/py/cyeva)
 [![Documentation Status](https://readthedocs.org/projects/cyeva/badge/?version=latest)](https://cyeva.readthedocs.io/zh_CN/latest/?badge=latest)
 [![Line statistic](https://tokei.rs/b1/github/caiyunapp/cyeva?category=lines)](https://github.com/caiyunapp/cyeva)
-[![Download statistic](https://pepy.tech/project/cyeva)](https://pepy.tech/project/cyeva)
+[![Download statistic](https://pepy.tech/badge/cyeva)](https://pepy.tech/project/cyeva)
 
 cyeva 是一个由彩云科技天气团队开发的用于对气象要素确定性预报准确率进行快速评测的 Python 开源工具库。
 
@@ -36,8 +36,8 @@ from cyeva import PrecipitationComparison
 
 np.random.seed(0)
 
-obs = np.random.random(int(1E6)) * 50
-fcst = np.random.random(int(1E6)) * 50
+obs = np.random.random(int(1E4)) * 50
+fcst = np.random.random(int(1E4)) * 50
 
 precip = PrecipitationComparison(obs, fcst)
 
@@ -90,8 +90,8 @@ from cyeva import TemperatureComparison
 
 np.random.seed(0)
 
-obs = np.random.random(int(1E7)) * 50
-fcst = np.random.random(int(1E7)) * 50
+obs = np.random.random(int(1E4)) * 50
+fcst = np.random.random(int(1E4)) * 50
 
 temp = TemperatureComparison(obs, fcst, unit='degC')
 
@@ -112,15 +112,15 @@ from cyeva import WindComparison
 
 np.random.seed(0)
 
-obs_spd = np.random.random(int(1E7)) * 10
-obs_dir = np.random.random(int(1E7)) * 360
-fct_spd = np.random.random(int(1E7)) * 10
-fct_dir = np.random.random(int(1E7)) * 360
+obs_spd = np.random.random(int(1E4)) * 10
+obs_dir = np.random.random(int(1E4)) * 360
+fct_spd = np.random.random(int(1E4)) * 10
+fct_dir = np.random.random(int(1E4)) * 360
 
 wind = WindComparison(obs_spd, fct_spd, obs_dir, fct_dir)
 
-print(wind.calc_diff_accuracy_ratio(limit=1))       # 1度准确率（偏差在1°C以内）
-print(wind.calc_diff_accuracy_ratio(limit=2))       # 2度准确率（偏差在2°C以内）
+print(wind.calc_diff_accuracy_ratio(limit=1))       # 1m/s准确率（风速偏差在1m/s以内）
+print(wind.calc_diff_accuracy_ratio(limit=2))       # 2m/s准确率（风速偏差在2m/s以内）
 print(wind.calc_rss())                              # 剩余平方和（默认风速）
 print(wind.calc_rss(kind='direction'))              # 剩余平方和（指定风向）
 print(wind.calc_rmse())                             # 均方根误差（默认风速）
