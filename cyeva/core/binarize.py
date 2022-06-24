@@ -31,10 +31,10 @@ def threshold_binarize(
                                             consist of numbers.
 
         threshold (Number): The threshold to filter obervation and forecast.
-                            This argument should be used with `compare` argument,
-                            The `compare` argument will control the logical operator.
+                            This parameter should be used with `compare` parameter,
+                            The `compare` parameter will control the logical operator.
 
-        compare (str, optional): The logical operator applying to `threshold` argument.
+        compare (str, optional): The logical operator applying to `threshold` parameter.
                                 * '>' greater
                                 * '<' less
                                 * '>=' greater or equal
