@@ -371,7 +371,7 @@ def calc_chi_square(
 def calc_linregress(
     observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
 ) -> tuple:
-    """Calculste the arguments of linear regression.
+    """Calculste the parameters of linear regression.
 
     Args:
         observation (Union[list, np.ndarray]): Binarized observation data array
@@ -404,9 +404,9 @@ def calc_threshold_accuracy_ratio(
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
         threshold (Number): The threshold to filter obervation and forecast.
-                            This argument should be used with `compare` argument,
-                            The `compare` argument will control the logical operator.
-        compare (str, optional): The logical operator applying `threshold` argument.
+                            This parameter should be used with `compare` parameter,
+                            The `compare` parameter will control the logical operator.
+        compare (str, optional): The logical operator applying `threshold` parameter.
                                 * '>' greater
                                 * '<' less
                                 * '>=' greater or equal
@@ -439,9 +439,9 @@ def calc_threshold_miss_ratio(
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
         threshold (Number): The threshold to filter obervation and forecast.
-                            This argument should be used with `compare` argument,
-                            The `compare` argument will control the logical operator.
-        compare (str, optional): The logical operator applying `threshold` argument.
+                            This parameter should be used with `compare` parameter,
+                            The `compare` parameter will control the logical operator.
+        compare (str, optional): The logical operator applying `threshold` parameter.
                                 * '>' greater
                                 * '<' less
                                 * '>=' greater or equal
@@ -474,9 +474,9 @@ def calc_threshold_false_alarm_ratio(
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
         threshold (Number): The threshold to filter obervation and forecast.
-                            This argument should be used with `compare` argument,
-                            The `compare` argument will control the logical operator.
-        compare (str, optional): The logical operator applying `threshold` argument.
+                            This parameter should be used with `compare` parameter,
+                            The `compare` parameter will control the logical operator.
+        compare (str, optional): The logical operator applying `threshold` parameter.
                                 * '>' greater
                                 * '<' less
                                 * '>=' greater or equal
@@ -509,9 +509,9 @@ def calc_threshold_bias_score(
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
         threshold (Number): The threshold to filter obervation and forecast.
-                            This argument should be used with `compare` argument,
-                            The `compare` argument will control the logical operator.
-        compare (str, optional): The logical operator applying `threshold` argument.
+                            This parameter should be used with `compare` parameter,
+                            The `compare` parameter will control the logical operator.
+        compare (str, optional): The logical operator applying `threshold` parameter.
                                 * '>' greater
                                 * '<' less
                                 * '>=' greater or equal
@@ -544,9 +544,9 @@ def calc_threshold_ts(
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
         threshold (Number): The threshold to filter obervation and forecast.
-                            This argument should be used with `compare` argument,
-                            The `compare` argument will control the logical operator.
-        compare (str, optional): The logical operator applying `threshold` argument.
+                            This parameter should be used with `compare` parameter,
+                            The `compare` parameter will control the logical operator.
+        compare (str, optional): The logical operator applying `threshold` parameter.
                                 * '>' greater
                                 * '<' less
                                 * '>=' greater or equal
@@ -579,9 +579,9 @@ def calc_threshold_mae(
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
         threshold (Number): The threshold to filter obervation and forecast.
-                            This argument should be used with `compare` argument,
-                            The `compare` argument will control the logical operator.
-        compare (str, optional): The logical operator applying `threshold` argument.
+                            This parameter should be used with `compare` parameter,
+                            The `compare` parameter will control the logical operator.
+        compare (str, optional): The logical operator applying `threshold` parameter.
                                 * '>' greater
                                 * '<' less
                                 * '>=' greater or equal
