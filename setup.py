@@ -1,5 +1,22 @@
 import setuptools
 import os
+import codecs
+
+
+def read(rel_path):
+    here = os.path.abspath(os.path.dirname(__file__))
+    with codecs.open(os.path.join(here, rel_path), "r") as fp:
+        return fp.read()
+
+
+def get_version(rel_path):
+    for line in read(rel_path).splitlines():
+        if line.startswith("__version__"):
+            delim = '"' if '"' in line else "'"
+            return line.split(delim)[1]
+    else:
+        raise RuntimeError("Unable to find version string.")
+
 
 FILE_PATH = os.path.dirname(os.path.realpath(__file__))
 
@@ -12,10 +29,10 @@ with open(requirements_path) as f:
 
 setuptools.setup(
     name="cyeva",
-    version="0.1.0-beta",
     author="caiyunapp",
+    version=get_version("cyeva/__init__.py"),
     author_email="oss@caiyunapp.com",
-    description="A package to evaluate of forecast",
+    description="A package to evaluate weather forecast correction",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/caiyunapp/cyeva",
@@ -35,7 +52,7 @@ setuptools.setup(
         "Operating System :: POSIX :: Linux",
         "Operating System :: Microsoft :: Windows",
         "Operating System :: MacOS",
-        "Framework :: Sphinx"
+        "Framework :: Sphinx",
     ],
-    python_requires=">=3.7"
+    python_requires=">=3.7",
 )
