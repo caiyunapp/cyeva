@@ -25,6 +25,7 @@ from .case.wind import (
     WIND_SPEED_CHI_SQUARE_CASE,
     WIND_SPEED_RESIDUAL_SUM_OF_SQUARE_CASE,
     WIND_SPEED_LINREGRESS_CASE,
+    FILTER_WIND_SCALES_CASE,
 )
 
 
@@ -188,3 +189,16 @@ def test_calc_wind_speed_linregress():
 
         assert slope == result["slope"]
         assert intercept == result["intercept"]
+
+
+def test_filter_wind_scales():
+    for base_case in FILTER_WIND_SCALES_CASE:
+        obs = base_case["obs"]
+        fct = base_case["fct"]
+
+        for arg_case in base_case["arg_cases"]:
+            parameters = arg_case["parameters"]
+            result = arg_case["result"]
+            _result = filter_wind_scales(obs, fct, **parameters)
+            for i in range(len(result)):
+                assert (_result[i] == result[i]).all()
