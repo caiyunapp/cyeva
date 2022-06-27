@@ -4,7 +4,7 @@ from cyeva.core.wind import (
     identify_wind_scale,
     get_least_lev_diff,
     get_least_dir_deflection,
-    filter_wind_wind_scales,
+    filter_wind_scales,
     WindComparison,
 )
 
