@@ -253,12 +253,12 @@ def filter_wind_scales(
         bools = ((obs_lev >= scale_min) & (obs_lev <= scale_max)) & (
             (fct_lev >= scale_min) & (fct_lev <= scale_max)
         )
-        index = np.where(bools==True)
+        index = np.where(bools == True)
     elif mode == "or":
         bools = ((obs_lev >= scale_min) & (obs_lev <= scale_max)) | (
             (fct_lev >= scale_min) & (fct_lev <= scale_max)
         )
-        index = np.where(bools==True)
+        index = np.where(bools == True)
 
     filtered_obs = observation[index]
     filtered_fct = forecast[index]
