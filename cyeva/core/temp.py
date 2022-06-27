@@ -8,6 +8,7 @@ from ..core import Comparison
 
 UNITS = UnitRegistry()
 
+
 class TemperatureComparison(Comparison):
     def __init__(
         self,
