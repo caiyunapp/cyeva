@@ -211,7 +211,7 @@ def get_least_dir_deflection(
 @source_round_digit(series_num=2)
 @convert_to_ndarray
 @drop_nan
-def filter_wind_wind_scales(
+def filter_wind_scales(
     observation,
     forecast,
     scale_min=None,
@@ -679,11 +679,11 @@ class WindComparison(Comparison):
             forecast = self.fct_spd
 
         if mode == "strict":
-            observation, forecast = filter_wind_wind_scales(
+            observation, forecast = filter_wind_scales(
                 observation, forecast, scale_min=scale_min, scale_max=scale_max
             )
         elif mode == "loose":
-            observation, forecast = filter_wind_wind_scales(
+            observation, forecast = filter_wind_scales(
                 observation,
                 forecast,
                 scale_min=scale_min,
