@@ -9,6 +9,7 @@ from cyeva import (
 
 from .case.precip.single import (
     ACCURACY_RATE_CASE,
+    HIT_RATIO_CASE,
     BIAS_SCORE_CASE,
     ETS_SCORE_CASE,
     TS_SCORE_CASE,
@@ -18,6 +19,7 @@ from .case.precip.single import (
 )
 from .case.precip.interval import (
     LEV_ACCURACY_RATE_CASE,
+    LEV_HIT_RATIO_CASE,
     LEV_TS_SCORE_CASE,
     LEV_ETS_SCORE_CASE,
     LEV_MISS_RATE_CASE,
@@ -27,6 +29,7 @@ from .case.precip.interval import (
 )
 from .case.precip.accumulate import (
     ACC_ACCURACY_RATE_CASE,
+    ACC_HIT_RATIO_CASE,
     ACC_TS_SCORE_CASE,
     ACC_ETS_SCORE_CASE,
     ACC_MISS_RATIO_CASE,
@@ -51,6 +54,18 @@ def test_calc_accuracy_ratio():
         fct = case["fct"]
         result = case["result"]
         _result = calc_precip_occur_indicators(obs, fct, indicator="accuracy_ratio")
+        if not np.isnan(result):
+            assert _result == result
+        else:
+            assert np.isnan(_result)
+
+
+def test_calc_miss_ratio():
+    for case in HIT_RATIO_CASE:
+        obs = case["obs"]
+        fct = case["fct"]
+        result = case["result"]
+        _result = calc_precip_occur_indicators(obs, fct, indicator="hit_ratio")
         if not np.isnan(result):
             assert _result == result
         else:
@@ -193,6 +208,22 @@ def test_calc_precip_interval_bias_score():
                     assert np.isnan(_result)
 
 
+def test_calc_precip_interval_hit_ratio():
+    for kind, levs in LEV_HIT_RATIO_CASE.items():
+        for lev, cases in levs.items():
+            for case in cases:
+                obs = case["obs"]
+                fct = case["fct"]
+                result = case["result"]
+                _result = calc_precip_interval_indicators(
+                    obs, fct, kind, lev, indicator="hit_ratio"
+                )
+                if not np.isnan(result):
+                    assert _result == result
+                else:
+                    assert np.isnan(_result)
+
+
 def test_calc_precip_interval_ts():
     for kind, levs in LEV_TS_SCORE_CASE.items():
         for lev, cases in levs.items():
@@ -234,6 +265,21 @@ def test_calc_precip_accumulate_accuracy_ratio():
                 result = case["result"]
                 _result = calc_precip_accumulate_indicators(
                     obs, fct, kind, lev, indicator="accuracy_ratio"
+                )
+                if not np.isnan(result):
+                    assert _result == result
+                else:
+                    assert np.isnan(_result)
+
+def test_calc_precip_accumulate_hit_ratio():
+    for kind, levs in ACC_HIT_RATIO_CASE.items():
+        for lev, cases in levs.items():
+            for case in cases:
+                obs = case["obs"]
+                fct = case["fct"]
+                result = case["result"]
+                _result = calc_precip_accumulate_indicators(
+                    obs, fct, kind, lev, indicator="hit_ratio"
                 )
                 if not np.isnan(result):
                     assert _result == result

@@ -14,6 +14,7 @@ from ..core.binarize import (
 from ..utils import result_round_digit, source_round_digit
 from .statistic import (
     calc_binary_accuracy_ratio,
+    calc_hit_ratio,
     calc_miss_ratio,
     calc_false_alarm_ratio,
     calc_false_alarm_rate,
@@ -65,6 +66,7 @@ def calc_precip_occur_indicators(
     )
     indicator_funcs = {
         "accuracy_ratio": calc_binary_accuracy_ratio,
+        "hit_ratio": calc_hit_ratio,
         "miss_ratio": calc_miss_ratio,
         "false_alarm_ratio": calc_false_alarm_ratio,
         "false_alarm_rate": calc_false_alarm_rate,
@@ -121,6 +123,7 @@ def calc_precip_interval_indicators(
     )
     indicator_funcs = {
         "accuracy_ratio": calc_binary_accuracy_ratio,
+        "hit_ratio": calc_hit_ratio,
         "miss_ratio": calc_miss_ratio,
         "false_alarm_ratio": calc_false_alarm_ratio,
         "false_alarm_rate": calc_false_alarm_rate,
@@ -179,6 +182,7 @@ def calc_precip_accumulate_indicators(
 
     indicator_funcs = {
         "accuracy_ratio": calc_binary_accuracy_ratio,
+        "hit_ratio": calc_hit_ratio,
         "miss_ratio": calc_miss_ratio,
         "false_alarm_ratio": calc_false_alarm_ratio,
         "false_alarm_rate": calc_false_alarm_rate,
@@ -293,6 +297,51 @@ class PrecipitationComparison(Comparison):
             kind = None
 
         func_choice = self.__make_func_choice(indicator="accuracy_ratio")
+
+        return func_choice[lev](
+            self.observation, self.forecast, kind=kind, lev=int(lev)
+        )
+
+    def calc_hit_ratio(self, kind: str = None, lev: str = "0"):
+        """Calculste precipitation hit ratio.
+
+        Args:
+            kind (str): Statistic kind. Options are '1h', '3h', '12h' and '24h'.
+            lev (str): Level ID, Options:
+                       * "0": Rain or shine.
+                       * "1": Light rain.
+                       * "2": Moderate rain.
+                       * "3": Heavy rain.
+                       * "4": Violent rain.
+                       * "5": Severe violent rain.
+                       * "6": Super severe violent rain(1h don't have this).
+                       * "+1": Accumulated to Light rain.
+                       * "+2": Accumulated to Moderate rain.
+                       * "+3": Accumulated to Heavy rain.
+                       * "+4": Accumulated to Violent rain.
+                       * "+5": Accumulated to Severe violent rain.
+                       * "+6": Accumulated to Super severe violent rain(1h don't have this).
+                       Defaults to "0".
+
+        Returns:
+            float: Hit ratio of specific kind and level(%).
+        """
+        if int(lev) > 0:
+            if not kind:
+                kind = self.kind
+            assert kind and (kind.lower() in ["1h", "3h", "12h", "24h"])
+            if not lev:
+                lev = self.lev
+            assert lev and (lev in self.lev_index)
+
+            if kind == "1h" and lev in ["6", "+6"]:
+                lev = lev.replace("6", "5")
+
+            kind = kind.lower()
+        else:
+            kind = None
+
+        func_choice = self.__make_func_choice(indicator="hit_ratio")
 
         return func_choice[lev](
             self.observation, self.forecast, kind=kind, lev=int(lev)
