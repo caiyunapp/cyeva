@@ -5,7 +5,7 @@ import codecs
 
 def read(rel_path):
     here = os.path.abspath(os.path.dirname(__file__))
-    with codecs.open(os.path.join(here, rel_path), "r") as fp:
+    with codecs.open(os.path.join(here, rel_path), "r", encoding="utf8") as fp:
         return fp.read()
 
 
@@ -20,11 +20,11 @@ def get_version(rel_path):
 
 FILE_PATH = os.path.dirname(os.path.realpath(__file__))
 
-with open(os.path.join(FILE_PATH, "README.md"), "r") as fh:
+with open(os.path.join(FILE_PATH, "README.md"), "r", encoding="utf8") as fh:
     long_description = fh.read()
 
 requirements_path = os.path.join(FILE_PATH, "requirements/requirements.txt")
-with open(requirements_path) as f:
+with open(requirements_path, encoding="utf8") as f:
     required = f.read().splitlines()
 
 setuptools.setup(
