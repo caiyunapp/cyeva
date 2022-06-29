@@ -6,6 +6,7 @@
 [![Documentation Status](https://readthedocs.org/projects/cyeva/badge/?version=latest)](https://cyeva.readthedocs.io/zh_CN/latest/?badge=latest)
 [![Line statistic](https://tokei.rs/b1/github/caiyunapp/cyeva?category=lines)](https://github.com/caiyunapp/cyeva)
 [![Download statistic](https://pepy.tech/badge/cyeva)](https://pepy.tech/project/cyeva)
+[![codecov](https://codecov.io/gh/caiyunapp/cyeva/branch/main/graph/badge.svg?token=344FXDKAYD)](https://codecov.io/gh/caiyunapp/cyeva)
 
 cyeva 是一个由彩云科技天气团队开发的用于对气象要素确定性预报准确率进行快速评测的 Python 开源工具库。
 
