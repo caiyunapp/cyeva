@@ -251,7 +251,7 @@ def calc_bias_score(
 @fix_zero_division
 @convert_to_ndarray
 @drop_nan
-def calc_differ_accuracy_ratio(
+def calc_diff_accuracy_ratio(
     observation: Union[list, np.ndarray],
     forecast: Union[list, np.ndarray],
     limit: Union[float, int] = 1,

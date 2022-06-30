@@ -7,7 +7,7 @@ import pandas as pd
 from ..utils import result_round_digit, source_round_digit
 from .binarize import threshold_binarize
 from .statistic import (
-    calc_differ_accuracy_ratio,
+    calc_diff_accuracy_ratio,
     calc_rmse,
     calc_mae,
     calc_rss,
@@ -200,4 +200,4 @@ class Comparison:
         if forecast is None:
             forecast = self.forecast
 
-        return calc_differ_accuracy_ratio(observation, forecast, limit=limit)
+        return calc_diff_accuracy_ratio(observation, forecast, limit=limit)
