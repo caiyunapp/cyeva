@@ -24,6 +24,24 @@
 
 :math:`N`——预报的总样本个数。
 
+代码示例：
+
+.. code:: python
+
+    >>> import numpy as np
+    >>> from cyeva import calc_binary_accuracy_ratio
+    >>> from cyeva import Comparison
+
+    >>> obs = np.array([False, True, True, False])
+    >>> fct = np.array([False, False, True, True])
+
+    >>> calc_binary_accuracy_ratio(obs, fct)
+    50.0
+
+    >>> cp = Comparison(observation=obs, forecast=fct)
+    >>> cp.calc_binary_accuracy_ratio()
+    50.0
+
 .. _err_accuracy:
 
 误差准确率
