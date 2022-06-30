@@ -63,6 +63,24 @@
 :math:`N`——预报的总样本个数。
 
 
+代码示例：
+
+.. code:: python
+
+    >>> import numpy as np
+    >>> from cyeva import calc_diff_accuracy_ratio
+    >>> from cyeva import Comparison
+
+    >>> obs = np.array([1, 2, 3, 4, 5])
+    >>> fct = np.array([1.5, 2.4, 3.1, 4.4, 6])
+
+    >>> calc_diff_accuracy_ratio(obs, fct, limit=0.5)
+    80.0
+
+    >>> cp = Comparison(observation=obs, forecast=fct)
+    >>> cp.calc_diff_accuracy_ratio(limit=0.5)
+    80.0
+
 .. _rmse:
 
 均方根误差（RMSE）
