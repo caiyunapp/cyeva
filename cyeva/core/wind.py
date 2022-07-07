@@ -174,6 +174,7 @@ def get_least_lev_diff(
     return np.abs(lev1 - lev2)
 
 
+@convert_to_ndarray
 def get_least_dir_deflection(
     dir1: Union[int, np.ndarray], dir2: Union[int, np.ndarray], circle_num: int = 8
 ) -> Union[int, np.ndarray]:
