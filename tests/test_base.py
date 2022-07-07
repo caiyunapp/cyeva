@@ -98,8 +98,9 @@ def test_comparison():
 
         result = case["result"]
         _result = cp.calc_bias()
+        _result2 = cp.calc_bias(cp.observation, cp.forecast)
         if not np.isnan(result):
-            assert _result == result
+            assert _result == _result2 == result
         else:
             assert np.isnan(_result)
 
