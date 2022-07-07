@@ -3,6 +3,8 @@ from numbers import Number
 
 import numpy as np
 
+from ..errors import ArrayLengthNotEqualError
+
 
 def assert_length(func):
     """Check if array is empty"""
@@ -19,7 +21,10 @@ def assert_length(func):
         ):
             return func(observation, forecast, *args, **kwargs)
         else:
-            return None
+            raise ArrayLengthNotEqualError(
+                f"The length of observation array is not equal to forecast array, "
+                f"observation: {len(observation)}, forecast: {len(forecast)}"
+            )
 
     return wrapper
 
