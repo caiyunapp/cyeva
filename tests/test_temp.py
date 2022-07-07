@@ -107,9 +107,45 @@ def test_calc_temp_linregress():
 
 
 def test_gather_all_factors():
-    for _, cases in ACCURACY_RATE_CASE.items():
-        for case in cases:
-            obs = case["obs"]
-            fcst = case["fct"]
+    np.random.seed(0)
 
-            TemperatureComparison(obs, fcst)
+    obs = np.sin(np.arange(100)) * 20 + np.random.random(100) * 5 * np.random.choice(
+        [1, -1]
+    )
+    fcst = obs + np.random.random(100) * 5 * np.random.choice([1, -1])
+
+    temp = TemperatureComparison(obs, fcst)
+    temp.gather_all_factors()
+
+
+def test_temp_obj():
+    np.random.seed(0)
+
+    obs = np.sin(np.arange(100)) * 20 + np.random.random(100) * 5 * np.random.choice(
+        [1, -1]
+    )
+    fcst = obs + np.random.random(100) * 5 * np.random.choice([1, -1])
+
+    temp = TemperatureComparison(obs, fcst)
+    temp
+    print(temp)
+    assert (
+        temp.__str__()
+        == temp.__repr__()
+        == """<Object:TemperatureComparison(degC)>
+data:
+    observation   forecast
+0     -2.744068  -5.592160
+1     13.253473   9.734786
+2     15.172132  13.729749
+3      0.097984  -2.068456
+4    -17.254324 -21.034857
+..          ...        ...
+95    12.749277   7.898094
+96    16.739190  13.336467
+97     7.491617   7.065139
+98   -15.612338 -15.894429
+99   -20.007614 -22.446803
+
+[100 rows x 2 columns]"""
+    )

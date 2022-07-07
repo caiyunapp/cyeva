@@ -13,6 +13,13 @@ IDENTIFY_DIRECTION8_CASE = [
     {"angle": 350, "result": 0},
 ]
 
+IDENTIFY_DIRECTION16_CASE = [
+    {"angle": 22, "result": 1},
+    {"angle": 23, "result": 1},
+    {"angle": 91, "result": 4},
+    {"angle": 350, "result": 0},
+]
+
 LEAST_DIR_DEFLECTION_CASE = [
     {"dir1": 0, "dir2": 1, "result": 1},
     {"dir1": 0, "dir2": 7, "result": 1},
@@ -20,6 +27,7 @@ LEAST_DIR_DEFLECTION_CASE = [
     {"dir1": 2, "dir2": 7, "result": 3},
     {"dir1": 2, "dir2": 6, "result": 4},
     {"dir1": 3, "dir2": 6, "result": 3},
+    {"dir1": [3, 2], "dir2": [6, 6], "result": np.array([3, 4])},
 ]
 
 WIND_DIR_SCORE_CASE = [

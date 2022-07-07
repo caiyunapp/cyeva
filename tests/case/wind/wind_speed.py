@@ -4,6 +4,7 @@ IDENTIFY_SPEED_LEVEL_GENERAL_CASE = [
     {"wspd": 0.1, "result": 0},
     {"wspd": 8.1, "result": 5},
     {"wspd": 38, "result": 13},
+    {"wspd": [38, 8.1], "result": np.array([13, 5])},
 ]
 
 IDENTIFY_SPEED_LEVEL_MAPPING_CASE = [
