@@ -38,7 +38,7 @@ setuptools.setup(
     url="https://github.com/caiyunapp/cyeva",
     include_package_data=True,
     package_data={"": ["*.csv", "*.config", "*.nl", "*.json"]},
-    packages=["cyeva"],
+    packages=setuptools.find_packages(exclude=["tests"]),
     install_requires=required,
     classifiers=[
         "Development Status :: 4 - Beta",
