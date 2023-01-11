@@ -6,10 +6,16 @@ cyeva.base
 ============
 base 模块主要存放基础对象相关的类和函数。
 
-.. py:class:: Comparison(object)
+.. py:class:: Comparison(observation, forecast)
     :module: cyeva.base
 
     对比对象，即预设预报和观测的两个等长数组，该对象初始化以后可以进行其支持的相关指标计算。
+
+    :param np.ndarray or list observation:
+        观测数组。
+        
+    :param np.ndarray or list forecast:
+        预报数组。
 
     .. py:method:: calc_rmse(observation=None,forecast=None,*args,**kwargs)
 
