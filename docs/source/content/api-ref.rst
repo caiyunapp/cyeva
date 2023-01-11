@@ -145,3 +145,30 @@ base 模块主要存放基础对象相关的类和函数。
             误差准确率
 
         :rtype: float
+
+
+cyeva.binarize
+=================
+binarize 模块主要存放二值化相关的函数。
+
+.. py:function:: threshold_binarize(observation, forecast, threshold = 0,compare= ">=")
+    :module: cyeva.binarize
+
+    基于阈值对观测和预报数组进行二值化
+
+    :param np.ndarray or list observation:
+        观测数组
+
+    :param np.ndarray or list forecast:
+        预报数组
+
+    :param Number threshold:
+        二值化阈值，高于该值的成员被标记为 True，否则标记为 False。默认为 0。
+
+    :param str compare:
+        过滤方式，结合阈值满足此种方式的成员将被标记为 True，否则为 False。默认为 ``">="``
+
+    :return:
+        二值化后由 True 和 False 组成的观测和预报数组
+    :rtype:
+        tuple
