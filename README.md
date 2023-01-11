@@ -3,7 +3,6 @@
 [![Pytest](https://github.com/caiyunapp/cyeva/actions/workflows/pytest.yml/badge.svg)](https://github.com/caiyunapp/cyeva/actions/workflows/pytest.yml)
 [![Pypi publish](https://github.com/caiyunapp/cyeva/actions/workflows/pypi-publish.yml/badge.svg)](https://github.com/caiyunapp/cyeva/actions/workflows/pypi-publish.yml)
 [![Anaconda.org](https://anaconda.org/conda-forge/cyeva/badges/version.svg)](https://anaconda.org/conda-forge/cyeva)
-[![Install with conda](https://anaconda.org/conda-forge/cyeva/badges/installer/conda.svg)](https://anaconda.org/conda-forge/cyeva)
 [![Downloads](https://anaconda.org/conda-forge/cyeva/badges/downloads.svg)](https://anaconda.org/conda-forge/cyeva)
 [![Anaconda-Server Badge](https://anaconda.org/conda-forge/cyeva/badges/platforms.svg)](https://anaconda.org/conda-forge/cyeva)
 [![Anaconda-Server Badge](https://anaconda.org/conda-forge/cyeva/badges/latest_release_date.svg)](https://anaconda.org/conda-forge/cyeva)
