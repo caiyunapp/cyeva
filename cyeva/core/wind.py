@@ -271,6 +271,7 @@ def filter_wind_scales(
 
 
 class WindComparison(Comparison):
+    # FIXME: 需要加最小扇形逻辑
     def __init__(
         self,
         obs_spd: Union[np.ndarray, list] = None,
