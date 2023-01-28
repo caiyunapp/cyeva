@@ -381,9 +381,9 @@ def calc_linregress(
 
     Returns:
         tuple: Aguments of linear regression as follow:
-               slope, intercept, r_value, p_value, std_err
+               slope, intercept, r_value, p_value
     """
-    linreg_result = stats.linregress(forecast, observation)
+    linreg_result = stats.linregress(forecast, observation)[:4]
 
     return tuple(round(p, 4) for p in linreg_result)
 
