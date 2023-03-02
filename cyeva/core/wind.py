@@ -700,12 +700,6 @@ class WindComparison(Comparison):
 
             dir_deflection = get_least_lev_diff(obs_d8, fct_d8)
 
-            print(f"observation: {observation}")
-            print(f"forecast: {forecast}")
-            print(f"obs_d8: {obs_d8}")
-            print(f"fct_d8: {fct_d8}")
-            print(f"dir_deflection: {dir_deflection}")
-
             score_series = np.full_like(dir_deflection, 0).astype(float)
             score_series[np.isclose(dir_deflection, 1)] = 0.6
             score_series[dir_deflection < 1] = 1
