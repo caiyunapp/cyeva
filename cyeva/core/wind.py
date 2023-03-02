@@ -28,8 +28,62 @@ from ..core import Comparison
 UNITS = UnitRegistry()
 
 
-def get_least_angle_deflection(
+def get_angle_relative_positions(
     angle1: Union[Number, np.ndarray], angle2: Union[Number, np.ndarray]
+) -> Union[Number, np.ndarray]:
+    """To identify the relative positions (less or greater) of angles
+
+    Args:
+        angle1 (Union[Number, np.ndarray]): One angle number or array in degree.
+        angle2 (Union[Number, np.ndarray]): Another angle number or array in degree
+
+    Returns:
+        Union[Number, np.ndarray]: The number or array to indicate the relative postisons, -1 stands for first one less than second one, 0 stands for equal, 1 stands for first one greater than second one.
+    """
+    if isinstance(angle1, Number) and isinstance(angle2, Number):
+        if angle1 == 180 or angle2 == 180:
+            defl = 90
+        else:
+            defl = 180
+
+        ag1 = (angle1 + defl) % 360
+        ag2 = (angle2 + defl) % 360
+
+        if ag1 - ag2 < 0:
+            return -1
+        elif ag1 - ag2 > 0:
+            return 1
+        else:
+            return 0
+    elif isinstance(angle1, np.ndarray) or isinstance(angle2, np.ndarray):
+        if (
+            (isinstance(angle1, np.ndarray) and 180 in angle1)
+            or (isinstance(angle2, np.ndarray) and 180 in angle2)
+            or (isinstance(angle1, Number) and angle1 == 180)
+            or (isinstance(angle2, Number) and angle2 == 180)
+        ):
+            defl = 90
+        else:
+            defl = 180
+
+        ag1 = (angle1 + defl) % 360
+        ag2 = (angle2 + defl) % 360
+
+        diff = ag1 - ag2
+        relation_position_array = np.full(diff.shape, np.nan)
+
+        relation_position_array[diff < 0] = -1
+        relation_position_array[diff == 0] = 0
+        relation_position_array[diff > 0] = 1
+
+        return relation_position_array.astype(int)
+    else:
+        raise TypeError(f"parameter of 'angle1' and 'angle2' types are not supported.")
+
+
+def get_least_angle_deflection(
+    angle1: Union[Number, np.ndarray],
+    angle2: Union[Number, np.ndarray],
 ) -> Union[Number, np.ndarray]:
     """Calculate the least angle deflection between two angles.
 
@@ -102,8 +156,15 @@ def identify_direction(
 
     if isinstance(angle, Number):
         for dir_id, center_angle in DIRECTION_CENTER_ANGLE.items():
-            if get_least_angle_deflection(angle_magnitude, center_angle) <= threshold:
+            least_angle_deflection = get_least_angle_deflection(
+                angle_magnitude, center_angle
+            )
+            if get_least_angle_deflection(angle_magnitude, center_angle) < threshold:
                 break
+            elif least_angle_deflection == threshold:
+                rp = get_angle_relative_positions(angle_magnitude, center_angle)
+                if rp > 0:
+                    break
 
         return dir_id
 
@@ -111,7 +172,14 @@ def identify_direction(
         dir_ids = np.full_like(angle_magnitude, -1)
         for dir_id, center_angle in DIRECTION_CENTER_ANGLE.items():
             least_angle_defl = get_least_angle_deflection(angle_magnitude, center_angle)
-            dir_ids[least_angle_defl <= threshold] = dir_id
+            dir_ids[least_angle_defl < threshold] = dir_id
+
+            rp = get_angle_relative_positions(angle_magnitude, center_angle)
+
+            dir_ids[(least_angle_defl == threshold) & (rp < 0)] = dir_id - 1
+            dir_ids[(least_angle_defl == threshold) & (rp > 0)] = dir_id
+
+            dir_ids[dir_ids < min(DIRECTION_CENTER_ANGLE)] = 7
 
         return dir_ids
 
@@ -631,6 +699,12 @@ class WindComparison(Comparison):
             fct_d8 = identify_direction(forecast)
 
             dir_deflection = get_least_lev_diff(obs_d8, fct_d8)
+
+            print(f"observation: {observation}")
+            print(f"forecast: {forecast}")
+            print(f"obs_d8: {obs_d8}")
+            print(f"fct_d8: {fct_d8}")
+            print(f"dir_deflection: {dir_deflection}")
 
             score_series = np.full_like(dir_deflection, 0).astype(float)
             score_series[np.isclose(dir_deflection, 1)] = 0.6

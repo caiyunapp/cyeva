@@ -59,7 +59,10 @@ def test_identify_direction8():
     for case in IDENTIFY_DIRECTION8_CASE:
         angle = case["angle"]
         result = case["result"]
-        assert identify_direction(angle, dnum=8) == result
+        if isinstance(result, np.ndarray):
+            assert (identify_direction(angle, dnum=8) == result).all()
+        else:
+            assert identify_direction(angle, dnum=8) == result
 
 
 def test_identify_direction16():
@@ -67,7 +70,10 @@ def test_identify_direction16():
         angle = case["angle"]
         result = case["result"]
         _result = identify_direction(angle, dnum=16)
-        assert _result == result
+        if isinstance(_result, np.ndarray):
+            assert (_result == result).all()
+        else:
+            assert _result == result
 
 
 def test_identify_wind_scale():
