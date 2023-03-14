@@ -235,8 +235,6 @@ def test_wind_obj():
     fct_dir = np.random.random(100) * 360
 
     wind = WindComparison(obs_spd, fct_spd, obs_dir, fct_dir)
-    wind
-    print(wind)
 
     assert (
         wind.__str__()
@@ -258,3 +256,26 @@ data:
 
 [100 rows x 4 columns]"""
     )
+
+
+def test_minsector():
+    """Test direction angle with minimum sector"""
+    for angle1 in range(0, 360):
+        angle2 = angle1 + 30
+        if angle2 > 360:
+            angle2 -= 360
+
+        wc = WindComparison([1], [1], [angle1], [angle2])
+
+        assert wc.calc_rmse(kind="direction") == 30
+        assert wc.calc_mae(kind="direction") == 30
+
+    for angle1 in range(0, 360):
+        angle2 = angle1 - 30
+        if angle2 < 0:
+            angle2 += 360
+
+        wc = WindComparison([1], [1], [angle1], [angle2])
+
+        assert wc.calc_rmse(kind="direction") == 30
+        assert wc.calc_mae(kind="direction") == 30

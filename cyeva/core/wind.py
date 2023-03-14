@@ -254,12 +254,12 @@ def filter_wind_scales(
         bools = ((obs_lev >= scale_min) & (obs_lev <= scale_max)) & (
             (fct_lev >= scale_min) & (fct_lev <= scale_max)
         )
-        index = np.where(bools == True)
+        index = np.where(bools == True)   # noqa
     elif mode == "or":
         bools = ((obs_lev >= scale_min) & (obs_lev <= scale_max)) | (
             (fct_lev >= scale_min) & (fct_lev <= scale_max)
         )
-        index = np.where(bools == True)
+        index = np.where(bools == True)   # noqa
 
     filtered_obs = observation[index]
     filtered_fct = forecast[index]
@@ -330,7 +330,10 @@ class WindComparison(Comparison):
             elif kind == "direction":
                 forecast = self.fct_dir
 
-        return super().calc_rmse(observation, forecast)
+        if kind == "speed":
+            return super().calc_rmse(observation, forecast)
+        elif kind == "direction":
+            return super().calc_rmse(observation, forecast, angle=True)
 
     @result_round_digit(4)
     @source_round_digit()
@@ -355,7 +358,10 @@ class WindComparison(Comparison):
             elif kind == "direction":
                 forecast = self.fct_dir
 
-        return super().calc_mae(observation, forecast)
+        if kind == "speed":
+            return super().calc_mae(observation, forecast)
+        elif kind == "direction":
+            return super().calc_mae(observation, forecast, angle=True)
 
     @result_round_digit(4)
     @source_round_digit()
@@ -380,7 +386,10 @@ class WindComparison(Comparison):
             elif kind == "direction":
                 forecast = self.fct_dir
 
-        return super().calc_chi_square(observation, forecast)
+        if kind == "speed":
+            return super().calc_chi_square(observation, forecast)
+        elif kind == "direction":
+            return super().calc_chi_square(observation, forecast, angle=True)
 
     @result_round_digit(4)
     @source_round_digit()
@@ -405,27 +414,23 @@ class WindComparison(Comparison):
             elif kind == "direction":
                 forecast = self.fct_dir
 
-        return super().calc_rss(observation, forecast)
+        if kind == "speed":
+            return super().calc_rss(observation, forecast)
+        elif kind == "direction":
+            return super().calc_rss(observation, forecast, angle=True)
 
     def calc_linregress_args(
         self,
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
-        kind: str = "speed",
         *args,
         **kwargs,
     ):
         """linregress args"""
         if observation is None:
-            if kind == "speed":
-                observation = self.obs_spd
-            elif kind == "direction":
-                observation = self.obs_dir
+            observation = self.obs_spd
         if forecast is None:
-            if kind == "speed":
-                forecast = self.fct_spd
-            elif kind == "direction":
-                forecast = self.fct_dir
+            forecast = self.fct_spd
 
         return super().calc_linregress_args(observation, forecast)
 

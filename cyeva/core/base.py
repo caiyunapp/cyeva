@@ -43,6 +43,7 @@ class Comparison:
         self,
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
+        angle=False,
         *args,
         **kwargs
     ) -> float:
@@ -52,7 +53,7 @@ class Comparison:
         if forecast is None:
             forecast = self.forecast
 
-        return calc_rmse(observation, forecast)
+        return calc_rmse(observation, forecast, angle)
 
     @result_round_digit(4)
     @source_round_digit()
@@ -60,6 +61,7 @@ class Comparison:
         self,
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
+        angle=False,
         *args,
         **kwargs
     ) -> float:
@@ -69,7 +71,7 @@ class Comparison:
         if forecast is None:
             forecast = self.forecast
 
-        return calc_mae(observation, forecast)
+        return calc_mae(observation, forecast, angle)
 
     @result_round_digit(4)
     @source_round_digit()
@@ -77,6 +79,7 @@ class Comparison:
         self,
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
+        angle=False,
         *args,
         **kwargs
     ) -> float:
@@ -86,7 +89,7 @@ class Comparison:
         if forecast is None:
             forecast = self.forecast
 
-        return calc_chi_square(observation, forecast)
+        return calc_chi_square(observation, forecast, angle)
 
     @result_round_digit(4)
     @source_round_digit()
@@ -94,6 +97,7 @@ class Comparison:
         self,
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
+        angle=False,
         *args,
         **kwargs
     ) -> float:
@@ -103,7 +107,7 @@ class Comparison:
         if forecast is None:
             forecast = self.forecast
 
-        return calc_rss(observation, forecast)
+        return calc_rss(observation, forecast, angle)
 
     def calc_linregress_args(
         self,
@@ -181,6 +185,7 @@ class Comparison:
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
         limit: Number = 1,
+        angle: bool = False,
         *args,
         **kwargs
     ) -> float:
@@ -200,4 +205,4 @@ class Comparison:
         if forecast is None:
             forecast = self.forecast
 
-        return calc_diff_accuracy_ratio(observation, forecast, limit=limit)
+        return calc_diff_accuracy_ratio(observation, forecast, limit=limit, angle=angle)

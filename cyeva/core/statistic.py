@@ -14,6 +14,17 @@ from ..utils import (
 from .binarize import threshold_binarize
 
 
+def minsector(observation, forecast):
+    observation = np.array(observation)
+    forecast = np.array(forecast)
+
+    diff = np.abs(observation - forecast)
+    ib180 = np.where(diff > 180)
+    diff[ib180] = 360 - np.abs(diff[ib180])
+
+    return np.abs(diff)
+
+
 @assert_length
 @drop_nan
 def calc_binary_quadrant_values(
@@ -255,22 +266,27 @@ def calc_diff_accuracy_ratio(
     observation: Union[list, np.ndarray],
     forecast: Union[list, np.ndarray],
     limit: Union[float, int] = 1,
+    angle=False,
 ) -> float:
     """Calculate the accuracy within a limited difference scope.
 
     Args:
-        observation (Union[list, np.ndarray]): Binarized observation data array
+        observation (Union[list, np.ndarray]): Observation data array
                                                that consist of numbers.
-        forecast (Union[list, np.ndarray]): Binarized forecast data array that
+        forecast (Union[list, np.ndarray]): Forecast data array that
                                             consist of numbers.
         limit (Union[float, int]): The limited(or tolerable) scope between
                                    observation and forecast. Default to 1.
+        angle (Union[list, np.ndarray]): Whether the input is angles.
 
     Returns:
         float: The difference accuracy(%).
     """
 
-    diff = np.abs(observation - forecast)
+    if angle:
+        diff = minsector(observation, forecast)
+    else:
+        diff = np.abs(observation - forecast)
 
     bins = np.full_like(diff, False)
     bins[diff <= limit] = True
@@ -286,20 +302,28 @@ def calc_diff_accuracy_ratio(
 @convert_to_ndarray
 @drop_nan
 def calc_rmse(
-    observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
+    observation: Union[list, np.ndarray],
+    forecast: Union[list, np.ndarray],
+    angle=False,
 ) -> float:
     """Calculate RMSE(root-mean-square error).
 
     Args:
-        observation (Union[list, np.ndarray]): Binarized observation data array
+        observation (Union[list, np.ndarray]): Observation data array
                                                that consist of numbers.
-        forecast (Union[list, np.ndarray]): Binarized forecast data array that
+        forecast (Union[list, np.ndarray]): Forecast data array that
                                             consist of numbers.
+        angle (Union[list, np.ndarray]): Whether the input is angles.
 
     Returns:
         float: The RMSE of forecast to observation.
     """
-    return np.sqrt(np.sum((observation - forecast) ** 2) / len(observation))
+    total = len(observation)
+    if angle:
+        diff = minsector(observation, forecast)
+    else:
+        diff = observation - forecast
+    return np.sqrt(np.sum(diff**2) / total)
 
 
 @assert_length
@@ -307,20 +331,28 @@ def calc_rmse(
 @convert_to_ndarray
 @drop_nan
 def calc_mae(
-    observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
+    observation: Union[list, np.ndarray],
+    forecast: Union[list, np.ndarray],
+    angle=False,
 ) -> float:
     """Calculate MAE(mean absolute error).
 
     Args:
-        observation (Union[list, np.ndarray]): Binarized observation data array
+        observation (Union[list, np.ndarray]): Observation data array
                                                that consist of numbers.
-        forecast (Union[list, np.ndarray]): Binarized forecast data array that
+        forecast (Union[list, np.ndarray]): Forecast data array that
                                             consist of numbers.
+        angle (Union[list, np.ndarray]): Whether the input is angles.
 
     Returns:
         float: The MAE of forecast to observation.
     """
-    return np.sum(np.abs(observation - forecast)) / len(observation)
+    total = len(observation)
+    if angle:
+        diff = minsector(observation, forecast)
+    else:
+        diff = observation - forecast
+    return np.sum(np.abs(diff)) / total
 
 
 @assert_length
@@ -328,20 +360,27 @@ def calc_mae(
 @convert_to_ndarray
 @drop_nan
 def calc_rss(
-    observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
+    observation: Union[list, np.ndarray],
+    forecast: Union[list, np.ndarray],
+    angle=False,
 ) -> float:
     """Calculate the residual sum of square between forecast and observation.
 
     Args:
-        observation (Union[list, np.ndarray]): Binarized observation data array
+        observation (Union[list, np.ndarray]): Observation data array
                                                that consist of numbers.
-        forecast (Union[list, np.ndarray]): Binarized forecast data array that
+        forecast (Union[list, np.ndarray]): Forecast data array that
                                             consist of numbers.
+        angle (Union[list, np.ndarray]): Whether the input is angles.
 
     Returns:
         float: The residual sum of square of forecast and observation.
     """
-    return np.sum((observation - forecast) ** 2)
+    if angle:
+        diff = minsector(observation, forecast)
+    else:
+        diff = observation - forecast
+    return np.sum(diff**2)
 
 
 @assert_length
@@ -349,20 +388,28 @@ def calc_rss(
 @convert_to_ndarray
 @drop_nan
 def calc_chi_square(
-    observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
+    observation: Union[list, np.ndarray],
+    forecast: Union[list, np.ndarray],
+    angle=False,
 ) -> float:
     """Calculate the χ2 between observation and forecast.
 
     Args:
-        observation (Union[list, np.ndarray]): Binarized observation data array
+        observation (Union[list, np.ndarray]): Observation data array
                                                that consist of numbers.
-        forecast (Union[list, np.ndarray]): Binarized forecast data array that
+        forecast (Union[list, np.ndarray]): Forecast data array that
                                             consist of numbers.
+        angle (Union[list, np.ndarray]): Whether the input is angles.
 
     Returns:
         float: The chi square of forecast and observation.
     """
-    return np.sum((observation - forecast) ** 2) / len(observation)
+    total = len(observation)
+    if angle:
+        diff = minsector(observation, forecast)
+    else:
+        diff = observation - forecast
+    return np.sum(diff**2) / total
 
 
 @assert_length
