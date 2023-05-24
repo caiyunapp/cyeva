@@ -16,6 +16,7 @@ from .statistic import (
     calc_linregress,
     calc_bias_score,
     calc_binary_accuracy_ratio,
+    calc_threshold_accuracy_ratio,
 )
 
 
@@ -219,3 +220,24 @@ class Comparison:
             forecast = self.forecast
 
         return calc_diff_accuracy_ratio(observation, forecast, limit=limit)
+
+    @result_round_digit(4)
+    @source_round_digit()
+    def calc_threshold_accuracy_ratio(
+        self,
+        observation: Union[np.ndarray, list] = None,
+        forecast: Union[np.ndarray, list] = None,
+        threshold: Number = 1,
+        compare: str = ">=",
+        *args,
+        **kwargs
+    ) -> float:
+
+        if observation is None:
+            observation = self.observation
+        if forecast is None:
+            forecast = self.forecast
+
+        return calc_threshold_accuracy_ratio(
+            observation, forecast, threshold=threshold, compare=compare
+        )
