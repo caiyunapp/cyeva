@@ -66,6 +66,11 @@ def drop_nan(func):
 
     @wraps(func)
     def wrapper(observation, forecast, *args, **kwargs):
+        if not isinstance(observation, np.ndarray):
+            observation = np.array(observation)
+        if not isinstance(forecast, np.ndarray):
+            forecast = np.array(forecast)
+
         where_obs_nan = observation != observation
         where_fct_nan = forecast != forecast
 

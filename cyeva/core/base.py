@@ -10,6 +10,7 @@ from .statistic import (
     calc_diff_accuracy_ratio,
     calc_rmse,
     calc_mae,
+    calc_mbe,
     calc_rss,
     calc_chi_square,
     calc_linregress,
@@ -70,6 +71,23 @@ class Comparison:
             forecast = self.forecast
 
         return calc_mae(observation, forecast)
+
+    @result_round_digit(4)
+    @source_round_digit()
+    def calc_mbe(
+        self,
+        observation: Union[np.ndarray, list] = None,
+        forecast: Union[np.ndarray, list] = None,
+        *args,
+        **kwargs
+    ) -> float:
+        """Mean Bias Error"""
+        if observation is None:
+            observation = self.observation
+        if forecast is None:
+            forecast = self.forecast
+
+        return calc_mbe(observation, forecast)
 
     @result_round_digit(4)
     @source_round_digit()
