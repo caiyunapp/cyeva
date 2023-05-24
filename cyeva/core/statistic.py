@@ -327,6 +327,27 @@ def calc_mae(
 @fix_zero_division
 @convert_to_ndarray
 @drop_nan
+def calc_mbe(
+    observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
+) -> float:
+    """Calculate MAE(mean absolute error).
+
+    Args:
+        observation (Union[list, np.ndarray]): Binarized observation data array
+                                               that consist of numbers.
+        forecast (Union[list, np.ndarray]): Binarized forecast data array that
+                                            consist of numbers.
+
+    Returns:
+        float: The MAE of forecast to observation.
+    """
+    return np.sum(forecast - observation) / len(observation)
+
+
+@assert_length
+@fix_zero_division
+@convert_to_ndarray
+@drop_nan
 def calc_rss(
     observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
 ) -> float:
@@ -421,6 +442,41 @@ def calc_threshold_accuracy_ratio(
     )
 
     return calc_binary_accuracy_ratio(obs_bins, fct_bins)
+
+
+@assert_length
+@drop_nan
+def calc_threshold_hit_ratio(
+    observation: Union[list, np.ndarray],
+    forecast: Union[list, np.ndarray],
+    threshold: Number,
+    compare: str = ">=",
+) -> float:
+    """Calculate hit ratio of forecast filtered by threshold.
+
+    Args:
+        observation (Union[list, np.ndarray]): Binarized observation data array
+                                               that consist of numbers.
+        forecast (Union[list, np.ndarray]): Binarized forecast data array that
+                                            consist of numbers.
+        threshold (Number): The threshold to filter obervation and forecast.
+                            This parameter should be used with `compare` parameter,
+                            The `compare` parameter will control the logical operator.
+        compare (str, optional): The logical operator applying `threshold` parameter.
+                                * '>' greater
+                                * '<' less
+                                * '>=' greater or equal
+                                * '<=' less or equal
+                                Defaults to '>='.
+
+    Returns:
+        float: The missing ratio of forecast filtered by threshold.
+    """
+    obs_bins, fct_bins = threshold_binarize(
+        observation, forecast, threshold=threshold, compare=compare
+    )
+
+    return calc_hit_ratio(obs_bins, fct_bins)
 
 
 @assert_length
