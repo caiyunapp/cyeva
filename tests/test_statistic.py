@@ -166,7 +166,6 @@ def calc_correlation_coefficient():
     for case in THRESHOLD_TS_CASE:
         obs = case["obs"]
         fct = case["fct"]
-        threshold = case["threshold"]
         result = case["result"]
         _, _, _result, _ = calc_linregress(obs, fct)
         if not np.isnan(result):

@@ -17,6 +17,12 @@ from .statistic import (
     calc_bias_score,
     calc_binary_accuracy_ratio,
     calc_threshold_accuracy_ratio,
+    calc_threshold_hit_ratio,
+    calc_threshold_miss_ratio,
+    calc_threshold_false_alarm_ratio,
+    calc_threshold_bias_score,
+    calc_threshold_ts,
+    calc_threshold_mae,
 )
 
 
@@ -239,5 +245,131 @@ class Comparison:
             forecast = self.forecast
 
         return calc_threshold_accuracy_ratio(
+            observation, forecast, threshold=threshold, compare=compare
+        )
+
+    @result_round_digit(4)
+    @source_round_digit()
+    def calc_threshold_hit_ratio(
+        self,
+        observation: Union[np.ndarray, list] = None,
+        forecast: Union[np.ndarray, list] = None,
+        threshold: Number = 1,
+        compare: str = ">=",
+        *args,
+        **kwargs
+    ) -> float:
+
+        if observation is None:
+            observation = self.observation
+        if forecast is None:
+            forecast = self.forecast
+
+        return calc_threshold_hit_ratio(
+            observation, forecast, threshold=threshold, compare=compare
+        )
+
+    @result_round_digit(4)
+    @source_round_digit()
+    def calc_threshold_miss_ratio(
+        self,
+        observation: Union[np.ndarray, list] = None,
+        forecast: Union[np.ndarray, list] = None,
+        threshold: Number = 1,
+        compare: str = ">=",
+        *args,
+        **kwargs
+    ) -> float:
+
+        if observation is None:
+            observation = self.observation
+        if forecast is None:
+            forecast = self.forecast
+
+        return calc_threshold_miss_ratio(
+            observation, forecast, threshold=threshold, compare=compare
+        )
+
+    @result_round_digit(4)
+    @source_round_digit()
+    def calc_threshold_false_alarm_ratio(
+        self,
+        observation: Union[np.ndarray, list] = None,
+        forecast: Union[np.ndarray, list] = None,
+        threshold: Number = 1,
+        compare: str = ">=",
+        *args,
+        **kwargs
+    ) -> float:
+
+        if observation is None:
+            observation = self.observation
+        if forecast is None:
+            forecast = self.forecast
+
+        return calc_threshold_false_alarm_ratio(
+            observation, forecast, threshold=threshold, compare=compare
+        )
+
+    @result_round_digit(4)
+    @source_round_digit()
+    def calc_threshold_bias_score(
+        self,
+        observation: Union[np.ndarray, list] = None,
+        forecast: Union[np.ndarray, list] = None,
+        threshold: Number = 1,
+        compare: str = ">=",
+        *args,
+        **kwargs
+    ) -> float:
+
+        if observation is None:
+            observation = self.observation
+        if forecast is None:
+            forecast = self.forecast
+
+        return calc_threshold_bias_score(
+            observation, forecast, threshold=threshold, compare=compare
+        )
+
+    @result_round_digit(4)
+    @source_round_digit()
+    def calc_threshold_ts(
+        self,
+        observation: Union[np.ndarray, list] = None,
+        forecast: Union[np.ndarray, list] = None,
+        threshold: Number = 1,
+        compare: str = ">=",
+        *args,
+        **kwargs
+    ) -> float:
+
+        if observation is None:
+            observation = self.observation
+        if forecast is None:
+            forecast = self.forecast
+
+        return calc_threshold_ts(
+            observation, forecast, threshold=threshold, compare=compare
+        )
+
+    @result_round_digit(4)
+    @source_round_digit()
+    def calc_threshold_mae(
+        self,
+        observation: Union[np.ndarray, list] = None,
+        forecast: Union[np.ndarray, list] = None,
+        threshold: Number = 1,
+        compare: str = ">=",
+        *args,
+        **kwargs
+    ) -> float:
+
+        if observation is None:
+            observation = self.observation
+        if forecast is None:
+            forecast = self.forecast
+
+        return calc_threshold_mae(
             observation, forecast, threshold=threshold, compare=compare
         )
