@@ -38,7 +38,9 @@ def get_angle_relative_positions(
         angle2 (Union[Number, np.ndarray]): Another angle number or array in degree
 
     Returns:
-        Union[Number, np.ndarray]: The number or array to indicate the relative postisons, -1 stands for first one less than second one, 0 stands for equal, 1 stands for first one greater than second one.
+        Union[Number, np.ndarray]: The number or array to indicate the relative postisons,
+        -1 stands for first one less than second one, 0 stands for equal, 1 stands for first
+        one greater than second one.
     """
     if isinstance(angle1, Number) and isinstance(angle2, Number):
         if angle1 == 180 or angle2 == 180:
@@ -78,7 +80,7 @@ def get_angle_relative_positions(
 
         return relation_position_array.astype(int)
     else:
-        raise TypeError(f"parameter of 'angle1' and 'angle2' types are not supported.")
+        raise TypeError("parameter of 'angle1' and 'angle2' types are not supported.")
 
 
 def get_least_angle_deflection(
@@ -322,12 +324,12 @@ def filter_wind_scales(
         bools = ((obs_lev >= scale_min) & (obs_lev <= scale_max)) & (
             (fct_lev >= scale_min) & (fct_lev <= scale_max)
         )
-        index = np.where(bools == True)
+        index = np.where(bools == True)  # noqa
     elif mode == "or":
         bools = ((obs_lev >= scale_min) & (obs_lev <= scale_max)) | (
             (fct_lev >= scale_min) & (fct_lev <= scale_max)
         )
-        index = np.where(bools == True)
+        index = np.where(bools == True)  # noqa
 
     filtered_obs = observation[index]
     filtered_fct = forecast[index]

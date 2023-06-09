@@ -2,7 +2,7 @@
 This is the module to store precipitation's level constants.
 
 * PRECIP_LEVELS: Precipitation's levels thresholds for 1 hour, 3 hours and 24 hours.
-* ACC_PRECIP_LEVELS: Accumulated precipitation's levels thresholds for 1 hour, 
+* ACC_PRECIP_LEVELS: Accumulated precipitation's levels thresholds for 1 hour,
                      3 hours and 24 hours.
 """
 
