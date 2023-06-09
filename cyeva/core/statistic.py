@@ -330,7 +330,7 @@ def calc_mae(
 def calc_mbe(
     observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
 ) -> float:
-    """Calculate MAE(mean absolute error).
+    """Calculate MBE(mean bias error).
 
     Args:
         observation (Union[list, np.ndarray]): Binarized observation data array
@@ -339,7 +339,7 @@ def calc_mbe(
                                             consist of numbers.
 
     Returns:
-        float: The MAE of forecast to observation.
+        float: The MBE of forecast to observation.
     """
     return np.sum(forecast - observation) / len(observation)
 

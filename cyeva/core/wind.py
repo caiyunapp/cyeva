@@ -139,10 +139,10 @@ def identify_direction(
     if isinstance(angle, List):
         angle = np.array(angle)
 
-    if isinstance(angle, np.ndarray) or isinstance(angle, Quantity):
+    if isinstance(angle, Quantity):
         angle_magnitude = angle.magnitude
 
-    if isinstance(angle, Number):
+    if isinstance(angle, np.ndarray) or isinstance(angle, Number):
         angle_magnitude = angle
 
     if dnum == 8:
@@ -350,13 +350,21 @@ class WindComparison(Comparison):
         unit_dir: str = "degree",
     ):
         if obs_spd is not None:
-            self.obs_spd = (obs_spd * UNITS.parse_expression(unit_spd)).to("m/s")
+            self.obs_spd = (
+                (obs_spd * UNITS.parse_expression(unit_spd)).to("m/s").magnitude
+            )
         if obs_dir is not None:
-            self.obs_dir = (obs_dir * UNITS.parse_expression(unit_dir)).to("degree")
+            self.obs_dir = (
+                (obs_dir * UNITS.parse_expression(unit_dir)).to("degree").magnitude
+            )
         if fct_spd is not None:
-            self.fct_spd = (fct_spd * UNITS.parse_expression(unit_spd)).to("m/s")
+            self.fct_spd = (
+                (fct_spd * UNITS.parse_expression(unit_spd)).to("m/s").magnitude
+            )
         if fct_dir is not None:
-            self.fct_dir = (fct_dir * UNITS.parse_expression(unit_dir)).to("degree")
+            self.fct_dir = (
+                (fct_dir * UNITS.parse_expression(unit_dir)).to("degree").magnitude
+            )
 
         self.df = pd.DataFrame(
             {
