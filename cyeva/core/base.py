@@ -3,6 +3,7 @@ from numbers import Number
 
 import numpy as np
 import pandas as pd
+from pint import Quantity
 
 from ..utils import result_round_digit, source_round_digit
 from .binarize import threshold_binarize
@@ -32,6 +33,11 @@ class Comparison:
     def __init__(
         self, observation: Union[np.ndarray, list], forecast: Union[np.ndarray, list]
     ):
+
+        if isinstance(observation, Quantity):
+            observation = observation.magnitude
+        if isinstance(forecast, Quantity):
+            forecast = forecast.magnitude
 
         self.df = pd.DataFrame({"observation": observation, "forecast": forecast})
         self.observation = self.df["observation"].values

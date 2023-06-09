@@ -2,6 +2,7 @@ from functools import wraps
 from numbers import Number
 
 import numpy as np
+from pint import Quantity
 
 from ..errors import ArrayLengthNotEqualError
 
@@ -38,10 +39,16 @@ def convert_to_ndarray(func):
         if not isinstance(observation, np.ndarray) and not isinstance(
             observation, Number
         ):
-            observation = np.array(observation)
+            if isinstance(observation, Quantity):
+                observation = np.array(observation.magnitude)
+            else:
+                observation = np.array(observation)
 
         if not isinstance(forecast, np.ndarray) and not isinstance(forecast, Number):
-            forecast = np.array(forecast)
+            if isinstance(forecast, Quantity):
+                forecast = np.array(forecast.magnitude)
+            else:
+                forecast = np.array(forecast)
 
         return func(observation, forecast, *args, **kwargs)
 
