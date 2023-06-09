@@ -24,6 +24,7 @@ jobs:
       - name: Lint with black
         run: |
           black --verbose --check .
+          flake8 .
 
   coverage:
     runs-on: "ubuntu-latest"

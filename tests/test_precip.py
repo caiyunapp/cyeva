@@ -60,7 +60,7 @@ def test_calc_accuracy_ratio():
             assert np.isnan(_result)
 
 
-def test_calc_miss_ratio():
+def test_calc_hit_ratio():
     for case in HIT_RATIO_CASE:
         obs = case["obs"]
         fct = case["fct"]
@@ -270,6 +270,7 @@ def test_calc_precip_accumulate_accuracy_ratio():
                     assert _result == result
                 else:
                     assert np.isnan(_result)
+
 
 def test_calc_precip_accumulate_hit_ratio():
     for kind, levs in ACC_HIT_RATIO_CASE.items():
