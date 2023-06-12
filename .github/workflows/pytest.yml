@@ -36,7 +36,7 @@ jobs:
           python -m pip install pytest pytest-cov
           pip install -r requirements/requirements.txt
       - name: Run tests and collect coverage
-        run: pytest --cov .
+        run: pytest --cov ./tests/functions
       - name: Upload coverage reports to Codecov
         run: |
           curl -Os https://uploader.codecov.io/latest/linux/codecov
