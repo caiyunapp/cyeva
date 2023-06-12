@@ -54,7 +54,7 @@ jobs:
           pip install -r requirements/requirements.txt
       - name: Run tests and collect coverage, benchmark
         run: |
-          pytest --cov --verbose -p no:warnings --memray --benchmark-json output.json ./tests/test_perf.py
+          pytest --cov --verbose -p no:warnings --memray --benchmark-json output.json
       - name: Upload coverage reports to Codecov
         run: |
           curl -Os https://uploader.codecov.io/latest/linux/codecov
