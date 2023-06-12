@@ -26,24 +26,24 @@ jobs:
           black --verbose --check .
           flake8 .
 
-  coverage:
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: actions/checkout@v1
-      - name: Install requirements
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install pytest pytest-cov
-          pip install -r requirements/requirements.txt
-      - name: Run tests and collect coverage
-        run: pytest --cov ./tests/functions
-      - name: Upload coverage reports to Codecov
-        run: |
-          curl -Os https://uploader.codecov.io/latest/linux/codecov
-          chmod +x codecov
-          ./codecov -t ${{ secrets.CODECOV_TOKEN }}
+  # coverage:
+    # runs-on: "ubuntu-latest"
+    # steps:
+    #   - uses: actions/checkout@v1
+    #   - name: Install requirements
+    #     run: |
+    #       python -m pip install --upgrade pip
+    #       python -m pip install pytest pytest-cov
+    #       pip install -r requirements/requirements.txt
+    #   - name: Run tests and collect coverage
+    #     run: pytest --cov ./tests/functions
+    #   - name: Upload coverage reports to Codecov
+    #     run: |
+    #       curl -Os https://uploader.codecov.io/latest/linux/codecov
+    #       chmod +x codecov
+    #       ./codecov -t ${{ secrets.CODECOV_TOKEN }}
 
-  perf:
+  coverage-perf:
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v1
@@ -52,9 +52,14 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install pytest pytest-cov pytest-benchmark pytest-memray
           pip install -r requirements/requirements.txt
-      - name: Run tests and collect benchmark
+      - name: Run tests and collect coverage, benchmark
         run: |
-          pytest --verbose -p no:warnings --memray --benchmark-json output.json ./tests/test_perf.py
+          pytest --cov --verbose -p no:warnings --memray --benchmark-json output.json ./tests/test_perf.py
+      - name: Upload coverage reports to Codecov
+        run: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov -t ${{ secrets.CODECOV_TOKEN }}
       - name: Continuous Benchmark
         uses: benchmark-action/github-action-benchmark@v1.14.0
         with:
