@@ -86,44 +86,30 @@ def get_angle_relative_positions(
 def get_least_angle_deflection(
     angle1: Union[Number, np.ndarray],
     angle2: Union[Number, np.ndarray],
+    absolute: bool = True,
 ) -> Union[Number, np.ndarray]:
     """Calculate the least angle deflection between two angles.
 
     Args:
         angle1 (Union[Number, np.ndarray]): One angle(degree).
         angle2 (Union[Number, np.ndarray]): Another angle(degree).
+        absolute (bool, optional): Whether to return the absolute value. Defaults to True.
 
     Returns:
         Union[Number, np.ndarray]: The least deflection between two angles.
     """
 
     if isinstance(angle1, Quantity):
-        angle1_magnitude = angle1.magnitude
-    else:
-        angle1_magnitude = angle1
+        angle1 = angle1.magnitude
+
     if isinstance(angle2, Quantity):
-        angle2_magnitude = angle2.magnitude
+        angle2 = angle2.magnitude
+
+    diff = (angle2 - angle1 + 180) % 360 - 180
+    if absolute:
+        return np.abs(diff)
     else:
-        angle2_magnitude = angle2
-
-    angle1_magnitude %= 360
-    angle2_magnitude %= 360
-
-    deflection1 = abs(angle1_magnitude - angle2_magnitude)
-    deflection2 = 360 - abs(angle1_magnitude - angle2_magnitude)
-
-    if isinstance(angle1, Number) and isinstance(angle2, Number):
-        return deflection1 if deflection1 < deflection2 else deflection2
-    else:
-        index1 = np.where(deflection1 <= deflection2)
-        index2 = np.where(deflection2 <= deflection1)
-
-        deflection = np.full_like(deflection1, 0)
-
-        deflection[index1] = deflection1[index1]
-        deflection[index2] = deflection2[index2]
-
-        return deflection
+        return diff
 
 
 def identify_direction(
@@ -408,6 +394,10 @@ class WindComparison(Comparison):
             elif kind == "direction":
                 forecast = self.fct_dir
 
+        if kind == "direction":
+            forecast = get_least_angle_deflection(observation, forecast, absolute=False)
+            observation = np.zeros_like(forecast)
+
         return super().calc_rmse(observation, forecast)
 
     @result_round_digit(4)
@@ -432,6 +422,12 @@ class WindComparison(Comparison):
                 forecast = self.fct_spd
             elif kind == "direction":
                 forecast = self.fct_dir
+
+        if kind == "direction":
+            forecast = forecast = get_least_angle_deflection(
+                observation, forecast, absolute=False
+            )
+            observation = np.zeros_like(forecast)
 
         return super().calc_mae(observation, forecast)
 
@@ -458,6 +454,12 @@ class WindComparison(Comparison):
             elif kind == "direction":
                 forecast = self.fct_dir
 
+        if kind == "direction":
+            forecast = forecast = get_least_angle_deflection(
+                observation, forecast, absolute=False
+            )
+            observation = np.zeros_like(forecast)
+
         return super().calc_chi_square(observation, forecast)
 
     @result_round_digit(4)
@@ -483,27 +485,28 @@ class WindComparison(Comparison):
             elif kind == "direction":
                 forecast = self.fct_dir
 
+        if kind == "direction":
+            forecast = forecast = get_least_angle_deflection(
+                observation, forecast, absolute=False
+            )
+            observation = np.zeros_like(forecast)
+
         return super().calc_rss(observation, forecast)
 
     def calc_linregress_args(
         self,
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
-        kind: str = "speed",
         *args,
         **kwargs,
     ):
-        """linregress args"""
+        """linregress args, only for wind speed
+        (slope, intercept, rvalue, pvalue, stderr)
+        """
         if observation is None:
-            if kind == "speed":
-                observation = self.obs_spd
-            elif kind == "direction":
-                observation = self.obs_dir
+            observation = self.obs_spd
         if forecast is None:
-            if kind == "speed":
-                forecast = self.fct_spd
-            elif kind == "direction":
-                forecast = self.fct_dir
+            forecast = self.fct_spd
 
         return super().calc_linregress_args(observation, forecast)
 
@@ -531,6 +534,12 @@ class WindComparison(Comparison):
             elif kind == "direction":
                 forecast = self.fct_dir
 
+        if kind == "direction":
+            forecast = forecast = get_least_angle_deflection(
+                observation, forecast, absolute=True
+            )
+            observation = np.zeros_like(forecast)
+
         return super().calc_bias(observation, forecast, threshold=threshold)
 
     @result_round_digit(4)
@@ -540,12 +549,11 @@ class WindComparison(Comparison):
         self,
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
-        kind: str = "speed",
         threshold: Number = 0,
         *args,
         **kwargs,
     ) -> float:
-        """Binary accuracy ratio
+        """Binary accuracy ratio, only for wind speed
 
         Args:
             threshold (Number, optional): The threshold to binarize array.
@@ -555,15 +563,9 @@ class WindComparison(Comparison):
             float: The accuracy ratio.
         """
         if observation is None:
-            if kind == "speed":
-                observation = self.obs_spd
-            elif kind == "direction":
-                observation = self.obs_dir
+            observation = self.obs_spd
         if forecast is None:
-            if kind == "speed":
-                forecast = self.fct_spd
-            elif kind == "direction":
-                forecast = self.fct_dir
+            forecast = self.fct_spd
 
         return super().calc_binary_accuracy_ratio(
             observation, forecast, threshold=threshold
@@ -602,6 +604,12 @@ class WindComparison(Comparison):
                 forecast = self.fct_spd
             elif kind == "direction":
                 forecast = self.fct_dir
+
+        if kind == "direction":
+            forecast = forecast = get_least_angle_deflection(
+                observation, forecast, absolute=False
+            )
+            observation = np.zeros_like(forecast)
 
         return super().calc_diff_accuracy_ratio(observation, forecast, limit=limit)
 
