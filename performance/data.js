@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1686568788928,
+  "lastUpdate": 1686568930921,
   "repoUrl": "https://github.com/caiyunapp/cyeva",
   "entries": {
     "cyeva Benchmark": [
@@ -55,6 +55,61 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.000017436335272235607",
             "extra": "mean: 652.9869214709253 usec\nrounds: 1006"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "caiyunapp",
+            "username": "caiyunapp"
+          },
+          "committer": {
+            "name": "caiyunapp",
+            "username": "caiyunapp"
+          },
+          "id": "a65f9a1da2569d09b4bbef4faa596f0546c17200",
+          "message": "tests: add test perf",
+          "timestamp": "2023-04-14T21:45:30Z",
+          "url": "https://github.com/caiyunapp/cyeva/pull/43/commits/a65f9a1da2569d09b4bbef4faa596f0546c17200"
+        },
+        "date": 1686568929214,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/test_perf.py::test_calc_mae",
+            "value": 20090.24065967039,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000005228032455871745",
+            "extra": "mean: 49.77541170063845 usec\nrounds: 4598"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_mbe",
+            "value": 10740.996195027976,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000007093580554453022",
+            "extra": "mean: 93.10123398636912 usec\nrounds: 3778"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_threshold_hit_ratio",
+            "value": 1274.677063235968,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000027883116364530893",
+            "extra": "mean: 784.5124297297253 usec\nrounds: 740"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_threshold_false_alarm_ratio",
+            "value": 1266.1107290434709,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00002927667949042342",
+            "extra": "mean: 789.8203348734642 usec\nrounds: 866"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_threshold_ts",
+            "value": 1277.9685373349112,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000028889218234837676",
+            "extra": "mean: 782.4918773707923 usec\nrounds: 791"
           }
         ]
       }
