@@ -61,7 +61,7 @@ jobs:
           name: cyeva Benchmark
           tool: "pytest"
           output-file-path: output.json
-          github-token: ${{ secrets.CI_TOKEN }}
+          github-token: ${{ secrets.OPS_ACTIONS_CI_TOKEN }}
           gh-repository: "github.com/caiyunapp/cyeva"
           auto-push: true
           alert-threshold: "150%"
