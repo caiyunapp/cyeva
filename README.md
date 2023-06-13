@@ -10,6 +10,7 @@
 [![Documentation Status](https://readthedocs.org/projects/cyeva/badge/?version=latest)](https://cyeva.readthedocs.io/zh_CN/latest/?badge=latest)
 [![Download statistic](https://pepy.tech/badge/cyeva)](https://pepy.tech/project/cyeva)
 [![codecov](https://codecov.io/gh/caiyunapp/cyeva/branch/main/graph/badge.svg?token=344FXDKAYD)](https://codecov.io/gh/caiyunapp/cyeva)
+[![performance](https://img.shields.io/badge/performance-benchmark-yellow)](https://caiyunapp.github.io/cyeva/performance/)
 [![style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 
