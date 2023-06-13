@@ -10,6 +10,7 @@ from cyeva.core.statistic import (
 
 
 def test_calc_mae_1e3(benchmark):
+    # thousand level
     obs = np.random.rand(int(1e3))
     fct = np.random.rand(int(1e3))
 
@@ -20,6 +21,7 @@ def test_calc_mae_1e3(benchmark):
 
 
 def test_calc_mae_1e6(benchmark):
+    # million level
     obs = np.random.rand(int(1e6))
     fct = np.random.rand(int(1e6))
 
@@ -30,6 +32,7 @@ def test_calc_mae_1e6(benchmark):
 
 
 def test_calc_mae_1e7(benchmark):
+    # ten million level
     obs = np.random.rand(int(1e7))
     fct = np.random.rand(int(1e7))
 
@@ -40,6 +43,7 @@ def test_calc_mae_1e7(benchmark):
 
 
 def test_calc_mbe_1e3(benchmark):
+    # thousand level
     obs = np.random.rand(int(1e3))
     fct = np.random.rand(int(1e3))
 
@@ -50,6 +54,7 @@ def test_calc_mbe_1e3(benchmark):
 
 
 def test_calc_mbe_1e6(benchmark):
+    # million level
     obs = np.random.rand(int(1e6))
     fct = np.random.rand(int(1e6))
 
@@ -60,6 +65,7 @@ def test_calc_mbe_1e6(benchmark):
 
 
 def test_calc_mbe_1e7(benchmark):
+    # ten million level
     obs = np.random.rand(int(1e7))
     fct = np.random.rand(int(1e7))
 
@@ -70,6 +76,7 @@ def test_calc_mbe_1e7(benchmark):
 
 
 def test_calc_threshold_hit_ratio_1e3(benchmark):
+    # thousand level
     obs = np.random.rand(int(1e3))
     fct = np.random.rand(int(1e3))
 
@@ -80,6 +87,7 @@ def test_calc_threshold_hit_ratio_1e3(benchmark):
 
 
 def test_calc_threshold_hit_ratio_1e6(benchmark):
+    # million level
     obs = np.random.rand(int(1e6))
     fct = np.random.rand(int(1e6))
 
@@ -90,6 +98,7 @@ def test_calc_threshold_hit_ratio_1e6(benchmark):
 
 
 def test_calc_threshold_hit_ratio_1e7(benchmark):
+    # ten million level
     obs = np.random.rand(int(1e7))
     fct = np.random.rand(int(1e7))
 
@@ -110,6 +119,7 @@ def test_calc_threshold_false_alarm_ratio_1e3(benchmark):
 
 
 def test_calc_threshold_false_alarm_ratio_1e6(benchmark):
+    # million level
     obs = np.random.rand(int(1e6))
     fct = np.random.rand(int(1e6))
 
@@ -120,6 +130,7 @@ def test_calc_threshold_false_alarm_ratio_1e6(benchmark):
 
 
 def test_calc_threshold_false_alarm_ratio_1e7(benchmark):
+    # ten million level
     obs = np.random.rand(int(1e7))
     fct = np.random.rand(int(1e7))
 
@@ -130,6 +141,7 @@ def test_calc_threshold_false_alarm_ratio_1e7(benchmark):
 
 
 def test_calc_threshold_ts_1e3(benchmark):
+    # thousand level
     obs = np.random.rand(int(1e3))
     fct = np.random.rand(int(1e3))
 
@@ -140,6 +152,7 @@ def test_calc_threshold_ts_1e3(benchmark):
 
 
 def test_calc_threshold_ts_1e6(benchmark):
+    # million level
     obs = np.random.rand(int(1e6))
     fct = np.random.rand(int(1e6))
 
@@ -150,6 +163,7 @@ def test_calc_threshold_ts_1e6(benchmark):
 
 
 def test_calc_threshold_ts_1e7(benchmark):
+    # ten million level
     obs = np.random.rand(int(1e7))
     fct = np.random.rand(int(1e7))
 
