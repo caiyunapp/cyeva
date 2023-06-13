@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1686651219124,
+  "lastUpdate": 1686651486919,
   "repoUrl": "https://github.com/caiyunapp/cyeva",
   "entries": {
     "cyeva Benchmark": [
@@ -1342,6 +1342,586 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.009114864125099159",
             "extra": "mean: 1.5160091643999294 sec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "caiyunapp",
+            "username": "caiyunapp"
+          },
+          "committer": {
+            "name": "caiyunapp",
+            "username": "caiyunapp"
+          },
+          "id": "d334125ffe78b263c6a66c900694127e8f968ffb",
+          "message": "tests: enlarge perf test",
+          "timestamp": "2023-04-14T21:45:30Z",
+          "url": "https://github.com/caiyunapp/cyeva/pull/44/commits/d334125ffe78b263c6a66c900694127e8f968ffb"
+        },
+        "date": 1686651485999,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_mae_1e3",
+            "value": 24939.762089843545,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000013493006234622828",
+            "extra": "mean: 40.0966134479382 usec\nrounds: 3019"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_mbe_1e3",
+            "value": 26155.74285430341,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000013282597039444614",
+            "extra": "mean: 38.232521460787716 usec\nrounds: 6873"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_threshold_hit_ratio_1e3",
+            "value": 1572.632222437564,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00007440460728317019",
+            "extra": "mean: 635.8765805078127 usec\nrounds: 944"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_threshold_false_alarm_ratio_1e3",
+            "value": 1571.8921603648764,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00032925187941476185",
+            "extra": "mean: 636.1759573683951 usec\nrounds: 1079"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_threshold_ts_1e3",
+            "value": 1622.8168988934449,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00010471033777608163",
+            "extra": "mean: 616.2124640690351 usec\nrounds: 1155"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_hit_ratio_1e3",
+            "value": 3056.643759136437,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00010044406583894919",
+            "extra": "mean: 327.15621407007535 usec\nrounds: 2317"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_miss_ratio_1e3",
+            "value": 3140.471292670365,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00014462396895347188",
+            "extra": "mean: 318.4235443686202 usec\nrounds: 2930"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_binary_accuracy_ratio_1e3",
+            "value": 3290.425628236818,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000057761836507594196",
+            "extra": "mean: 303.9120505926318 usec\nrounds: 3123"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_false_alarm_ratio_1e3",
+            "value": 3251.175519895094,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00005814596167505215",
+            "extra": "mean: 307.5810561074436 usec\nrounds: 2317"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_false_alarm_rate_1e3",
+            "value": 3345.450764997672,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000052562335753175285",
+            "extra": "mean: 298.9133812587124 usec\nrounds: 2177"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_ts_1e3",
+            "value": 3252.0298211945246,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00018476733714709498",
+            "extra": "mean: 307.50025521988704 usec\nrounds: 3209"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_ets_1e3",
+            "value": 3293.650224364658,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00006529430334034141",
+            "extra": "mean: 303.6145103091203 usec\nrounds: 2716"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_bias_score_1e3",
+            "value": 3431.31300723348,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00009303386078693506",
+            "extra": "mean: 291.43362843667154 usec\nrounds: 2328"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_diff_accuracy_ratio_1e3",
+            "value": 3952.936182526365,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000036619083193466665",
+            "extra": "mean: 252.9765100738077 usec\nrounds: 2035"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_rmse_1e3",
+            "value": 23469.296287696667,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00001584326769188878",
+            "extra": "mean: 42.60886171198201 usec\nrounds: 5409"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_rss_1e3",
+            "value": 23973.832547511385,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00002721499145394408",
+            "extra": "mean: 41.712145858122526 usec\nrounds: 5855"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_chi_square_1e3",
+            "value": 24313.495010116876,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00002185760391074469",
+            "extra": "mean: 41.12942214123879 usec\nrounds: 7154"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_linregress_1e3",
+            "value": 3069.4275222005563,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00005084905871700913",
+            "extra": "mean: 325.79365134612226 usec\nrounds: 1523"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_threshold_accuracy_ratio_1e3",
+            "value": 1636.8466152377339,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00005689036470834496",
+            "extra": "mean: 610.9307925927814 usec\nrounds: 1215"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_threshold_miss_ratio_1e3",
+            "value": 1631.064101911527,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00011801239946878668",
+            "extra": "mean: 613.0966887371558 usec\nrounds: 1314"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_threshold_bias_score_1e3",
+            "value": 1580.3387668508067,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0002761956203739618",
+            "extra": "mean: 632.7757193432222 usec\nrounds: 1158"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e3.py::test_calc_threshold_mae_1e3",
+            "value": 5456.594752631717,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00003519421797487728",
+            "extra": "mean: 183.26448001616757 usec\nrounds: 2502"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_mae_1e6",
+            "value": 45.235872577846955,
+            "unit": "iter/sec",
+            "range": "stddev: 0.001901479927476154",
+            "extra": "mean: 22.106349297873894 msec\nrounds: 47"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_mbe_1e6",
+            "value": 63.459656760685085,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0017010053774500291",
+            "extra": "mean: 15.758042999998167 msec\nrounds: 56"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_threshold_hit_ratio_1e6",
+            "value": 3.262393221290789,
+            "unit": "iter/sec",
+            "range": "stddev: 0.011743301538015317",
+            "extra": "mean: 306.5234422000003 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_threshold_false_alarm_ratio_1e6",
+            "value": 3.32447286403618,
+            "unit": "iter/sec",
+            "range": "stddev: 0.005967877784978823",
+            "extra": "mean: 300.79956759999504 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_threshold_ts_1e6",
+            "value": 3.357651852125239,
+            "unit": "iter/sec",
+            "range": "stddev: 0.005625402314286218",
+            "extra": "mean: 297.8271851999921 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_hit_ratio_1e6",
+            "value": 4.2531477197515475,
+            "unit": "iter/sec",
+            "range": "stddev: 0.006203404909064664",
+            "extra": "mean: 235.11997840000163 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_miss_ratio_1e6",
+            "value": 4.184900109045776,
+            "unit": "iter/sec",
+            "range": "stddev: 0.011097232493224243",
+            "extra": "mean: 238.95432959999994 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_binary_accuracy_ratio_1e6",
+            "value": 4.02388421867426,
+            "unit": "iter/sec",
+            "range": "stddev: 0.003645180166907961",
+            "extra": "mean: 248.51609679998887 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_false_alarm_ratio_1e6",
+            "value": 4.079222601728366,
+            "unit": "iter/sec",
+            "range": "stddev: 0.004914029962203274",
+            "extra": "mean: 245.1447488000042 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_false_alarm_rate_1e6",
+            "value": 4.11126059517604,
+            "unit": "iter/sec",
+            "range": "stddev: 0.009770123950179569",
+            "extra": "mean: 243.23439899999357 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_ts_1e6",
+            "value": 4.102414298382769,
+            "unit": "iter/sec",
+            "range": "stddev: 0.01068483674077234",
+            "extra": "mean: 243.75890080000318 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_ets_1e6",
+            "value": 4.3872109571612095,
+            "unit": "iter/sec",
+            "range": "stddev: 0.008897198974047813",
+            "extra": "mean: 227.93524399999683 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_bias_score_1e6",
+            "value": 4.235741490484141,
+            "unit": "iter/sec",
+            "range": "stddev: 0.005517402033982387",
+            "extra": "mean: 236.08617339999682 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_diff_accuracy_ratio_1e6",
+            "value": 5.461460338569276,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0034198715715002036",
+            "extra": "mean: 183.1012106666634 msec\nrounds: 6"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_rmse_1e6",
+            "value": 60.49497245728574,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0014987240265239479",
+            "extra": "mean: 16.530299285714683 msec\nrounds: 56"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_rss_1e6",
+            "value": 60.99781921084932,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0015206324316092662",
+            "extra": "mean: 16.394028719999483 msec\nrounds: 50"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_chi_square_1e6",
+            "value": 58.373482945327616,
+            "unit": "iter/sec",
+            "range": "stddev: 0.001710307843744548",
+            "extra": "mean: 17.131066188676733 msec\nrounds: 53"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_linregress_1e6",
+            "value": 32.200158747176545,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0017509992829252052",
+            "extra": "mean: 31.055747515148024 msec\nrounds: 33"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_threshold_accuracy_ratio_1e6",
+            "value": 3.48351282918146,
+            "unit": "iter/sec",
+            "range": "stddev: 0.004222976049614251",
+            "extra": "mean: 287.0665471999928 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_threshold_miss_ratio_1e6",
+            "value": 3.467490763651747,
+            "unit": "iter/sec",
+            "range": "stddev: 0.004306787526616718",
+            "extra": "mean: 288.3929816000034 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_threshold_bias_score_1e6",
+            "value": 3.3928086906410115,
+            "unit": "iter/sec",
+            "range": "stddev: 0.008372005990444732",
+            "extra": "mean: 294.74105119999194 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_statistic_1e6.py::test_calc_threshold_mae_1e6",
+            "value": 18.04160372358495,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0036197259573683385",
+            "extra": "mean: 55.427445105267815 msec\nrounds: 19"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_get_least_angle_deflection_1e3",
+            "value": 35260.20243936109,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000009797641192301265",
+            "extra": "mean: 28.360585896231164 usec\nrounds: 16421"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_get_least_dir_deflection_1e3",
+            "value": 23534.889508344128,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000016866126709345057",
+            "extra": "mean: 42.49010812842173 usec\nrounds: 9091"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_identify_direction8_1e3",
+            "value": 815.8771565766491,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00008783971768069239",
+            "extra": "mean: 1.225674713330515 msec\nrounds: 600"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_identify_direction16_1e3",
+            "value": 422.49407131393616,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00024050895525181603",
+            "extra": "mean: 2.3668971185561216 msec\nrounds: 388"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_identify_wind_scale_1e3",
+            "value": 6655.848290594942,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00003558146596921326",
+            "extra": "mean: 150.24380910440095 usec\nrounds: 3515"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_calc_wind_dir_score_1e3",
+            "value": 367.44381400768884,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00033440107029366587",
+            "extra": "mean: 2.721504518182132 msec\nrounds: 330"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_get_least_lev_deflection_1e3",
+            "value": 201302.95313701843,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000004847884403464895",
+            "extra": "mean: 4.9676370088785635 usec\nrounds: 42552"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_calc_wind_dir_accuracy_ratio_1e3",
+            "value": 8599.71409422395,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00002202077540230181",
+            "extra": "mean: 116.28293557708577 usec\nrounds: 3089"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_calc_wind_scale_accuracy_ratio_1e3",
+            "value": 1076.193982689798,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00008345343309774124",
+            "extra": "mean: 929.2005122539696 usec\nrounds: 816"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_calc_wind_speed_accuracy_ratio_1e3",
+            "value": 2613.204744201128,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00012375566557331033",
+            "extra": "mean: 382.67189060446384 usec\nrounds: 2267"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_calc_wind_speed_score_1e3",
+            "value": 1153.4326371574923,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00011814755859145936",
+            "extra": "mean: 866.9773749981532 usec\nrounds: 768"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_calc_wind_scale_stronger_ratio_1e3",
+            "value": 1554.9524572916464,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00007516829180620765",
+            "extra": "mean: 643.1064791149691 usec\nrounds: 1221"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_calc_wind_scale_weaker_ratio_1e3",
+            "value": 1524.5207907058316,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00015332446383025544",
+            "extra": "mean: 655.9438258214991 usec\nrounds: 1309"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_calc_wind_speed_chi_square_1e3",
+            "value": 7433.101608538442,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00002289738720303622",
+            "extra": "mean: 134.53334188937964 usec\nrounds: 4013"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_calc_wind_speed_rss_1e3",
+            "value": 7462.725249769198,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000034935718085842406",
+            "extra": "mean: 133.99930541874463 usec\nrounds: 3248"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_calc_wind_speed_mae_1e3",
+            "value": 7452.794599289151,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000299673942152651",
+            "extra": "mean: 134.17785592741015 usec\nrounds: 3408"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_calc_wind_speed_linregress_1e3",
+            "value": 3067.9331288550256,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00005753742223832167",
+            "extra": "mean: 325.9523457648528 usec\nrounds: 1582"
+          },
+          {
+            "name": "tests/performance/test_wind_1e3.py::test_filter_wind_scales_1e3",
+            "value": 2001.24325744896,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00011166589036395773",
+            "extra": "mean: 499.68937872886454 usec\nrounds: 1307"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_get_least_angle_deflection_1e6",
+            "value": 65.8519458549713,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0009324980335241644",
+            "extra": "mean: 15.185580122451428 msec\nrounds: 49"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_get_least_dir_deflection_1e6",
+            "value": 31.53759831763973,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0020276605050542685",
+            "extra": "mean: 31.708184939392677 msec\nrounds: 33"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_identify_direction8_1e6",
+            "value": 1.9911695770888702,
+            "unit": "iter/sec",
+            "range": "stddev: 0.018934053020311467",
+            "extra": "mean: 502.21739600000313 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_identify_direction16_1e6",
+            "value": 1.0541831723464223,
+            "unit": "iter/sec",
+            "range": "stddev: 0.039465085585630236",
+            "extra": "mean: 948.6017479999987 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_identify_wind_scale_1e6",
+            "value": 24.538305801798217,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0018029497954691724",
+            "extra": "mean: 40.75260973912543 msec\nrounds: 23"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_calc_wind_dir_score_1e6",
+            "value": 1.0117044846561456,
+            "unit": "iter/sec",
+            "range": "stddev: 0.01732616105418712",
+            "extra": "mean: 988.4309253999959 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_get_least_lev_deflection_1e6",
+            "value": 522.0803418751732,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0005657886156545577",
+            "extra": "mean: 1.9154140077526514 msec\nrounds: 129"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_calc_wind_dir_accuracy_ratio_1e6",
+            "value": 46.693271550284614,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0016881390258368333",
+            "extra": "mean: 21.416361861110683 msec\nrounds: 36"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_calc_wind_scale_accuracy_ratio_1e6",
+            "value": 4.652702982540059,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00721881343724083",
+            "extra": "mean: 214.92882820000432 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_calc_wind_speed_accuracy_ratio_1e6",
+            "value": 5.238343519614064,
+            "unit": "iter/sec",
+            "range": "stddev: 0.006871404809643698",
+            "extra": "mean: 190.9000423999828 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_calc_wind_speed_score_1e6",
+            "value": 4.851394014838132,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00544373141884639",
+            "extra": "mean: 206.12632099999928 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_calc_wind_scale_stronger_ratio_1e6",
+            "value": 3.877868672934272,
+            "unit": "iter/sec",
+            "range": "stddev: 0.006938986625474218",
+            "extra": "mean: 257.87361159998454 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_calc_wind_scale_weaker_ratio_1e6",
+            "value": 3.8314811096674664,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00629552185358046",
+            "extra": "mean: 260.9956753999995 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_calc_wind_speed_chi_square_1e6",
+            "value": 73.88653204434704,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0014100011819370556",
+            "extra": "mean: 13.534266290909356 msec\nrounds: 55"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_calc_wind_speed_rss_1e6",
+            "value": 75.46979131433227,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0011344402539634007",
+            "extra": "mean: 13.250334770835556 msec\nrounds: 48"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_calc_wind_speed_mae_1e6",
+            "value": 43.67177960205029,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0018322312978093964",
+            "extra": "mean: 22.898082219508456 msec\nrounds: 41"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_calc_wind_speed_linregress_1e6",
+            "value": 33.97290976909746,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00204588083527208",
+            "extra": "mean: 29.435217848475933 msec\nrounds: 33"
+          },
+          {
+            "name": "tests/performance/test_wind_1e6.py::test_filter_wind_scales_1e6",
+            "value": 7.956639070065126,
+            "unit": "iter/sec",
+            "range": "stddev: 0.006335313942963444",
+            "extra": "mean: 125.68120675000216 msec\nrounds: 8"
           }
         ]
       }
