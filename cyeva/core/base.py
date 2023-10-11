@@ -24,6 +24,9 @@ from .statistic import (
     calc_threshold_bias_score,
     calc_threshold_ts,
     calc_threshold_mae,
+    calc_multiclass_accuracy_ratio,
+    calc_multiclass_hanssen_kuipers_score,
+    calc_multiclass_heidke_skill_score
 )
 
 
@@ -204,6 +207,54 @@ class Comparison:
             observation, forecast, threshold=threshold, compare=">"
         )
         return calc_binary_accuracy_ratio(binary_observation, binary_forecast)
+
+    @result_round_digit(4)
+    def calc_multiclass_accuracy_ratio(
+        self,
+        observation: Union[np.ndarray, list] = None,
+        forecast: Union[np.ndarray, list] = None,
+        *args,
+        **kwargs
+    ) -> float:
+        
+        if observation is None:
+            observation = self.observation
+        if forecast is None:
+            forecast = self.forecast
+
+        return calc_multiclass_accuracy_ratio(observation, forecast)
+
+    @result_round_digit(4)
+    def calc_multiclass_hanssen_kuipers_score(
+        self,
+        observation: Union[np.ndarray, list] = None,
+        forecast: Union[np.ndarray, list] = None,
+        *args,
+        **kwargs
+    ) -> float:
+        
+        if observation is None:
+            observation = self.observation
+        if forecast is None:
+            forecast = self.forecast
+
+        return calc_multiclass_hanssen_kuipers_score(observation, forecast)
+    
+    @result_round_digit(4)
+    def calc_multiclass_heidke_skill_score(
+        self,
+        observation: Union[np.ndarray, list] = None,
+        forecast: Union[np.ndarray, list] = None,
+        *args,
+        **kwargs
+    ) -> float:
+        
+        if observation is None:
+            observation = self.observation
+        if forecast is None:
+            forecast = self.forecast
+
+        return calc_multiclass_heidke_skill_score(observation, forecast)
 
     @result_round_digit(4)
     @source_round_digit()
