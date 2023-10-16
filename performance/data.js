@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1697424954757,
+  "lastUpdate": 1697437982993,
   "repoUrl": "https://github.com/caiyunapp/cyeva",
   "entries": {
     "cyeva Benchmark": [
@@ -1088,6 +1088,131 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0039101522876201856",
             "extra": "mean: 2.9013823447999814 sec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "caiyunapp",
+            "username": "caiyunapp"
+          },
+          "committer": {
+            "name": "caiyunapp",
+            "username": "caiyunapp"
+          },
+          "id": "3808eb9971c347c91a43481f22862d9be90777d7",
+          "message": "refactor: use pyproject.toml for environment build",
+          "timestamp": "2023-04-14T21:45:30Z",
+          "url": "https://github.com/caiyunapp/cyeva/pull/47/commits/3808eb9971c347c91a43481f22862d9be90777d7"
+        },
+        "date": 1697437982378,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/test_perf.py::test_calc_mae_1e3",
+            "value": 38913.0508321962,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000004792388457420505",
+            "extra": "mean: 25.698319165780028 usec\nrounds: 6235"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_mae_1e6",
+            "value": 56.057965169263376,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00026873815401252824",
+            "extra": "mean: 17.838678178570433 msec\nrounds: 56"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_mae_1e7",
+            "value": 5.685640218851701,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0020995093111626667",
+            "extra": "mean: 175.8816881666784 msec\nrounds: 6"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_mbe_1e3",
+            "value": 41362.804460395746,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000005351304248417907",
+            "extra": "mean: 24.17631040848511 usec\nrounds: 4333"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_mbe_1e6",
+            "value": 68.8334047945943,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00039570119997771655",
+            "extra": "mean: 14.527829953844345 msec\nrounds: 65"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_mbe_1e7",
+            "value": 6.756332509943726,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000258205818430335",
+            "extra": "mean: 148.00929328570436 msec\nrounds: 7"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_threshold_hit_ratio_1e3",
+            "value": 2154.2814142280326,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000230868042907998",
+            "extra": "mean: 464.1919079816882 usec\nrounds: 1065"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_threshold_hit_ratio_1e6",
+            "value": 3.1281929093552634,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00043443265015908564",
+            "extra": "mean: 319.6733798000025 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_threshold_hit_ratio_1e7",
+            "value": 0.31068064119424904,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00201254256612633",
+            "extra": "mean: 3.218739333600007 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_threshold_false_alarm_ratio_1e3",
+            "value": 2154.984469245023,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000024194581454850318",
+            "extra": "mean: 464.0404672384205 usec\nrounds: 1282"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_threshold_false_alarm_ratio_1e6",
+            "value": 3.128552933317306,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00036931253177372277",
+            "extra": "mean: 319.6365928000034 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_threshold_false_alarm_ratio_1e7",
+            "value": 0.31067844472535544,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0022608614214897163",
+            "extra": "mean: 3.2187620898000033 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_threshold_ts_1e3",
+            "value": 2152.0313945267276,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000023595449312918072",
+            "extra": "mean: 464.6772359098966 usec\nrounds: 1242"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_threshold_ts_1e6",
+            "value": 3.1277503501283035,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0007059964036642188",
+            "extra": "mean: 319.71861180000474 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/test_perf.py::test_calc_threshold_ts_1e7",
+            "value": 0.3103045055572992,
+            "unit": "iter/sec",
+            "range": "stddev: 0.006496741065955587",
+            "extra": "mean: 3.2226409288000015 sec\nrounds: 5"
           }
         ]
       }
