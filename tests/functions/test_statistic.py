@@ -7,6 +7,10 @@ from cyeva.core.statistic import (
     calc_threshold_false_alarm_ratio,
     calc_threshold_ts,
     calc_linregress,
+    calc_multiclass_confusion_matrix,
+    calc_multiclass_accuracy_ratio,
+    calc_multiclass_hanssen_kuipers_score,
+    calc_multiclass_heidke_skill_score,
 )
 
 
@@ -172,3 +176,88 @@ def calc_correlation_coefficient():
             assert _result == result
         else:
             assert np.isnan(_result)
+
+def test_calc_multiclass_confusion_matrix():
+    MULTICLASS_CASE = [
+        {
+            "obs": [1, 2, 3, 4, 5],
+            "fct": [1, 2, 3, 4, 5],
+            "result": np.diag([1]*5)
+        },
+        {
+            "obs": [1]*5 + [2]*5 + [3]*5 + [4]*5 + [5]*5,
+            "fct": [1, 2, 3, 4, 5]*5,
+            "result": np.ones((5,5))
+        }
+    ]
+    for case in MULTICLASS_CASE:
+        obs = case["obs"]
+        fct = case["fct"]
+        result = case["result"]
+        cm = calc_multiclass_confusion_matrix(obs, fct)
+        assert (cm.values == result).all()
+
+def test_calc_multiclass_accuracy_ratio():
+    MULTICLASS_CASE = [
+        {
+            "obs": [1, 2, 3, 4, 5],
+            "fct": [1, 2, 3, 4, 5],
+            "result": 100
+        },
+        {
+            "obs": np.array(['A', 'B', 'C', 'D', 'E']), 
+            "fct": np.array(['A', 'B', 'C', 'D', 'E']), 
+            "result": 100
+        },
+        {
+            "obs": [1]*5 + [2]*5 + [3]*5 + [4]*5 + [5]*5,
+            "fct": [1, 2, 3, 4, 5]*5,
+            "result": 20
+        }
+    ]
+    for case in MULTICLASS_CASE:
+        obs = case["obs"]
+        fct = case["fct"]
+        result = case["result"]
+        acc = calc_multiclass_accuracy_ratio(obs, fct)
+        assert acc == result
+
+def test_calc_multiclass_hanssen_kuipers_score():
+    MULTICLASS_CASE = [
+        {
+            "obs": [1, 2, 3, 4, 5],
+            "fct": [1, 2, 3, 4, 5],
+            "result": 1
+        },
+        {
+            "obs": [1]*5 + [2]*5 + [3]*5 + [4]*5 + [5]*5,
+            "fct": [1, 2, 3, 4, 5]*5,
+            "result": 0
+        }
+    ]
+    for case in MULTICLASS_CASE:
+        obs = case["obs"]
+        fct = case["fct"]
+        result = case["result"]
+        acc = calc_multiclass_hanssen_kuipers_score(obs, fct)
+        assert acc == result
+
+def test_calc_multiclass_heidke_skill_score():
+    MULTICLASS_CASE = [
+        {
+            "obs": [1, 2, 3, 4, 5],
+            "fct": [1, 2, 3, 4, 5],
+            "result": 1
+        },
+        {
+            "obs": [1]*5 + [2]*5 + [3]*5 + [4]*5 + [5]*5,
+            "fct": [1, 2, 3, 4, 5]*5,
+            "result": 0
+        }
+    ]
+    for case in MULTICLASS_CASE:
+        obs = case["obs"]
+        fct = case["fct"]
+        result = case["result"]
+        acc = calc_multiclass_heidke_skill_score(obs, fct)
+        assert acc == result
