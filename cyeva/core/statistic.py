@@ -1,9 +1,11 @@
 from typing import Union
 from numbers import Number
 from collections import Counter
+from itertools import product
 
 import numpy as np
 from scipy import stats
+import pandas as pd
 
 from ..utils import (
     convert_to_ndarray,
@@ -46,6 +48,153 @@ def calc_binary_quadrant_values(
 
     return hits, misses, false_alarms, correct_rejects, total
 
+@assert_length
+@drop_nan
+def calc_multiclass_confusion_matrix(
+    observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
+) -> pd.DataFrame:
+    """Calculate multiclass confusion matrix
+
+        confusion matrix
+                            Observation
+                            class 1     class 2      ...    class K
+        Forecast    class 1 n(F_1,O_1)  n(F_1,O_2)          n(F_1,O_K)
+                    class 2 n(F_2,O_1)  n(F_2,O_2)          n(F_2,O_K)
+                    .
+                    .
+                    .
+                    class K n(F_K,O_1)  n(F_K,O_2)          n(F_K,O_K)
+
+        where n(Fi,Oj) denotes the number of forecasts in category i that had observations in category j and K is total class number
+
+    Args:
+        observation (Union[list, np.ndarray]): Multiclass obervation data array
+                                                that consist of class labels.
+        forecast (Union[list, np.ndarray]): Multiclass forecast data array
+                                        that consist of class labels.
+
+    Returns:
+        pd.DataFrame: confusion matrix
+    """
+
+    cates = np.unique(np.concatenate([np.unique(observation), np.unique(forecast)]))
+    confusion_matrix_list = []
+    for obs_cate_, fcst_cate_ in product(cates, cates):
+        count_cate_ = Counter((observation==obs_cate_) & (forecast==fcst_cate_))[True]
+        confusion_matrix_list.append([obs_cate_, fcst_cate_, count_cate_])
+
+    confusion_matrix = pd.DataFrame(np.array(confusion_matrix_list), columns=['observation','forecast', 'count'])
+    confusion_matrix = confusion_matrix.pivot_table('count', index='forecast',columns='observation',aggfunc='sum').astype(int)
+
+    assert len(observation) == np.sum(confusion_matrix.values)
+
+    return confusion_matrix
+
+
+@assert_length
+@fix_zero_division
+@drop_nan
+def calc_multiclass_accuracy_ratio(
+    observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
+) -> float:
+    """Calculate accuracy of Multiclass observation and forecast.
+
+       Accuray = \frac {\sum\limits_{i=1}^{K} n(F_i,O_i)} {Total} * 100
+
+    Args:
+        observation (Union[list, np.ndarray]): Multiclass observation data array
+                                                that consist of class labels.
+        forecast (Union[list, np.ndarray]): Multiclass forecast data array 
+                                            that consist of class labels.
+
+    Returns:
+        float: The accuracy(%) of multiclass forecast. Perfect score 100.
+    """
+
+    confusion_matrix = calc_multiclass_confusion_matrix(
+        observation, forecast
+    )
+    # compute the sum of hits of all categories
+    all_hits = np.sum(confusion_matrix.values.diagonal())
+    total = len(observation)
+
+    return (all_hits  / total) * 100
+
+@assert_length
+@fix_zero_division
+@drop_nan
+def calc_multiclass_heidke_skill_score(
+    observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
+) -> float:
+    """calculate the Heidke Skill Score (HSS), which measures the 
+    fraction of correct forecasts after eliminating those forecasts 
+    which would be correct due purely to random chance. 
+
+        HSS = \frac {\frac {1} {Total} \sum\limits_{i=1}^{K} n(F_i,O_i) - 
+            \frac {1} {Total^2} \sum\limits_{i=1}^{K} N(F_i)N(O_i) } 
+            {1 - \frac {1} {Total^2} \sum\limits_{i=1}^{K} N(F_i)*N(O_i)}
+
+    Args:
+        observation (Union[list, np.ndarray]): Multiclass observation data array
+                                                that consist of class labels.
+        forecast (Union[list, np.ndarray]): Multiclass forecast data array 
+                                            that consist of class labels.
+
+    Returns:
+        float: HSS score. Perfect score 1.
+    """
+
+    confusion_matrix = calc_multiclass_confusion_matrix(
+        observation, forecast
+    )
+    total = len(observation)
+
+    # compute HSS score
+    acc_ = np.sum(confusion_matrix.values.diagonal()) / total 
+    reference_acc_ = np.sum(confusion_matrix.sum(axis=0).values * confusion_matrix.sum(axis=1).values) / (total**2)
+    perfect_acc_ = 1
+    hss_score_ = ( acc_ - reference_acc_ ) / (perfect_acc_ - reference_acc_)
+    
+    return hss_score_
+
+@assert_length
+@fix_zero_division
+@drop_nan
+def calc_multiclass_hanssen_kuipers_score(
+    observation: Union[list, np.ndarray], forecast: Union[list, np.ndarray]
+) -> float:
+    """calculate the Hanssen and Kuipers Score (HSS), which is 
+    similar to the Heidke skill score (above), except that in 
+    the denominator the fraction of correct forecasts due to 
+    random chance is for an unbiased forecast.
+
+        HK = \frac {\frac {1} {Total} \sum\limits_{i=1}^{K} n(F_i,O_i) - 
+            \frac {1} {Total^2} \sum\limits_{i=1}^{K} N(F_i)N(O_i) } 
+            {1 - \frac {1} {Total^2} \sum\limits_{i=1}^{K} N(O_i)^2}
+
+    Args:
+        observation (Union[list, np.ndarray]): Multiclass observation data array
+                                                that consist of class labels.
+        forecast (Union[list, np.ndarray]): Multiclass forecast data array 
+                                            that consist of class labels.
+
+    Returns:
+        float: HK score. Perfect score 1.
+    """
+
+    confusion_matrix = calc_multiclass_confusion_matrix(
+        observation, forecast
+    )
+    total = len(observation)
+
+    # compute HK score
+    acc_ = np.sum(confusion_matrix.values.diagonal()) / total 
+    reference_acc_ = np.sum(confusion_matrix.sum(axis=0).values * confusion_matrix.sum(axis=1).values) / (total**2)
+    perfect_acc_ = 1
+    unbias_reference_acc_ = np.sum(confusion_matrix.sum(axis=0).values**2) / (total**2)
+    hk_score_ = ( acc_ - reference_acc_ ) / (perfect_acc_ - unbias_reference_acc_)
+    
+    return hk_score_
 
 @assert_length
 @fix_zero_division
