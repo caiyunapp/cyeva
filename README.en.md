@@ -1,6 +1,6 @@
-cyeva is a Python open-source tool library jointly developed by the Colorful Clouds Technology weather team and community contributors for quickly evaluating the accuracy of deterministic forecasts of meteorological elements.
+Cyeva is a Python open-source tool library jointly developed by the Colorful Clouds Technology weather team and community contributors for quickly evaluating the accuracy of deterministic forecasts of meteorological elements.
 
-cyeva aims to make automated evaluation of the accuracy of deterministic meteorological forecasts straightforward. It integrates commonly used deterministic forecast accuracy evaluation metrics. Its internal algorithms widely use numpy's vector operations, thus having high computational efficiency for large data sets.
+Cyeva aims to make automated evaluation of the accuracy of deterministic meteorological forecasts straightforward. It integrates commonly used deterministic forecast accuracy evaluation metrics. Its internal algorithms widely use numpy's vector operations, thus having high computational efficiency for large data sets.
 
 ## Installation
 
@@ -14,7 +14,7 @@ $ pip install cyeva
 
 ### Install from Source Code
 
-First, choose the desired version on the [Release Page](https://github.com/caiyunapp/cyeva/releases), extract it, navigate to the project directory, and then execute:
+First, choose the desired version on the [release page](https://github.com/caiyunapp/cyeva/releases), extract it, navigate to the project directory, and then execute:
 
 ```bash
 $ python setup.py install
@@ -22,7 +22,7 @@ $ python setup.py install
 
 ## Usage
 
-cyeva has specially designed objects to handle relevant indicators for temperature, wind, and precipitation.
+Cyeva has specially designed objects to handle relevant indicators for temperature, wind, and precipitation.
 
 ### Temperature
 
