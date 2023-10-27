@@ -1,0 +1,115 @@
+from functools import wraps
+
+import numpy as np
+
+
+def assert_length(func):
+    """Check if array is empty"""
+
+    @wraps(func)
+    def wrapper(observation, forecast, *args, **kwargs):
+        if (
+            hasattr(observation, "__len__")
+            and hasattr(forecast, "__len__")
+            and len(observation) == len(forecast)
+            and len(observation) > 0
+        ):
+            return func(observation, forecast, *args, **kwargs)
+        else:
+            return None
+
+    return wrapper
+
+
+def convert_to_ndarray(func):
+    """Convert list array to numpy ndarray"""
+
+    @wraps(func)
+    def wrapper(observation, forecast, *args, **kwargs):
+        if not isinstance(observation, np.ndarray):
+            observation = np.array(observation)
+
+        if not isinstance(forecast, np.ndarray):
+            forecast = np.array(forecast)
+
+        return func(observation, forecast, *args, **kwargs)
+
+    return wrapper
+
+
+def fix_zero_division(func):
+    """Check if there is zero division and fix it."""
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except ZeroDivisionError:
+            return np.nan
+
+    return wrapper
+
+
+def drop_nan(func):
+    """Drop nan"""
+
+    @wraps(func)
+    def wrapper(observation, forecast, *args, **kwargs):
+        where_obs_nan = observation != observation
+        where_fct_nan = forecast != forecast
+
+        either_nan = where_obs_nan | where_fct_nan
+
+        valid_obs = observation[~either_nan]
+        valid_fct = forecast[~either_nan]
+
+        return func(valid_obs, valid_fct, *args, **kwargs)
+
+    return wrapper
+
+
+def source_round_digit(series_num=2, digit_num=1):
+    """A decorator to round source array's significant digit
+
+    Args:
+        digit_num (int, optional): The digit num to round.
+                                   Defaults to 2.
+    """
+
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            args_list = list(args)
+            serieses = args[:series_num]
+            for i, series in enumerate(serieses):
+                try:
+                    args_list[i] = np.round(series, digit_num)
+                except TypeError:
+                    args_list[i] = series
+            return func(*args_list, **kwargs)
+
+        return wrapper
+
+    return decorator
+
+
+def result_round_digit(digit_num=2):
+    """A decorator to round result array's significant digit
+
+    Args:
+        digit_num (int, optional): The digit num to round.
+                                   Defaults to 2.
+    """
+
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            result = func(*args, **kwargs)
+            if result:
+                return round(result, digit_num)
+            else:
+                return result
+
+        return wrapper
+
+    return decorator
