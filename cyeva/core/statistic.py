@@ -367,8 +367,6 @@ def calc_ets(
 
     hits_ref = ((hits + misses) * (hits + false_alarms)) / total
 
-    if hits - hits_ref == hits + false_alarms + misses - hits_ref:
-        return 1.0
     return (hits - hits_ref) / (hits + false_alarms + misses - hits_ref)
 
 
