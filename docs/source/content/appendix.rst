@@ -27,8 +27,8 @@
 延伸阅读： :ref:`rain_level_rule`
 
 参考资料：
- *  `《中华人民共和国气象行业标准——降水量等级 GB/T 28592——2012》 <http://www.gb688.cn/bzgk/gb/newGbInfo?hcno=B4A00E4ABCF80F8C6A048C1D0121A97D>`_ 
- * `《中华人民共和国气象行业标准——降雨过程等级 QX/T 489——2019》 <http://zwgk.cma.gov.cn/zfxxgk/gknr/flfgbz/bz/202102/P020210210454156397962.pdf>`_ 
+ *  `《中华人民共和国气象行业标准——降水量等级 GB/T 28592——2012》 <https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D7E11AD3A7E05397BE0A0AB82A>`_ 
+ * `《中华人民共和国气象行业标准——降雨过程等级 QX/T 489——2019》 <https://std.samr.gov.cn/hb/search/stdHBDetailed?id=94FD9B1F441545FFE05397BE0A0AA368>`_ 
 
 .. _accum_precip_table:
 
@@ -83,7 +83,7 @@
 +----------+---------------+----------+---------------+
 
 参考资料：
- * `《中华人民共和国国家标准：风力等级 GB/T 28591-2012》 <http://cmastd.cmatc.cn/u/cms/www/201602/01152025b4yb.pdf>`_
+ * `《中华人民共和国国家标准：风力等级 GB/T 28591-2012》 <https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D7E3DFD3A7E05397BE0A0AB82A>`_
 
 .. _wind_scale_score_table:
 
