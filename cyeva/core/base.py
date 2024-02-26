@@ -26,7 +26,7 @@ from .statistic import (
     calc_threshold_mae,
     calc_multiclass_accuracy_ratio,
     calc_multiclass_hanssen_kuipers_score,
-    calc_multiclass_heidke_skill_score
+    calc_multiclass_heidke_skill_score,
 )
 
 
@@ -36,7 +36,6 @@ class Comparison:
     def __init__(
         self, observation: Union[np.ndarray, list], forecast: Union[np.ndarray, list]
     ):
-
         if isinstance(observation, Quantity):
             observation = observation.magnitude
         if isinstance(forecast, Quantity):
@@ -216,7 +215,6 @@ class Comparison:
         *args,
         **kwargs
     ) -> float:
-        
         if observation is None:
             observation = self.observation
         if forecast is None:
@@ -232,14 +230,13 @@ class Comparison:
         *args,
         **kwargs
     ) -> float:
-        
         if observation is None:
             observation = self.observation
         if forecast is None:
             forecast = self.forecast
 
         return calc_multiclass_hanssen_kuipers_score(observation, forecast)
-    
+
     @result_round_digit(4)
     def calc_multiclass_heidke_skill_score(
         self,
@@ -248,7 +245,6 @@ class Comparison:
         *args,
         **kwargs
     ) -> float:
-        
         if observation is None:
             observation = self.observation
         if forecast is None:
@@ -295,7 +291,6 @@ class Comparison:
         *args,
         **kwargs
     ) -> float:
-
         if observation is None:
             observation = self.observation
         if forecast is None:
@@ -316,7 +311,6 @@ class Comparison:
         *args,
         **kwargs
     ) -> float:
-
         if observation is None:
             observation = self.observation
         if forecast is None:
@@ -337,7 +331,6 @@ class Comparison:
         *args,
         **kwargs
     ) -> float:
-
         if observation is None:
             observation = self.observation
         if forecast is None:
@@ -358,7 +351,6 @@ class Comparison:
         *args,
         **kwargs
     ) -> float:
-
         if observation is None:
             observation = self.observation
         if forecast is None:
@@ -379,7 +371,6 @@ class Comparison:
         *args,
         **kwargs
     ) -> float:
-
         if observation is None:
             observation = self.observation
         if forecast is None:
@@ -400,7 +391,6 @@ class Comparison:
         *args,
         **kwargs
     ) -> float:
-
         if observation is None:
             observation = self.observation
         if forecast is None:
@@ -421,7 +411,6 @@ class Comparison:
         *args,
         **kwargs
     ) -> float:
-
         if observation is None:
             observation = self.observation
         if forecast is None:

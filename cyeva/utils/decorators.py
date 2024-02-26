@@ -35,7 +35,6 @@ def convert_to_ndarray(func):
 
     @wraps(func)
     def wrapper(observation, forecast, *args, **kwargs):
-
         if not isinstance(observation, np.ndarray) and not isinstance(
             observation, Number
         ):

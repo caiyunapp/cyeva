@@ -177,18 +177,15 @@ def calc_correlation_coefficient():
         else:
             assert np.isnan(_result)
 
+
 def test_calc_multiclass_confusion_matrix():
     MULTICLASS_CASE = [
+        {"obs": [1, 2, 3, 4, 5], "fct": [1, 2, 3, 4, 5], "result": np.diag([1] * 5)},
         {
-            "obs": [1, 2, 3, 4, 5],
-            "fct": [1, 2, 3, 4, 5],
-            "result": np.diag([1]*5)
+            "obs": [1] * 5 + [2] * 5 + [3] * 5 + [4] * 5 + [5] * 5,
+            "fct": [1, 2, 3, 4, 5] * 5,
+            "result": np.ones((5, 5)),
         },
-        {
-            "obs": [1]*5 + [2]*5 + [3]*5 + [4]*5 + [5]*5,
-            "fct": [1, 2, 3, 4, 5]*5,
-            "result": np.ones((5,5))
-        }
     ]
     for case in MULTICLASS_CASE:
         obs = case["obs"]
@@ -197,23 +194,20 @@ def test_calc_multiclass_confusion_matrix():
         cm = calc_multiclass_confusion_matrix(obs, fct)
         assert (cm.values == result).all()
 
+
 def test_calc_multiclass_accuracy_ratio():
     MULTICLASS_CASE = [
+        {"obs": [1, 2, 3, 4, 5], "fct": [1, 2, 3, 4, 5], "result": 100},
         {
-            "obs": [1, 2, 3, 4, 5],
-            "fct": [1, 2, 3, 4, 5],
-            "result": 100
+            "obs": np.array(["A", "B", "C", "D", "E"]),
+            "fct": np.array(["A", "B", "C", "D", "E"]),
+            "result": 100,
         },
         {
-            "obs": np.array(['A', 'B', 'C', 'D', 'E']), 
-            "fct": np.array(['A', 'B', 'C', 'D', 'E']), 
-            "result": 100
+            "obs": [1] * 5 + [2] * 5 + [3] * 5 + [4] * 5 + [5] * 5,
+            "fct": [1, 2, 3, 4, 5] * 5,
+            "result": 20,
         },
-        {
-            "obs": [1]*5 + [2]*5 + [3]*5 + [4]*5 + [5]*5,
-            "fct": [1, 2, 3, 4, 5]*5,
-            "result": 20
-        }
     ]
     for case in MULTICLASS_CASE:
         obs = case["obs"]
@@ -222,18 +216,15 @@ def test_calc_multiclass_accuracy_ratio():
         acc = calc_multiclass_accuracy_ratio(obs, fct)
         assert acc == result
 
+
 def test_calc_multiclass_hanssen_kuipers_score():
     MULTICLASS_CASE = [
+        {"obs": [1, 2, 3, 4, 5], "fct": [1, 2, 3, 4, 5], "result": 1},
         {
-            "obs": [1, 2, 3, 4, 5],
-            "fct": [1, 2, 3, 4, 5],
-            "result": 1
+            "obs": [1] * 5 + [2] * 5 + [3] * 5 + [4] * 5 + [5] * 5,
+            "fct": [1, 2, 3, 4, 5] * 5,
+            "result": 0,
         },
-        {
-            "obs": [1]*5 + [2]*5 + [3]*5 + [4]*5 + [5]*5,
-            "fct": [1, 2, 3, 4, 5]*5,
-            "result": 0
-        }
     ]
     for case in MULTICLASS_CASE:
         obs = case["obs"]
@@ -242,18 +233,15 @@ def test_calc_multiclass_hanssen_kuipers_score():
         acc = calc_multiclass_hanssen_kuipers_score(obs, fct)
         assert acc == result
 
+
 def test_calc_multiclass_heidke_skill_score():
     MULTICLASS_CASE = [
+        {"obs": [1, 2, 3, 4, 5], "fct": [1, 2, 3, 4, 5], "result": 1},
         {
-            "obs": [1, 2, 3, 4, 5],
-            "fct": [1, 2, 3, 4, 5],
-            "result": 1
+            "obs": [1] * 5 + [2] * 5 + [3] * 5 + [4] * 5 + [5] * 5,
+            "fct": [1, 2, 3, 4, 5] * 5,
+            "result": 0,
         },
-        {
-            "obs": [1]*5 + [2]*5 + [3]*5 + [4]*5 + [5]*5,
-            "fct": [1, 2, 3, 4, 5]*5,
-            "result": 0
-        }
     ]
     for case in MULTICLASS_CASE:
         obs = case["obs"]

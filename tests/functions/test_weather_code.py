@@ -1,11 +1,7 @@
 import numpy as np
 
 from cyeva import WeatherCodeComparison
-from .case.weather_code import (
-    ACCURACY_RATE_CASE,
-    HK_CASE,
-    HSS_CASE
-)
+from .case.weather_code import ACCURACY_RATE_CASE, HK_CASE, HSS_CASE
 
 
 def test_calc_weather_code_accuracy_ratio():
@@ -23,6 +19,7 @@ def test_calc_weather_code_accuracy_ratio():
         else:
             assert np.isnan(_result)
 
+
 def test_calc_weather_code_hanssen_kuipers_score():
     for case in HK_CASE:
         obs = case["obs"]
@@ -37,6 +34,7 @@ def test_calc_weather_code_hanssen_kuipers_score():
             assert _result == result
         else:
             assert np.isnan(_result)
+
 
 def test_calc_weather_code_heidke_skill_score():
     for case in HSS_CASE:
@@ -61,4 +59,3 @@ def test_gather_all_factors():
 
         wc = WeatherCodeComparison(obs, fcst)
         wc.gather_all_factors()
-

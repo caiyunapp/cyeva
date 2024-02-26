@@ -209,8 +209,12 @@ class PrecipitationComparison(Comparison):
         self.kind = kind
         self.unit = unit
         self.lev = lev
-        self.observation = (self.observation * UNITS.parse_expression(unit)).to("mm").magnitude
-        self.forecast = (self.forecast * UNITS.parse_expression(unit)).to("mm").magnitude
+        self.observation = (
+            (self.observation * UNITS.parse_expression(unit)).to("mm").magnitude
+        )
+        self.forecast = (
+            (self.forecast * UNITS.parse_expression(unit)).to("mm").magnitude
+        )
         self.df = pd.DataFrame(
             {
                 "observation": self.observation,

@@ -11,7 +11,7 @@ def test_iss33():
     wd2 = np.array([3, 3])
 
     wc = WindComparison(ws1, ws2, wd1, wd2)
-    assert np.isclose(wc.calc_rmse(kind='direction'), 6)
+    assert np.isclose(wc.calc_rmse(kind="direction"), 6)
 
 
 def test_iss36():

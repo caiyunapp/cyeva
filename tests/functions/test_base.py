@@ -14,7 +14,6 @@ from .case import (
 
 
 def test_comparison():
-
     for case in RMSE_CASE:
         obs = case["obs"]
         fcst = case["fct"]

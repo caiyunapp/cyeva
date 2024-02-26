@@ -48,7 +48,6 @@ class WeatherCodeComparison(Comparison):
                 }
             )
 
-
         df = pd.DataFrame(result)
 
         return df
