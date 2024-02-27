@@ -1,6 +1,8 @@
-# cyeva
-
-![logo](./docs/source/_static/logo.png)
+<h1 align="center" style="margin:1em;">
+  <a href="./docs/source/_static/logo.png">
+    <img src="./docs/source/_static/logo.png"
+         alt="cyeva"></a>
+</h1>
 
 [![Pytest](https://github.com/caiyunapp/cyeva/actions/workflows/pytest.yml/badge.svg)](https://github.com/caiyunapp/cyeva/actions/workflows/pytest.yml)
 [![Pypi publish](https://github.com/caiyunapp/cyeva/actions/workflows/pypi-publish.yml/badge.svg)](https://github.com/caiyunapp/cyeva/actions/workflows/pypi-publish.yml)
