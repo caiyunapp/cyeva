@@ -25,7 +25,7 @@ Cyeva aims to make automated evaluation of the accuracy of deterministic meteoro
 $ pip install cyeva
 ```
 
-**Note: Since this project is currently in beta, it is not a stable version. It may undergo incompatible changes in future releases. Therefore, it's recommended to specify the version during installation, e.g., pip install cyeva==0.1.0b0.**
+**Note: Since this project is currently in beta, it is not a stable version. It may undergo incompatible changes in future releases. Therefore, it's recommended to specify the version during installation, e.g., pip install cyeva==0.2.0.**
 
 ### Install from Source Code
 
