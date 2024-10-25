@@ -290,7 +290,7 @@ def filter_wind_scales(
             Defaults to None.
         mode (str, optional): Filter logic(and/or). Defaults to 'and'.
         return_index (boolean, optional): Whether return index, if it is False
-            return values, ohterwise return array's index. Defaults to False.
+            return values, otherwise return array's index. Defaults to False.
 
     Returns:
         tuple: (Observation wind speed array, Forecast wind speed array)
