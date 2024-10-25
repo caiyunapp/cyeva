@@ -3,7 +3,7 @@ from typing import Union
 
 import numpy as np
 
-from ..utils.decorators import (
+from ..utils import (
     assert_length,
     convert_to_ndarray,
     drop_nan,

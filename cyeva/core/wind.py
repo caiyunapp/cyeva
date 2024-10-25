@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 from pint import Quantity, UnitRegistry
 
-from ..config.directions.wind import (
+from ..config.directions import (
     DIRECTION8_CENTER_ANGLE,
     DIRECTION16_CENTER_ANGLE,
 )
