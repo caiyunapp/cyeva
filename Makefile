@@ -43,3 +43,6 @@ test: lint
 
 bench: sync
 	uv run pytest --cov=cyeva/ -p no:warnings --memray --benchmark-json output.json
+
+freeze-doc-requirements:
+	cd docs;uv lock;uv export > requirements.txt
