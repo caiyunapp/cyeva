@@ -4,7 +4,7 @@ version = "0.2.0"
 description = "A package to evaluate weather forecast correction"
 readme = "README.md"
 # Python 3.13 is not supported yet. See https://github.com/hgrecco/pint/issues/2065
-requires-python = ">=3.11, <3.13"
+requires-python = ">=3.10, <3.13"
 dependencies = [
     "fire>=0.7.0",
     "numpy>=2.1.2",
