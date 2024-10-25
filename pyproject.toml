@@ -35,7 +35,7 @@ dev-dependencies = [
     "ruff>=0.7.1",
     "pytest-cov>=5.0.0",
     "pytest-benchmark>=4.0.0",
-    "pytest-memray>=1.7.0",
+    "pytest-memray>=1.7.0; sys_platform != 'win32'",
 ]
 package = true
 

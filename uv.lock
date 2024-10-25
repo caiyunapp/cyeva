@@ -187,7 +187,7 @@ dev = [
     { name = "pytest" },
     { name = "pytest-benchmark" },
     { name = "pytest-cov" },
-    { name = "pytest-memray" },
+    { name = "pytest-memray", marker = "sys_platform != 'win32'" },
     { name = "ruff" },
     { name = "sphinx" },
 ]
@@ -207,7 +207,7 @@ dev = [
     { name = "pytest", specifier = ">=8.3.3" },
     { name = "pytest-benchmark", specifier = ">=4.0.0" },
     { name = "pytest-cov", specifier = ">=5.0.0" },
-    { name = "pytest-memray", specifier = ">=1.7.0" },
+    { name = "pytest-memray", marker = "sys_platform != 'win32'", specifier = ">=1.7.0" },
     { name = "ruff", specifier = ">=0.7.1" },
     { name = "sphinx", specifier = ">=8.1.3" },
 ]
