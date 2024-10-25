@@ -58,7 +58,7 @@ print('accuracy ration within 1 degC:', temp.calc_diff_accuracy_ratio(limit=1)) 
 print('accuracy ration within 2 degC:', temp.calc_diff_accuracy_ratio(limit=2))       # 2-degree accuracy (deviation within 2°C)
 print('rss:', temp.calc_rss())                                                        # Residual Sum of Squares
 print('rmse:', temp.calc_rmse())                                                      # Root Mean Square Error
-print('mae:', temp.calc_mae())                                                        # Mean Absolute Erro
+print('mae:', temp.calc_mae())                                                        # Mean Absolute Error
 print('chi square:', temp.calc_chi_square())                                          # Chi Square (χ2)
 ```
 
@@ -79,7 +79,7 @@ precip = PrecipitationComparison(obs, fcst, unit='mm')
 
 print('rss:', precip.calc_rss())                                        # Residual Sum of Squares
 print('rmse:', precip.calc_rmse())                                      # Root Mean Square Error
-print('mae:', precip.calc_mae())                                        # Mean Absolute Erro
+print('mae:', precip.calc_mae())                                        # Mean Absolute Error
 print('chi square:', precip.calc_chi_square())                          # Chi Square (χ2)
 print('accuracy ratio:', precip.calc_accuracy_ratio())                  # Accuracy(0 level)
 print('binary accuracy ratio:', precip.calc_binary_accuracy_ratio())    # Binary accuracy(Binary classes between sunny or rainy weather)
@@ -146,8 +146,8 @@ print('wind speed rss:', wind.calc_rss())                                       
 print('wind direction rss:', wind.calc_rss(kind='direction'))                                  # Residual Sum of Squares（by direction）
 print('wind speed rmse:', wind.calc_rmse())                                                    # Root Mean Square Error（by speed/default）
 print('wind direction rmse:', wind.calc_rmse(kind='direction'))                                # Root Mean Square Error（by direction）
-print('wind speed mae:', wind.calc_mae())                                                      # Mean Absolute Erro（by speed/default）
-print('wind direction mae:', wind.calc_mae(kind='direction'))                                  # Mean Absolute Erro（by direction）
+print('wind speed mae:', wind.calc_mae())                                                      # Mean Absolute Error（by speed/default）
+print('wind direction mae:', wind.calc_mae(kind='direction'))                                  # Mean Absolute Error（by direction）
 print('wind speed chi square:', wind.calc_chi_square())                                        # Chi Square(χ2)
 print('wind direction chi square:', wind.calc_chi_square(kind='direction'))                    # Chi Square(χ2)（by direction）
 print('wind direction score:', wind.calc_dir_score())                                          # Direction score

@@ -46,7 +46,7 @@ def calc_precip_occur_indicators(
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
 
-        threshold (Number): The threshold to filter obervation and forecast.
+        threshold (Number): The threshold to filter observation and forecast.
                             Values less than threshold will be dropped.
                             Default to 0.0001.
 

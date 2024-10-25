@@ -102,8 +102,8 @@ def source_round_digit(series_num=2, digit_num=1):
         @wraps(func)
         def wrapper(*args, **kwargs):
             args_list = list(args)
-            serieses = args[:series_num]
-            for i, series in enumerate(serieses):
+            series = args[:series_num]
+            for i, series in enumerate(series):
                 try:
                     args_list[i] = np.round(series, digit_num)
                 except TypeError:

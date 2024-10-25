@@ -30,7 +30,7 @@ def threshold_binarize(
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
 
-        threshold (Number): The threshold to filter obervation and forecast.
+        threshold (Number): The threshold to filter observation and forecast.
                             This parameter should be used with `compare` parameter,
                             The `compare` parameter will control the logical operator.
 

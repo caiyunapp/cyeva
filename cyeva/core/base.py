@@ -31,7 +31,7 @@ from .statistic import (
 
 
 class Comparison:
-    """A base class of comparison between obervation & forecast"""
+    """A base class of comparison between observation & forecast"""
 
     def __init__(
         self, observation: Union[np.ndarray, list], forecast: Union[np.ndarray, list]
