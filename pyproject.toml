@@ -1,9 +1,9 @@
 [project]
 name = "cyeva"
-version = "0.1.0"
-description = "Add your description here"
+version = "0.2.0"
+description = "A package to evaluate weather forecast correction"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 dependencies = [
     "fire>=0.7.0",
     "numpy>=2.1.2",
@@ -11,15 +11,33 @@ dependencies = [
     "pint>=0.24.3",
     "scipy>=1.14.1",
 ]
+authors = [{ name = "caiyunapp", email = "oss@caiyunapp.com" }]
+maintainers = [{ name = "ringsaturn", email = "ringsaturn.me@gmail.com" }]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS",
+    "Framework :: Sphinx",
+]
 
 [tool.uv]
 dev-dependencies = [
     "furo>=2024.8.6",
     "pytest>=8.3.3",
     "sphinx>=8.1.3",
-    "sphinx-rtd-theme>=3.0.1",
     "ruff>=0.7.1",
     "pytest-cov>=5.0.0",
     "pytest-benchmark>=4.0.0",
     "pytest-memray>=1.7.0",
 ]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
