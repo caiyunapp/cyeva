@@ -42,7 +42,7 @@ test: lint
 	uv run pytest --cov=cyeva/ ./tests/functions ./tests/test_issues.py
 
 bench: sync
-	uv run pytest --cov=cyeva/ -p no:warnings --memray --benchmark-json output.json
+	uv run pytest --cov=cyeva/ -p no:warnings --memray --benchmark-json output.json tests/test_perf.py
 
 freeze-doc-requirements:
 	cd docs;uv lock;uv export > requirements.txt
