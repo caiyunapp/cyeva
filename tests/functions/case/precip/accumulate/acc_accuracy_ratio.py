@@ -1,5 +1,3 @@
-import numpy as np
-
 ACC_ACCURACY_RATE_CASE = {
     "1h": {
         1: [

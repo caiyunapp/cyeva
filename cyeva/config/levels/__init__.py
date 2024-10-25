@@ -1,2 +1,2 @@
-from .precip import *
-from .wind import *
+from .precip import *  # noqa
+from .wind import *  # noqa

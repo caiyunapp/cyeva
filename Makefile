@@ -18,7 +18,7 @@ fmt:
 	uv run ruff format .
 
 lint:
-	uv run ruff check .
+	uv run ruff check --fix .
 	uv run ruff format --check .
 
 sync:
@@ -33,7 +33,7 @@ upgrade:
 all: lock sync
 	make fmt
 	make lint
-	# make test	
+	make test	
 
-# test: lint
-# 	uv run pytest -v .
+test: lint
+	uv run pytest -v .

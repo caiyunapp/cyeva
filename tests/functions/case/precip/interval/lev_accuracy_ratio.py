@@ -1,5 +1,3 @@
-import numpy as np
-
 LEV_ACCURACY_RATE_CASE = {
     "1h": {
         1: [
