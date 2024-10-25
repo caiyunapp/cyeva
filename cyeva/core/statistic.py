@@ -1,17 +1,17 @@
-from typing import Union
-from numbers import Number
 from collections import Counter
 from itertools import product
+from numbers import Number
+from typing import Union
 
 import numpy as np
-from scipy import stats
 import pandas as pd
+from scipy import stats
 
 from ..utils import (
-    convert_to_ndarray,
-    fix_zero_division,
     assert_length,
+    convert_to_ndarray,
     drop_nan,
+    fix_zero_division,
 )
 from .binarize import threshold_binarize
 

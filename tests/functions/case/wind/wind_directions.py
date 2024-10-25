@@ -1,5 +1,4 @@
 import numpy as np
-
 from pint import Unit
 
 LEAST_ANGLE_DEFLECTION_CASE = [

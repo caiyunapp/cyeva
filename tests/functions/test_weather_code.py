@@ -1,6 +1,7 @@
 import numpy as np
 
 from cyeva import WeatherCodeComparison
+
 from .case.weather_code import ACCURACY_RATE_CASE, HK_CASE, HSS_CASE
 
 

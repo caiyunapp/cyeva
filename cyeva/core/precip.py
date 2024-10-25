@@ -1,28 +1,28 @@
-from typing import Union
-from numbers import Number
 from functools import partial
+from numbers import Number
+from typing import Union
 
 import numpy as np
 import pandas as pd
 from pint import UnitRegistry
 
-from ..config.levels.precip import PRECIP_LEVELS, ACC_PRECIP_LEVELS
+from ..config.levels.precip import ACC_PRECIP_LEVELS, PRECIP_LEVELS
+from ..core import Comparison
 from ..core.binarize import (
-    threshold_binarize,
     level_binarize,
+    threshold_binarize,
 )
 from ..utils import result_round_digit, source_round_digit
 from .statistic import (
+    calc_bias_score,
     calc_binary_accuracy_ratio,
+    calc_ets,
+    calc_false_alarm_rate,
+    calc_false_alarm_ratio,
     calc_hit_ratio,
     calc_miss_ratio,
-    calc_false_alarm_ratio,
-    calc_false_alarm_rate,
     calc_ts,
-    calc_ets,
-    calc_bias_score,
 )
-from ..core import Comparison
 
 UNITS = UnitRegistry()
 

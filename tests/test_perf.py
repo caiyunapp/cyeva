@@ -3,8 +3,8 @@ import numpy as np
 from cyeva.core.statistic import (
     calc_mae,
     calc_mbe,
-    calc_threshold_hit_ratio,
     calc_threshold_false_alarm_ratio,
+    calc_threshold_hit_ratio,
     calc_threshold_ts,
 )
 

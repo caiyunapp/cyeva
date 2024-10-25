@@ -1,11 +1,11 @@
-from typing import Union
 from numbers import Number
+from typing import Union
 
 import numpy as np
 
 from ..utils.decorators import (
-    convert_to_ndarray,
     assert_length,
+    convert_to_ndarray,
     drop_nan,
     source_round_digit,
 )

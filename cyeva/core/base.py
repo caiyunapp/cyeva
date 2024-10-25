@@ -1,5 +1,5 @@
-from typing import Union
 from numbers import Number
+from typing import Union
 
 import numpy as np
 import pandas as pd
@@ -8,25 +8,25 @@ from pint import Quantity
 from ..utils import result_round_digit, source_round_digit
 from .binarize import threshold_binarize
 from .statistic import (
-    calc_diff_accuracy_ratio,
-    calc_rmse,
-    calc_mae,
-    calc_mbe,
-    calc_rss,
-    calc_chi_square,
-    calc_linregress,
     calc_bias_score,
     calc_binary_accuracy_ratio,
-    calc_threshold_accuracy_ratio,
-    calc_threshold_hit_ratio,
-    calc_threshold_miss_ratio,
-    calc_threshold_false_alarm_ratio,
-    calc_threshold_bias_score,
-    calc_threshold_ts,
-    calc_threshold_mae,
+    calc_chi_square,
+    calc_diff_accuracy_ratio,
+    calc_linregress,
+    calc_mae,
+    calc_mbe,
     calc_multiclass_accuracy_ratio,
     calc_multiclass_hanssen_kuipers_score,
     calc_multiclass_heidke_skill_score,
+    calc_rmse,
+    calc_rss,
+    calc_threshold_accuracy_ratio,
+    calc_threshold_bias_score,
+    calc_threshold_false_alarm_ratio,
+    calc_threshold_hit_ratio,
+    calc_threshold_mae,
+    calc_threshold_miss_ratio,
+    calc_threshold_ts,
 )
 
 
@@ -60,7 +60,7 @@ class Comparison:
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         "Root Mean Square Error"
         if observation is None:
@@ -77,7 +77,7 @@ class Comparison:
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         """Mean Absolute Error"""
         if observation is None:
@@ -94,7 +94,7 @@ class Comparison:
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         """Mean Bias Error"""
         if observation is None:
@@ -111,7 +111,7 @@ class Comparison:
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         """χ2"""
         if observation is None:
@@ -128,7 +128,7 @@ class Comparison:
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         """Residual Sum of Square"""
         if observation is None:
@@ -143,7 +143,7 @@ class Comparison:
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
         *args,
-        **kwargs
+        **kwargs,
     ):
         """linregress args"""
         if observation is None:
@@ -161,7 +161,7 @@ class Comparison:
         forecast: Union[np.ndarray, list] = None,
         threshold: Number = 0,
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         """BIAS score"""
         if observation is None:
@@ -186,7 +186,7 @@ class Comparison:
         forecast: Union[np.ndarray, list] = None,
         threshold: Number = 0,
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         """Binary accuracy ratio
 
@@ -213,7 +213,7 @@ class Comparison:
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         if observation is None:
             observation = self.observation
@@ -228,7 +228,7 @@ class Comparison:
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         if observation is None:
             observation = self.observation
@@ -243,7 +243,7 @@ class Comparison:
         observation: Union[np.ndarray, list] = None,
         forecast: Union[np.ndarray, list] = None,
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         if observation is None:
             observation = self.observation
@@ -260,7 +260,7 @@ class Comparison:
         forecast: Union[np.ndarray, list] = None,
         limit: Number = 1,
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         """
         Calculate the accuracy ratio that
@@ -289,7 +289,7 @@ class Comparison:
         threshold: Number = 1,
         compare: str = ">=",
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         if observation is None:
             observation = self.observation
@@ -309,7 +309,7 @@ class Comparison:
         threshold: Number = 1,
         compare: str = ">=",
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         if observation is None:
             observation = self.observation
@@ -329,7 +329,7 @@ class Comparison:
         threshold: Number = 1,
         compare: str = ">=",
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         if observation is None:
             observation = self.observation
@@ -349,7 +349,7 @@ class Comparison:
         threshold: Number = 1,
         compare: str = ">=",
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         if observation is None:
             observation = self.observation
@@ -369,7 +369,7 @@ class Comparison:
         threshold: Number = 1,
         compare: str = ">=",
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         if observation is None:
             observation = self.observation
@@ -389,7 +389,7 @@ class Comparison:
         threshold: Number = 1,
         compare: str = ">=",
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         if observation is None:
             observation = self.observation
@@ -409,7 +409,7 @@ class Comparison:
         threshold: Number = 1,
         compare: str = ">=",
         *args,
-        **kwargs
+        **kwargs,
     ) -> float:
         if observation is None:
             observation = self.observation

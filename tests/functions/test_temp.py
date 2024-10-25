@@ -1,13 +1,14 @@
 import numpy as np
 
 from cyeva import TemperatureComparison
+
 from .case.temp import (
     ACCURACY_RATE_CASE,
-    RMSE_CASE,
-    MAE_CASE,
-    RESIDUAL_SUM_OF_SQUARE_CASE,
     CHI_SQUARE_CASE,
     LINREGRESS_CASE,
+    MAE_CASE,
+    RESIDUAL_SUM_OF_SQUARE_CASE,
+    RMSE_CASE,
 )
 
 

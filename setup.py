@@ -1,6 +1,7 @@
-import setuptools
-import os
 import codecs
+import os
+
+import setuptools
 
 
 def read(rel_path):

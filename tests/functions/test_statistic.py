@@ -1,16 +1,16 @@
 import numpy as np
 
 from cyeva.core.statistic import (
+    calc_linregress,
     calc_mae,
     calc_mbe,
-    calc_threshold_hit_ratio,
-    calc_threshold_false_alarm_ratio,
-    calc_threshold_ts,
-    calc_linregress,
-    calc_multiclass_confusion_matrix,
     calc_multiclass_accuracy_ratio,
+    calc_multiclass_confusion_matrix,
     calc_multiclass_hanssen_kuipers_score,
     calc_multiclass_heidke_skill_score,
+    calc_threshold_false_alarm_ratio,
+    calc_threshold_hit_ratio,
+    calc_threshold_ts,
 )
 
 

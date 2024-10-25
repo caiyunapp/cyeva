@@ -1,20 +1,12 @@
-from typing import List, Union
-from numbers import Number
 from collections import Counter
 from functools import partial
+from numbers import Number
+from typing import List, Union
 
 import numpy as np
 import pandas as pd
-from pint import UnitRegistry, Quantity
+from pint import Quantity, UnitRegistry
 
-from ..utils import (
-    convert_to_ndarray,
-    fix_zero_division,
-    result_round_digit,
-    source_round_digit,
-    assert_length,
-    drop_nan,
-)
 from ..config.directions.wind import (
     DIRECTION8_CENTER_ANGLE,
     DIRECTION16_CENTER_ANGLE,
@@ -22,8 +14,15 @@ from ..config.directions.wind import (
 from ..config.levels.wind import (
     GENERAL_WIND_SCALES,
 )
-
 from ..core import Comparison
+from ..utils import (
+    assert_length,
+    convert_to_ndarray,
+    drop_nan,
+    fix_zero_division,
+    result_round_digit,
+    source_round_digit,
+)
 
 UNITS = UnitRegistry()
 
@@ -207,9 +206,9 @@ def identify_wind_scale(speed: Union[Number, np.ndarray]) -> Union[int, np.ndarr
                     (speed_magnitude >= minimum) & (speed_magnitude <= maximum)
                 ] = lev
             else:
-                spd_levs[
-                    (speed_magnitude > minimum) & (speed_magnitude <= maximum)
-                ] = lev
+                spd_levs[(speed_magnitude > minimum) & (speed_magnitude <= maximum)] = (
+                    lev
+                )
 
     return spd_levs
 
