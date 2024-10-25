@@ -1,4 +1,5 @@
 .PHONY: help build fmt lint sync lock upgrade all
+export PYTHONPATH := $(shell pwd)
 
 help:
 	@echo "Available commands:"
