@@ -1,5 +1,7 @@
-.PHONY: help build fmt lint sync lock upgrade all
+.PHONY: help build fmt lint sync lock upgrade all test
+
 export PYTHONPATH := $(shell pwd)
+export UV_PYTHON_PREFERENCE=only-system
 
 help:
 	@echo "Available commands:"
@@ -23,7 +25,7 @@ lint:
 	uv run ruff format --check .
 
 sync:
-	uv sync --compile
+	uv sync --compile --frozen
 
 lock:
 	uv lock
@@ -37,4 +39,7 @@ all: lock sync
 	make test	
 
 test: lint
-	uv run pytest -v .
+	uv run pytest --cov=cyeva/ ./tests/functions ./tests/test_issues.py
+
+bench: sync
+	uv run pytest --cov=cyeva/ -p no:warnings --memray --benchmark-json output.json

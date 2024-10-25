@@ -37,6 +37,7 @@ dev-dependencies = [
     "pytest-benchmark>=4.0.0",
     "pytest-memray>=1.7.0",
 ]
+package = true
 
 [build-system]
 requires = ["hatchling"]
