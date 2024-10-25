@@ -3,7 +3,8 @@ name = "cyeva"
 version = "0.2.0"
 description = "A package to evaluate weather forecast correction"
 readme = "README.md"
-requires-python = ">=3.11"
+# Python 3.13 is not supported yet. See https://github.com/hgrecco/pint/issues/2065
+requires-python = ">=3.11, <3.13"
 dependencies = [
     "fire>=0.7.0",
     "numpy>=2.1.2",
@@ -20,7 +21,7 @@ classifiers = [
     "License :: OSI Approved :: BSD License",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
+    # "Programming Language :: Python :: 3.13",
     "Operating System :: POSIX :: Linux",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: MacOS",
