@@ -6,7 +6,6 @@ readme = "README.md"
 # Python 3.13 is not supported yet. See https://github.com/hgrecco/pint/issues/2065
 requires-python = ">=3.10, <3.13"
 dependencies = [
-    "fire>=0.7.0",
     "numpy>=2.1.2",
     "pandas>=2.2.3",
     "pint>=0.24.3",
