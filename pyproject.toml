@@ -13,11 +13,11 @@ dependencies = [
 ]
 authors = [{ name = "caiyunapp", email = "oss@caiyunapp.com" }]
 maintainers = [{ name = "ringsaturn", email = "ringsaturn.me@gmail.com" }]
+license = { file = "LICENSE" }
 classifiers = [
     "Development Status :: 4 - Beta",
     "Topic :: Scientific/Engineering :: Atmospheric Science",
     "Topic :: Scientific/Engineering :: Mathematics",
-    "License :: OSI Approved :: BSD License",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
