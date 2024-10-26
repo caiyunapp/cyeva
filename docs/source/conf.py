@@ -58,6 +58,7 @@ html_theme_options = {
     "source_repository": "https://github.com/caiyunapp/cyeva/",
     "source_branch": "main",
     "source_directory": "docs/source/",
+    "source_view_link": "https://github.com/caiyunapp/cyeva/blob/main/docs/source/{filename}",
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
