@@ -4,7 +4,7 @@
          alt="cyeva"></a>
 </h1>
 
-[![Pytest](https://github.com/caiyunapp/cyeva/actions/workflows/pytest.yml/badge.svg)](https://github.com/caiyunapp/cyeva/actions/workflows/pytest.yml)
+[![Pytest](https://github.com/caiyunapp/cyeva/actions/workflows/test.yml/badge.svg)](https://github.com/caiyunapp/cyeva/actions/workflows/test.yml)
 [![Pypi publish](https://github.com/caiyunapp/cyeva/actions/workflows/pypi-publish.yml/badge.svg)](https://github.com/caiyunapp/cyeva/actions/workflows/pypi-publish.yml)
 [![Anaconda.org](https://anaconda.org/conda-forge/cyeva/badges/version.svg)](https://anaconda.org/conda-forge/cyeva)
 [![Downloads](https://anaconda.org/conda-forge/cyeva/badges/downloads.svg)](https://anaconda.org/conda-forge/cyeva)
