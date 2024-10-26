@@ -29,11 +29,13 @@ jobs:
           enable-cache: true
 
       - run: make html
+      - run: ls -alh "./build/html/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./build/html"
+          # https://github.com/actions/upload-pages-artifact/issues/74
+          path: "docs/build/html/"
 
       - name: Deploy to GitHub Pages
         id: deployment
