@@ -26,10 +26,6 @@ jobs:
         with:
           python-version: 3.12
 
-      - name: Install
-        run: |
-          uv build --config-setting profile==profiling
-
       - name: Run benchmarks
         uses: CodSpeedHQ/action@v3
         with:
