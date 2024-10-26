@@ -1,14 +1,12 @@
 # cyeva
 
-[![Pytest](https://github.com/caiyunapp/cyeva/actions/workflows/test.yml/badge.svg)](https://github.com/caiyunapp/cyeva/actions/workflows/test.yml)
-[![Pypi publish](https://github.com/caiyunapp/cyeva/actions/workflows/pypi-publish.yml/badge.svg)](https://github.com/caiyunapp/cyeva/actions/workflows/pypi-publish.yml)
-[![Anaconda.org](https://anaconda.org/conda-forge/cyeva/badges/version.svg)](https://anaconda.org/conda-forge/cyeva)
-[![Downloads](https://anaconda.org/conda-forge/cyeva/badges/downloads.svg)](https://anaconda.org/conda-forge/cyeva)
-[![Anaconda-Server Badge](https://anaconda.org/conda-forge/cyeva/badges/platforms.svg)](https://anaconda.org/conda-forge/cyeva)
-[![Anaconda-Server Badge](https://anaconda.org/conda-forge/cyeva/badges/latest_release_date.svg)](https://anaconda.org/conda-forge/cyeva)
+<!-- [![Anaconda.org](https://anaconda.org/conda-forge/cyeva/badges/version.svg)](https://anaconda.org/conda-forge/cyeva) -->
+<!-- [![Downloads](https://anaconda.org/conda-forge/cyeva/badges/downloads.svg)](https://anaconda.org/conda-forge/cyeva) -->
+<!-- [![Anaconda-Server Badge](https://anaconda.org/conda-forge/cyeva/badges/platforms.svg)](https://anaconda.org/conda-forge/cyeva) -->
+<!-- [![Anaconda-Server Badge](https://anaconda.org/conda-forge/cyeva/badges/latest_release_date.svg)](https://anaconda.org/conda-forge/cyeva) -->
+<!-- [![Download statistic](https://pepy.tech/badge/cyeva)](https://pepy.tech/project/cyeva) -->
 [![Pypi](https://badge.fury.io/py/cyeva.svg)](https://badge.fury.io/py/cyeva)
 [![Documentation Status](https://readthedocs.org/projects/cyeva/badge/?version=latest)](https://cyeva.readthedocs.io/zh_CN/latest/?badge=latest)
-[![Download statistic](https://pepy.tech/badge/cyeva)](https://pepy.tech/project/cyeva)
 [![codecov](https://codecov.io/gh/caiyunapp/cyeva/branch/main/graph/badge.svg?token=344FXDKAYD)](https://codecov.io/gh/caiyunapp/cyeva)
 [![CodSpeed Badge](https://img.shields.io/endpoint?url=https://codspeed.io/badge.json)](https://codspeed.io/caiyunapp/cyeva)
 
