@@ -1,6 +1,5 @@
 [project]
 name = "cyeva"
-version = "0.2.1"
 description = "A package to evaluate weather forecast correction"
 readme = "README.md"
 requires-python = ">=3.10, <3.13" # Python 3.13 is not supported yet. See https://github.com/hgrecco/pint/issues/2065
@@ -33,6 +32,7 @@ classifiers = [
     "Framework :: Sphinx",
 ]
 keywords = ["atmospheric-science", "mathmatics"]
+dynamic = ["version"]
 
 [project.urls]
 Documentation = "https://caiyunapp.github.io/cyeva"
@@ -53,3 +53,6 @@ package = true
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "cyeva/__init__.py"
