@@ -4,7 +4,7 @@
 
 ## Issue
 
-如果您发现了一个 bug 或者有一个新的功能请求，可以在我们的 [GitHub Issues](https://github.com/example-project/issues) 页面上创建一个 issue，我们会及时查看并回复您的问题。
+如果您发现了一个 bug 或者有一个新的功能请求，可以在我们的 [GitHub Issues](https://github.com/caiyunapp/cyeva/issues) 页面上创建一个 issue，我们会及时查看并回复您的问题。
 
 ## Pull Request
 
