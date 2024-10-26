@@ -54,6 +54,12 @@ exclude_patterns = []
 #
 html_theme = "furo"
 
+html_theme_options = {
+    "source_repository": "https://github.com/caiyunapp/cyeva/",
+    "source_branch": "main",
+    "source_directory": "docs/source/",
+}
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
