@@ -3,16 +3,22 @@ name = "cyeva"
 version = "0.2.0"
 description = "A package to evaluate weather forecast correction"
 readme = "README.md"
-# Python 3.13 is not supported yet. See https://github.com/hgrecco/pint/issues/2065
-requires-python = ">=3.10, <3.13"
+requires-python = ">=3.10, <3.13" # Python 3.13 is not supported yet. See https://github.com/hgrecco/pint/issues/2065
 dependencies = [
     "numpy>=2.1.2",
     "pandas>=2.2.3",
     "pint>=0.24.3",
     "scipy>=1.14.1",
 ]
-authors = [{ name = "caiyunapp", email = "oss@caiyunapp.com" }]
-maintainers = [{ name = "ringsaturn", email = "ringsaturn.me@gmail.com" }]
+maintainers = [
+    { name = "caiyunapp", email = "oss@caiyunapp.com" },
+    { name = "ringsaturn", email = "ringsaturn.me@gmail.com" },
+]
+auhtors = [
+    { name = "caiyunapp", email = "oss@caiyunapp.com" },
+    { name = "Clarmy", email = "clarmyleewt@gmail.com" },
+    { name = "ringsaturn", email = "ringsaturn.me@gmail.com" },
+]
 license = { file = "LICENSE" }
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -26,6 +32,12 @@ classifiers = [
     "Operating System :: MacOS",
     "Framework :: Sphinx",
 ]
+keywords = ["atmospheric-science", "mathmatics"]
+
+[project.urls]
+Documentation = "https://caiyunapp.github.io/cyeva"
+Issues = "https://github.com/caiyunapp/cyeva/issues"
+"Source Code" = "https://github.com/caiyunapp/cyeva"
 
 [tool.uv]
 dev-dependencies = [
