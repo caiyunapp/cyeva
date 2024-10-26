@@ -1,8 +1,5 @@
 import numpy as np
 
-from cyeva.core.base import Comparison
-
-
 RMSE_CASE = [
     {"obs": np.array([1, 2, 3, 0]), "fct": np.array([1, 2, 3, 0]), "result": 0},
     {"obs": np.array([1, 2, 0, 0]), "fct": np.array([0, 0, 3, 4]), "result": 2.7386},

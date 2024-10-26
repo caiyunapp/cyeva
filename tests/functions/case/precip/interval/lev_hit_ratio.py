@@ -1,5 +1,3 @@
-import numpy as np
-
 LEV_HIT_RATIO_CASE = {
     "1h": {
         1: [

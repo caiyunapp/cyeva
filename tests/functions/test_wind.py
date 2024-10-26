@@ -4,34 +4,34 @@ from typing import List
 import numpy as np
 
 from cyeva.core.wind import (
+    WindComparison,
+    filter_wind_scales,
     get_least_angle_deflection,
+    get_least_dir_deflection,
+    get_least_lev_diff,
     identify_direction,
     identify_wind_scale,
-    get_least_lev_diff,
-    get_least_dir_deflection,
-    filter_wind_scales,
-    WindComparison,
 )
 
 from .case.wind import (
-    LEAST_ANGLE_DEFLECTION_CASE,
-    LEAST_DIR_DEFLECTION_CASE,
+    FILTER_WIND_SCALES_CASE,
     IDENTIFY_DIRECTION8_CASE,
     IDENTIFY_DIRECTION16_CASE,
-    WIND_DIR_SCORE_CASE,
-    WIND_DIR_ACCURACY_RATE,
     IDENTIFY_SPEED_LEVEL_GENERAL_CASE,
+    LEAST_ANGLE_DEFLECTION_CASE,
+    LEAST_DIR_DEFLECTION_CASE,
     LEAST_LEV_DEFLECTION_CASE,
+    WIND_DIR_ACCURACY_RATE,
+    WIND_DIR_SCORE_CASE,
     WIND_LEVEL_ACCURACY_RATE_CASE,
-    WIND_SPEED_SCORE_CASE,
     WIND_SPEED_ACCURACY_RATE_CASE,
+    WIND_SPEED_CHI_SQUARE_CASE,
+    WIND_SPEED_LINREGRESS_CASE,
     WIND_SPEED_MAE_CASE,
+    WIND_SPEED_RESIDUAL_SUM_OF_SQUARE_CASE,
+    WIND_SPEED_SCORE_CASE,
     WIND_SPEED_STRONGER_RATE_CASE,
     WIND_SPEED_WEAKER_RATE_CASE,
-    WIND_SPEED_CHI_SQUARE_CASE,
-    WIND_SPEED_RESIDUAL_SUM_OF_SQUARE_CASE,
-    WIND_SPEED_LINREGRESS_CASE,
-    FILTER_WIND_SCALES_CASE,
 )
 
 

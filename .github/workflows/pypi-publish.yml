@@ -12,28 +12,27 @@ on:
   release:
     types: [published]
 
-permissions:
-  contents: read
-
 jobs:
   deploy:
-
+    name: upload release to PyPI
     runs-on: ubuntu-latest
-    environment: release
+    environment:
+      name: PyPI
+      url: https://pypi.org/p/cyeva
     permissions:
       id-token: write
+    env:
+      TRUSTED_PUBLISHING: always
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install build
-    - name: Build package
-      run: python -m build
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "pyproject.toml"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
 
-    - name: Publish package
-      uses: pypa/gh-action-pypi-publish@release/v1
+      - run: make build
+      - run: uv publish

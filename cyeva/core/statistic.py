@@ -1,17 +1,17 @@
-from typing import Union
-from numbers import Number
 from collections import Counter
 from itertools import product
+from numbers import Number
+from typing import Union
 
 import numpy as np
-from scipy import stats
 import pandas as pd
+from scipy import stats
 
 from ..utils import (
-    convert_to_ndarray,
-    fix_zero_division,
     assert_length,
+    convert_to_ndarray,
     drop_nan,
+    fix_zero_division,
 )
 from .binarize import threshold_binarize
 
@@ -30,7 +30,7 @@ def calc_binary_quadrant_values(
         * correct_rejects
 
     Args:
-        observation (ndarray): Binarized obervation data array
+        observation (ndarray): Binarized observation data array
                                that consist of True and False
         forecast (ndarray): Binarized forecast data array
                             that consist of True and False
@@ -69,7 +69,7 @@ def calc_multiclass_confusion_matrix(
         where n(Fi,Oj) denotes the number of forecasts in category i that had observations in category j and K is total class number
 
     Args:
-        observation (Union[list, np.ndarray]): Multiclass obervation data array
+        observation (Union[list, np.ndarray]): Multiclass observation data array
                                                 that consist of class labels.
         forecast (Union[list, np.ndarray]): Multiclass forecast data array
                                         that consist of class labels.
@@ -106,7 +106,7 @@ def calc_multiclass_accuracy_ratio(
 ) -> float:
     """Calculate accuracy of Multiclass observation and forecast.
 
-       Accuray = \frac {\sum\limits_{i=1}^{K} n(F_i,O_i)} {Total} * 100
+       Accuracy = \frac {\sum\limits_{i=1}^{K} n(F_i,O_i)} {Total} * 100
 
     Args:
         observation (Union[list, np.ndarray]): Multiclass observation data array
@@ -558,7 +558,7 @@ def calc_linregress(
                                             consist of numbers.
 
     Returns:
-        tuple: Aguments of linear regression as follow:
+        tuple: Arguments of linear regression as follow:
                slope, intercept, r_value, p_value
     """
     linreg_result = stats.linregress(forecast, observation)[:4]
@@ -581,7 +581,7 @@ def calc_threshold_accuracy_ratio(
                                                that consist of numbers.
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
-        threshold (Number): The threshold to filter obervation and forecast.
+        threshold (Number): The threshold to filter observation and forecast.
                             This parameter should be used with `compare` parameter,
                             The `compare` parameter will control the logical operator.
         compare (str, optional): The logical operator applying `threshold` parameter.
@@ -616,7 +616,7 @@ def calc_threshold_hit_ratio(
                                                that consist of numbers.
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
-        threshold (Number): The threshold to filter obervation and forecast.
+        threshold (Number): The threshold to filter observation and forecast.
                             This parameter should be used with `compare` parameter,
                             The `compare` parameter will control the logical operator.
         compare (str, optional): The logical operator applying `threshold` parameter.
@@ -651,7 +651,7 @@ def calc_threshold_miss_ratio(
                                                that consist of numbers.
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
-        threshold (Number): The threshold to filter obervation and forecast.
+        threshold (Number): The threshold to filter observation and forecast.
                             This parameter should be used with `compare` parameter,
                             The `compare` parameter will control the logical operator.
         compare (str, optional): The logical operator applying `threshold` parameter.
@@ -686,7 +686,7 @@ def calc_threshold_false_alarm_ratio(
                                                that consist of numbers.
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
-        threshold (Number): The threshold to filter obervation and forecast.
+        threshold (Number): The threshold to filter observation and forecast.
                             This parameter should be used with `compare` parameter,
                             The `compare` parameter will control the logical operator.
         compare (str, optional): The logical operator applying `threshold` parameter.
@@ -721,7 +721,7 @@ def calc_threshold_bias_score(
                                                that consist of numbers.
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
-        threshold (Number): The threshold to filter obervation and forecast.
+        threshold (Number): The threshold to filter observation and forecast.
                             This parameter should be used with `compare` parameter,
                             The `compare` parameter will control the logical operator.
         compare (str, optional): The logical operator applying `threshold` parameter.
@@ -756,7 +756,7 @@ def calc_threshold_ts(
                                                that consist of numbers.
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
-        threshold (Number): The threshold to filter obervation and forecast.
+        threshold (Number): The threshold to filter observation and forecast.
                             This parameter should be used with `compare` parameter,
                             The `compare` parameter will control the logical operator.
         compare (str, optional): The logical operator applying `threshold` parameter.
@@ -791,7 +791,7 @@ def calc_threshold_mae(
                                                that consist of numbers.
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
-        threshold (Number): The threshold to filter obervation and forecast.
+        threshold (Number): The threshold to filter observation and forecast.
                             This parameter should be used with `compare` parameter,
                             The `compare` parameter will control the logical operator.
         compare (str, optional): The logical operator applying `threshold` parameter.

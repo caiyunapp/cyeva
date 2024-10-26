@@ -1,15 +1,16 @@
 import numpy as np
 
 from cyeva.core.base import Comparison
+
 from .case import (
-    RMSE_CASE,
-    MAE_CASE,
-    CHI_SQUARE_CASE,
-    RESIDUAL_SUM_OF_SQUARE_CASE,
-    LINREGRESS_ARGS_CASE,
-    BINARY_ACCURACY_RATIO_CASE,
     BIAS_CASE,
+    BINARY_ACCURACY_RATIO_CASE,
+    CHI_SQUARE_CASE,
     DIFF_ACCURACY_RATIO,
+    LINREGRESS_ARGS_CASE,
+    MAE_CASE,
+    RESIDUAL_SUM_OF_SQUARE_CASE,
+    RMSE_CASE,
 )
 
 

@@ -1,11 +1,11 @@
-from typing import Union
 from numbers import Number
+from typing import Union
 
 import numpy as np
 
-from ..utils.decorators import (
-    convert_to_ndarray,
+from ..utils import (
     assert_length,
+    convert_to_ndarray,
     drop_nan,
     source_round_digit,
 )
@@ -30,7 +30,7 @@ def threshold_binarize(
         forecast (Union[list, np.ndarray]): Binarized forecast data array that
                                             consist of numbers.
 
-        threshold (Number): The threshold to filter obervation and forecast.
+        threshold (Number): The threshold to filter observation and forecast.
                             This parameter should be used with `compare` parameter,
                             The `compare` parameter will control the logical operator.
 

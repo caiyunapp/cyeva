@@ -1,5 +1,3 @@
-import numpy as np
-
 LEV_TS_SCORE_CASE = {
     "1h": {
         1: [

@@ -1,5 +1,3 @@
-import numpy as np
-
 ACC_HIT_RATIO_CASE = {
     "1h": {
         1: [
