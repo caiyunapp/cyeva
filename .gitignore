@@ -132,3 +132,5 @@ dmypy.json
 .vscode
 *.ipynb
 _build
+
+output.json

@@ -1,0 +1,36 @@
+name: Bench
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  benchmark:
+    name: Continuous Benchmarking with CodSpeed
+    runs-on: ubuntu-latest
+    steps:
+      - name: Collect Workflow Telemetry
+        uses: runforesight/workflow-telemetry-action@v2
+        with:
+          comment_on_pr: false
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - name: Run benchmarks
+        uses: CodSpeedHQ/action@v3
+        with:
+          run: |
+            uv run pytest --codspeed --benchmark-warmup=off --benchmark-warmup-iterations=10 --benchmark-min-rounds=2 -v tests/test_perf.py   
+
+      - name: Minimize uv cache
+        run: uv cache prune --ci
