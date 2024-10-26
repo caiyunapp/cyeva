@@ -14,7 +14,7 @@
 
 Cyeva is a Python open-source tool library jointly developed by the Colorful Clouds Technology weather team and community contributors for quickly evaluating the accuracy of deterministic forecasts of meteorological elements.
 
-Cyeva aims to make automated evaluation of the accuracy of deterministic meteorological forecasts straightforward. It integrates commonly used deterministic forecast accuracy evaluation metrics. Its internal algorithms widely use numpy's vector operations, thus having high computational efficiency for large data sets.
+Cyeva aims to make automated evaluation of the accuracy of deterministic meteorological forecasts straightforward. It integrates commonly used deterministic forecast accuracy evaluation metrics. Its internal algorithms widely use NumPy's vector operations, thus having high computational efficiency for large data sets.
 
 ## Installation
 
@@ -102,7 +102,7 @@ for inv in ['1h', '3h', '12h', '24h']:      # TS score under different time inte
         print(f'ts({inv}|{lev_str}):', precip.calc_ts(kind=inv, lev=lev_str))
         if lev > 0:
             print(f'ts({inv}|{levp_str}):', precip.calc_ts(kind=inv, lev=levp_str))
-    
+
 print('ets:', precip.calc_ets())            # ETS score（1-hr time interval/binary classes/ETS score/default）
 for inv in ['1h', '3h', '12h', '24h']:      # ETS score under different time intervals with different level criteria
     for lev in range(7):

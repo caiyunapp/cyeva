@@ -16,32 +16,31 @@
 [![codecov](https://codecov.io/gh/caiyunapp/cyeva/branch/main/graph/badge.svg?token=344FXDKAYD)](https://codecov.io/gh/caiyunapp/cyeva)
 [![CodSpeed Badge](https://img.shields.io/endpoint?url=https://codspeed.io/badge.json)](https://codspeed.io/caiyunapp/cyeva)
 
-
 cyeva 是一个由彩云科技天气团队和社区贡献者共同开发的用于对气象要素确定性预报准确率进行快速评测的 Python 开源工具库。
 
-cyeva 将致力于让气象要素确定性预报准确率的自动化评估变得简单直接，将集成常用的确定性预报准确率评估指标，且内部算法广泛使用了 numpy 的向量运算实现，对于大数据量的计算也具有较高的计算效率。
+cyeva 将致力于让气象要素确定性预报准确率的自动化评估变得简单直接，将集成常用的确定性预报准确率评估指标，且内部算法广泛使用了 NumPy 的向量运算实现，对于大数据量的计算也具有较高的计算效率。
 
 ## 安装
 
-### 通过pip安装
+### 通过 pip 安装
 
 ```bash
 $ pip install cyeva
 ```
 
-**注意：由于本项目目前处于beta阶段，并非稳定版本，有可能在后续的发布版中出现不兼容性修改，因此在安装时建议指定版本号，例如 `pip install cyeva==0.2.3`**
+**注意：由于本项目目前处于 beta 阶段，并非稳定版本，有可能在后续的发布版中出现不兼容性修改，因此在安装时建议指定版本号，例如 `pip install cyeva==0.2.3`**
 
 ### 通过源码安装
 
-首先在[版本页面](https://github.com/caiyunapp/cyeva/releases)选择想要安装的版本，解压，进入项目目录然后执行：
+需要安装 [uv](http://github.com/astral-sh/uv)，然后在[版本页面](https://github.com/caiyunapp/cyeva/releases)选择想要安装的版本，解压，进入项目目录然后执行：
 
 ```bash
-$ python setup.py install
+make sync
 ```
 
 ## 使用
 
-cyeva 为气温、风和降水编写了专门的对象用于处理对应要素的相关指标。   
+cyeva 为气温、风和降水编写了专门的对象用于处理对应要素的相关指标。
 
 ### 气温
 
@@ -107,7 +106,7 @@ for inv in ['1h', '3h', '12h', '24h']:      # 不同间隔下的分级TS评分
         print(f'ts({inv}|{lev_str}):', precip.calc_ts(kind=inv, lev=lev_str))
         if lev > 0:
             print(f'ts({inv}|{levp_str}):', precip.calc_ts(kind=inv, lev=levp_str))
-    
+
 print('ets:', precip.calc_ets())            # ETS评分（默认为1h晴雨ETS）
 for inv in ['1h', '3h', '12h', '24h']:      # 不同间隔下的分级ETS评分
     for lev in range(7):
@@ -126,7 +125,6 @@ for inv in ['1h', '3h', '12h', '24h']:      # 不同间隔下的分级bias评分
         if lev > 0:
             print(f'bias({inv}|{levp_str}):', precip.calc_bias_score(kind=inv, lev=levp_str))
 ```
-
 
 ### 风
 
@@ -166,4 +164,4 @@ print('wind scale weaker ratio:', wind.calc_wind_scale_weaker_ratio())          
 
 ## 算法解释
 
-对于本项目所实现的各类测评算法及其解释、公式等信息，可以参考 [cyeva说明文档](https://cyeva.readthedocs.io/zh_CN/latest/index.html) 的 [算法指标](https://cyeva.readthedocs.io/zh_CN/latest/content/indicator.html) 部分。
+对于本项目所实现的各类测评算法及其解释、公式等信息，可以参考 [cyeva 说明文档](https://cyeva.readthedocs.io/zh_CN/latest/index.html) 的 [算法指标](https://cyeva.readthedocs.io/zh_CN/latest/content/indicator.html) 部分。
