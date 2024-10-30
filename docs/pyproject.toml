@@ -3,12 +3,14 @@ name = "cyeva-docs"
 version = "0.2.3"
 requires-python = ">=3.11, <3.13"
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "furo>=2024.8.6",
     "sphinx-rtd-theme>=3.0.1",
     "sphinx>=8.1.3",
 ]
+
+[tool.uv]
 package = false
 
 [build-system]

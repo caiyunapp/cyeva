@@ -125,7 +125,7 @@ dependencies = [
     { name = "scipy" },
 ]
 
-[package.dev-dependencies]
+[package.dependency-groups]
 dev = [
     { name = "pytest" },
     { name = "pytest-benchmark" },
@@ -143,7 +143,7 @@ requires-dist = [
     { name = "scipy", specifier = ">=1.14.1" },
 ]
 
-[package.metadata.requires-dev]
+[package.metadata.dependency-groups]
 dev = [
     { name = "pytest", specifier = ">=8.3.3" },
     { name = "pytest-benchmark", specifier = ">=4.0.0" },
@@ -499,43 +499,44 @@ wheels = [
 
 [[package]]
 name = "pytest-benchmark"
-version = "4.0.0"
+version = "5.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "py-cpuinfo" },
     { name = "pytest" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/28/08/e6b0067efa9a1f2a1eb3043ecd8a0c48bfeb60d3255006dcc829d72d5da2/pytest-benchmark-4.0.0.tar.gz", hash = "sha256:fb0785b83efe599a6a956361c0691ae1dbb5318018561af10f3e915caa0048d1", size = 334641 }
+sdist = { url = "https://files.pythonhosted.org/packages/a3/48/b79272b2b8938513a66a62204a0649ef730dcf6cb52c812f4dc4daa62cd5/pytest-benchmark-5.0.1.tar.gz", hash = "sha256:8138178618c85586ce056c70cc5e92f4283c2e6198e8422c2c825aeb3ace6afd", size = 337310 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/4d/a1/3b70862b5b3f830f0422844f25a823d0470739d994466be9dbbbb414d85a/pytest_benchmark-4.0.0-py3-none-any.whl", hash = "sha256:fdb7db64e31c8b277dff9850d2a2556d8b60bcb0ea6524e36e28ffd7c87f71d6", size = 43951 },
+    { url = "https://files.pythonhosted.org/packages/f7/e2/c0da4989a933d6bac364f215217c47de37d2f641953aa69a37b66efd6d1b/pytest_benchmark-5.0.1-py3-none-any.whl", hash = "sha256:d75fec4cbf0d4fd91e020f425ce2d845e9c127c21bae35e77c84db8ed84bfaa6", size = 44062 },
 ]
 
 [[package]]
 name = "pytest-codspeed"
-version = "2.2.1"
+version = "3.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cffi" },
     { name = "filelock" },
     { name = "pytest" },
+    { name = "rich" },
     { name = "setuptools", marker = "python_full_version >= '3.12'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/40/6a/ba0b067dba286443a04c9d32ff75ef3bc169617ee347d1a97972ada62665/pytest_codspeed-2.2.1.tar.gz", hash = "sha256:0adc24baf01c64a6ca0a0b83b3cd704351708997e09ec086b7776c32227d4e0a", size = 9163 }
+sdist = { url = "https://files.pythonhosted.org/packages/ba/78/40e613268cce75b11cd35ea9fdc280fb648e2233fc4187c76112377b1869/pytest_codspeed-3.0.0.tar.gz", hash = "sha256:c5b80100ea32dd44079bb2db298288763eb8fe859eafa1650a8711bd2c32fd06", size = 12540 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/03/0b/e3541064afcf24ed54bcabfa6eb5f8083eb335d5c58c7b5b95bc31127f86/pytest_codspeed-2.2.1-py3-none-any.whl", hash = "sha256:aad08033015f3e6c8c14c8bf0eca475921a9b088e92c98b626bf8af8f516471e", size = 10126 },
+    { url = "https://files.pythonhosted.org/packages/a6/79/fa067436033410ac16e5d14b61b1a5f355688930ca8c6a8c61a52b2cbe0a/pytest_codspeed-3.0.0-py3-none-any.whl", hash = "sha256:ab1b8cb9da72e0d394718333d1abc7bea38524e09fd4854bc70a91abbcdcb20e", size = 15640 },
 ]
 
 [[package]]
 name = "pytest-cov"
-version = "5.0.0"
+version = "6.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "coverage", extra = ["toml"] },
     { name = "pytest" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/74/67/00efc8d11b630c56f15f4ad9c7f9223f1e5ec275aaae3fa9118c6a223ad2/pytest-cov-5.0.0.tar.gz", hash = "sha256:5837b58e9f6ebd335b0f8060eecce69b662415b16dc503883a02f45dfeb14857", size = 63042 }
+sdist = { url = "https://files.pythonhosted.org/packages/be/45/9b538de8cef30e17c7b45ef42f538a94889ed6a16f2387a6c89e73220651/pytest-cov-6.0.0.tar.gz", hash = "sha256:fde0b595ca248bb8e2d76f020b465f3b107c9632e6a1d1705f17834c89dcadc0", size = 66945 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/78/3a/af5b4fa5961d9a1e6237b530eb87dd04aea6eb83da09d2a4073d81b54ccf/pytest_cov-5.0.0-py3-none-any.whl", hash = "sha256:4f0764a1219df53214206bf1feea4633c3b558a2925c8b59f144f682861ce652", size = 21990 },
+    { url = "https://files.pythonhosted.org/packages/36/3b/48e79f2cd6a61dbbd4807b4ed46cb564b4fd50a76166b1c4ea5c1d9e2371/pytest_cov-6.0.0-py3-none-any.whl", hash = "sha256:eee6f1b9e61008bd34975a4d5bab25801eb31898b032dd55addc93e96fcaaa35", size = 22949 },
 ]
 
 [[package]]
@@ -648,11 +649,11 @@ wheels = [
 
 [[package]]
 name = "setuptools"
-version = "75.2.0"
+version = "75.3.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/07/37/b31be7e4b9f13b59cde9dcaeff112d401d49e0dc5b37ed4a9fc8fb12f409/setuptools-75.2.0.tar.gz", hash = "sha256:753bb6ebf1f465a1912e19ed1d41f403a79173a9acf66a42e7e6aec45c3c16ec", size = 1350308 }
+sdist = { url = "https://files.pythonhosted.org/packages/ed/22/a438e0caa4576f8c383fa4d35f1cc01655a46c75be358960d815bfbb12bd/setuptools-75.3.0.tar.gz", hash = "sha256:fba5dd4d766e97be1b1681d98712680ae8f2f26d7881245f2ce9e40714f1a686", size = 1351577 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/31/2d/90165d51ecd38f9a02c6832198c13a4e48652485e2ccf863ebb942c531b6/setuptools-75.2.0-py3-none-any.whl", hash = "sha256:a7fcb66f68b4d9e8e66b42f9876150a3371558f98fa32222ffaa5bced76406f8", size = 1249825 },
+    { url = "https://files.pythonhosted.org/packages/90/12/282ee9bce8b58130cb762fbc9beabd531549952cac11fc56add11dcb7ea0/setuptools-75.3.0-py3-none-any.whl", hash = "sha256:f2504966861356aa38616760c0f66568e535562374995367b4e69c7143cf6bcd", size = 1251070 },
 ]
 
 [[package]]
@@ -666,7 +667,7 @@ wheels = [
 
 [[package]]
 name = "textual"
-version = "0.85.0"
+version = "0.85.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "markdown-it-py", extra = ["linkify", "plugins"] },
@@ -674,9 +675,9 @@ dependencies = [
     { name = "rich" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f0/ef/d498d5eb07ebe63299517bbee7e4be2fe8e1b4f0835763446cef1c4eaed0/textual-0.85.0.tar.gz", hash = "sha256:645c0fd0b4f61cd19383df78a1acd4f3b555e2c514cfa2f454e20692dffc10a0", size = 1461202 }
+sdist = { url = "https://files.pythonhosted.org/packages/fd/d1/18d33de84ff3cfbc5932172b5decd204df9f5075acb7bbdeb8c932158532/textual-0.85.1.tar.gz", hash = "sha256:9966214390fad9a84c3f69d49398487897577f5fa788838106dd77bd7babc9cd", size = 1461224 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9c/d5/0f35e93d1343fd8a4a1571c104dd6f0a9d038aa89d203146f22b9beed725/textual-0.85.0-py3-none-any.whl", hash = "sha256:8e75d023f06b242fb88233926dfb7801792f867643493096dd45dd216dc950f3", size = 614318 },
+    { url = "https://files.pythonhosted.org/packages/55/94/8246e21228ebe4c5527fb31f50be0006a5a54211b383e4b6470e7c7b9c4a/textual-0.85.1-py3-none-any.whl", hash = "sha256:a1a064c67b9b81cfa0c1b14298aa52221855aa4a56ad17a9b89a5594c73657a8", size = 614340 },
 ]
 
 [[package]]

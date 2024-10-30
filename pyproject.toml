@@ -39,8 +39,8 @@ Documentation = "https://caiyunapp.github.io/cyeva"
 Issues = "https://github.com/caiyunapp/cyeva/issues"
 "Source Code" = "https://github.com/caiyunapp/cyeva"
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "pytest>=8.3.3",
     "ruff>=0.7.1",
     "pytest-cov>=5.0.0",
@@ -48,7 +48,6 @@ dev-dependencies = [
     "pytest-memray>=1.7.0; sys_platform != 'win32'",
     "pytest-codspeed>=2.2.1",
 ]
-package = true
 
 [build-system]
 requires = ["hatchling"]

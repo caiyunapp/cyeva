@@ -93,7 +93,7 @@ name = "cyeva-docs"
 version = "0.2.3"
 source = { virtual = "." }
 
-[package.dev-dependencies]
+[package.dependency-groups]
 dev = [
     { name = "furo" },
     { name = "sphinx" },
@@ -102,7 +102,7 @@ dev = [
 
 [package.metadata]
 
-[package.metadata.requires-dev]
+[package.metadata.dependency-groups]
 dev = [
     { name = "furo", specifier = ">=2024.8.6" },
     { name = "sphinx", specifier = ">=8.1.3" },
