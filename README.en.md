@@ -158,4 +158,4 @@ print('wind scale weaker ratio:', wind.calc_wind_scale_weaker_ratio())          
 
 ## Algorithm Explanation
 
-For explanations, formulas, and other information about the various evaluation algorithms implemented in this project, please refer to the [metrics](https://cyeva.readthedocs.io/zh_CN/latest/content/indicator.html) section in the [cyeva documentation](https://cyeva.readthedocs.io/zh_CN/latest/index.html).
+For explanations, formulas, and other information about the various evaluation algorithms implemented in this project, please refer to the [metrics](https://caiyunapp.github.io/cyeva/content/indicator.html) section in the [cyeva documentation](https://caiyunapp.github.io/cyeva/).
