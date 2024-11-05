@@ -13,7 +13,7 @@ maintainers = [
     { name = "caiyunapp", email = "oss@caiyunapp.com" },
     { name = "ringsaturn", email = "ringsaturn.me@gmail.com" },
 ]
-auhtors = [
+authors = [
     { name = "caiyunapp", email = "oss@caiyunapp.com" },
     { name = "Clarmy", email = "clarmyleewt@gmail.com" },
     { name = "ringsaturn", email = "ringsaturn.me@gmail.com" },
