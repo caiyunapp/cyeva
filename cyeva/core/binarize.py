@@ -112,7 +112,7 @@ def level_binarize(
 
     if not set(["max", "min"]).issubset(set(interval.keys())):
         raise ValueError(
-            "lev_config's each interval item " "should contains 'max' and 'min' keys."
+            "lev_config's each interval item should contains 'max' and 'min' keys."
         )
 
     minimum = interval["min"]
